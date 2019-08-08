@@ -10,11 +10,14 @@ namespace DTShopping.Repository
 {
     public class APIRepository
     {
+        private int RoleId = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["RoleId"]);
+
+        private int CompanyId = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["CompanyId"]);
 
         private string ApiUrl = System.Configuration.ConfigurationManager.AppSettings["ApiUrl"];
 
         public async Task<List<Category>> GetMenuList()
-        {            
+        {
             var result = await CallPostFunction(string.Empty, "ManageCategories/List");
             if (result == null || !result.Status)
             {
@@ -63,17 +66,48 @@ namespace DTShopping.Repository
             }
         }
 
-        public async Task<UserDetails> Register(UserDetails user)
+        public async Task<Response> Register(UserDetails user)
         {
-            var result = await CallPostFunction(string.Empty, "ManageVendor/Add");
+            user.role_id = RoleId;
+            user.company_id = CompanyId;
+            var detail = JsonConvert.SerializeObject(user);
+            var result = await CallPostFunction(detail, "ManageVendor/Add");
             if (result == null || !result.Status)
             {
                 return null;
             }
             else
             {
-                var UserDetails = JsonConvert.DeserializeObject<UserDetails>(result.ResponseValue);
-                return UserDetails;
+                //var result = JsonConvert.DeserializeObject<Response>(result.ResponseValue);
+                return result;
+            }
+        }
+
+        public async Task<List<R_StateMaster>> GetStateList()
+        {
+            var result = await CallPostFunction(string.Empty, "StateList");
+            if (result == null || !result.Status)
+            {
+                return null;
+            }
+            else
+            {
+                var states = JsonConvert.DeserializeObject<List<R_StateMaster>>(result.ResponseValue);
+                return states;
+            }
+        }
+
+        public async Task<List<R_CityMaster>> GetCityListById(string Id)
+        {
+            var result = await CallPostFunction(string.Empty, "CityList/" + Id);
+            if (result == null || !result.Status)
+            {
+                return null;
+            }
+            else
+            {
+                var cities = JsonConvert.DeserializeObject<List<R_CityMaster>>(result.ResponseValue);
+                return cities;
             }
         }
 

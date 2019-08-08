@@ -2,23 +2,26 @@
 using System.Web.Mvc;
 using DTShopping.Models;
 using DTShopping.Repository;
+using System.Collections.Generic;
 
-namespace DTShopping.Controllers
+namespace DTShopping
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private APIRepository _APIManager;
 
+        public Dashboard model;
+
         public AccountController()
-        {           
+        {
         }
 
         public AccountController(APIRepository Manager)
         {
-            _APIManager = Manager;            
+            _APIManager = Manager;
         }
-        
+
 
         //
         // GET: /Account/Login
@@ -32,20 +35,22 @@ namespace DTShopping.Controllers
         //
         // POST: /Account/Login
         [HttpPost]
-        [AllowAnonymous]        
+        [AllowAnonymous]
         public async Task<ActionResult> Login(UserDetails User)
         {
             var result = await _APIManager.Login(User);
 
-            return Json(result,JsonRequestBehavior.AllowGet);
-        }        
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
-        //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public async Task<ActionResult> Register()
         {
-            return View();
+            this.model = new Dashboard();
+            this._APIManager = new APIRepository();
+            await this.AssignStateCityList();
+            return View(this.model);
         }
 
         //
@@ -54,10 +59,10 @@ namespace DTShopping.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
-        {            
+        {
             return View(model);
         }
-        
+
         //
         // POST: /Account/LogOff
         [HttpPost]
@@ -68,7 +73,83 @@ namespace DTShopping.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-                
-      
+        private async Task AssignStateCityList()
+        {
+            this.model.States = await this._APIManager.GetStateList();
+            if (this.model.States == null)
+            {
+                this.model.States = new List<R_StateMaster>();
+                this.model.States.Add(new R_StateMaster
+                {
+                    Id = 0,
+                    Name = "-Not Available-"
+                });
+            }
+
+            //if (this.model.RetailerDetail != null)
+            //{
+            //    this.model.CityList = await this.repository.GetCityList(this.model.RetailerDetail.StateId);
+            //}
+
+            if (this.model.Cities == null)
+            {
+                this.model.Cities = new List<R_CityMaster>();
+                this.model.Cities.Add(new R_CityMaster
+                {
+                    cityID = 0,
+                    cityName = "-Not Available-"
+                });
+            }
+        }
+
+        public async Task<ActionResult> SaveDetail(Dashboard dashboardModel)
+        {
+            if (dashboardModel == null || dashboardModel.User == null)
+            {
+                return Json("Please send complete detail.");
+            }
+
+            this._APIManager = new APIRepository();
+            var res = await this._APIManager.Register(dashboardModel.User);
+            if (res == null)
+            {
+                return Json("Something went wrong. Please try again later.");
+            }
+            else
+            {
+                return Json("Registration done successfully.");
+            }
+        }
+
+        public async Task<ActionResult> GetCityListByState(string Id)
+        {
+            var cityList = new List<R_CityMaster>();
+            this._APIManager = new APIRepository();
+            this.model = new Dashboard();
+            if (string.IsNullOrEmpty(Id))
+            {
+                return null;
+            }
+            else
+            {
+                cityList = await this._APIManager.GetCityListById(Id);
+            }
+
+            if (cityList == null || cityList.Count == 0)
+            {
+                cityList = new List<R_CityMaster>();
+                if (this.model.Cities == null)
+                {
+                    this.model.Cities = new List<R_CityMaster>();
+                    this.model.Cities.Add(new R_CityMaster
+                    {
+                        cityID = 0,
+                        cityName = "-Not Available-"
+                    });
+                }
+            }
+            return Json(cityList);
+        }
+
     }
 }
