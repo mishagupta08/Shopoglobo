@@ -19,10 +19,12 @@ namespace DTShopping.Repository
         private string GetGetShoppingPortalAllFrontPageProductsListAction = "GetShoppingPortalAllFrontPageProductsList/";
 
         private string ManageListWithFilterAction = "ManageListWithFilter";
-
+        
         private string ManageProductsAction = "ManageProducts/";
 
-        private string ManageCartAction = "ManageCart/"; 
+        private string ManageProductImagesAction = "ManageProductImages/";
+
+        private string ManageCartAction = "ManageCart/";
 
         public async Task<List<Category>> GetMenuList()
         {
@@ -74,7 +76,7 @@ namespace DTShopping.Repository
             }
         }
 
-           public async Task<ShoppingPortalFrontPageProdList> GetGetShoppingPortalAllFrontPageProductsList()
+        public async Task<ShoppingPortalFrontPageProdList> GetGetShoppingPortalAllFrontPageProductsList()
         {
             var result = await CallPostFunction(string.Empty, GetGetShoppingPortalAllFrontPageProductsListAction + CompanyId);
             if (result == null)
@@ -137,6 +139,22 @@ namespace DTShopping.Repository
         {
             var filterData = JsonConvert.SerializeObject(filter);
             var result = await CallPostFunction(filterData, ManageCartAction + action);
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        public async Task<Response> GetProductImage(int prodId)
+        {
+            var data = new product_images();
+            data.product_id = prodId;
+            var d = JsonConvert.SerializeObject(data);
+            var result = await CallPostFunction(d, ManageProductImagesAction + "List");
             if (result == null)
             {
                 return null;
