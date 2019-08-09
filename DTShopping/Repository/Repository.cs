@@ -16,6 +16,14 @@ namespace DTShopping.Repository
 
         private string ApiUrl = System.Configuration.ConfigurationManager.AppSettings["ApiUrl"];
 
+        private string GetGetShoppingPortalAllFrontPageProductsListAction = "GetShoppingPortalAllFrontPageProductsList/";
+
+        private string ManageListWithFilterAction = "ManageListWithFilter";
+
+        private string ManageProductsAction = "ManageProducts/";
+
+        private string ManageCartAction = "ManageCart/"; 
+
         public async Task<List<Category>> GetMenuList()
         {
             var result = await CallPostFunction(string.Empty, "ManageCategories/List");
@@ -66,6 +74,20 @@ namespace DTShopping.Repository
             }
         }
 
+           public async Task<ShoppingPortalFrontPageProdList> GetGetShoppingPortalAllFrontPageProductsList()
+        {
+            var result = await CallPostFunction(string.Empty, GetGetShoppingPortalAllFrontPageProductsListAction + CompanyId);
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                var productList = JsonConvert.DeserializeObject<ShoppingPortalFrontPageProdList>(result.ResponseValue);
+                return productList;
+            }
+        }
+
         public async Task<Response> Register(UserDetails user)
         {
             user.role_id = RoleId;
@@ -108,6 +130,34 @@ namespace DTShopping.Repository
             {
                 var cities = JsonConvert.DeserializeObject<List<R_CityMaster>>(result.ResponseValue);
                 return cities;
+            }
+        }
+
+        public async Task<Response> ManageCart(CartFilter filter, string action)
+        {
+            var filterData = JsonConvert.SerializeObject(filter);
+            var result = await CallPostFunction(filterData, ManageCartAction + action);
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        public async Task<Response> GetProductDetailById(List<Product> products)
+        {
+            var productData = JsonConvert.SerializeObject(products);
+            var result = await CallPostFunction(productData, ManageProductsAction + "ById");
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                return result;
             }
         }
 
@@ -156,7 +206,12 @@ namespace DTShopping.Repository
             return null;
         }
 
-
-
+        //send ProductByCategory in pageName for parod list with page no detail.
+        public async Task<Response> ManageListWithFilter(Filters filter)
+        {
+            var detail = JsonConvert.SerializeObject(filter);
+            var result = await CallPostFunction(detail, ManageListWithFilterAction);
+            return result;
+        }
     }
 }
