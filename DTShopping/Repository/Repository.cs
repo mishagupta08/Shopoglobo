@@ -26,6 +26,8 @@ namespace DTShopping.Repository
 
         private string ManageCartAction = "ManageCart/";
 
+        private string ManageShoppingProductsListWithFilter = "ManageShoppingProductsListWithFilter/";
+
         public async Task<List<Category>> GetMenuList()
         {
             var result = await CallPostFunction(string.Empty, "ManageCategories/List");
@@ -169,6 +171,20 @@ namespace DTShopping.Repository
         {
             var productData = JsonConvert.SerializeObject(products);
             var result = await CallPostFunction(productData, ManageProductsAction + "ById");
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        public async Task<Response> GetCategoryProducts(Filters FilterDetails)
+        {
+            var productData = JsonConvert.SerializeObject(FilterDetails);
+            var result = await CallPostFunction(productData, ManageShoppingProductsListWithFilter);
             if (result == null)
             {
                 return null;

@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using DTShopping.Models;
 using DTShopping.Repository;
 using System.Collections.Generic;
+using System;
 
 namespace DTShopping
 {
@@ -38,9 +39,26 @@ namespace DTShopping
         [AllowAnonymous]
         public async Task<ActionResult> Login(UserDetails User)
         {
-            var result = await _APIManager.Login(User);
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            try
+            {
+                var companyId = System.Configuration.ConfigurationManager.AppSettings["CompanyId"];
+                if(!string.IsNullOrEmpty(companyId))
+                User.company_id = Convert.ToInt16(companyId);
+                var result = await _APIManager.Login(User);
+                if (result != null)
+                {
+                    Session["UserDetail"] = result;
+                    return RedirectToAction("Home", "Index");
+                }
+                else
+                {
+                    return Json("Login Failed", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }            
         }
 
         // GET: /Account/Register

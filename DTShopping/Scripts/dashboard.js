@@ -55,3 +55,32 @@ function SaveDetailForm() {
 
     return false;
 }
+
+
+function Login_Account() {
+    $("#loginError").html("");
+    var loginDetail = $('#login_account').serialize();
+    $(".preloader").show();
+    $.ajax({
+        url: '/Account/Login',
+        type: 'Post',
+        datatype: 'Json',
+        data: loginDetail
+    }).done(function (result) {
+        if (result == "Success") {
+            window.location.href = "/Home/Index";
+        }
+        else {
+            $("#loginError").html(result);
+        }
+        $(".preloader").hide();
+        $("#closeError").show();
+    }).fail(function (error) {
+        $("#loginError").html(error.statusText);
+        $(".preloader").hide();
+        $("#closeError").show();
+        $(".preloader").hide();
+    });
+
+    return false;
+}
