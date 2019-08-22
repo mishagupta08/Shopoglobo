@@ -7,17 +7,145 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DTShopping.Models;
+using DTShopping.Repository;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace DTShopping.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ManageController : Controller
     {
+        private const string AddAction = "Add";
+        private const string CartProductListAction = "CartProductList";
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        APIRepository objRepository = new APIRepository();
+        Dashboard model = new Dashboard();
+
         public ManageController()
         {
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> GetProductDetail(int prodId)
+        {
+            this.model = new Dashboard();
+            this.objRepository = new APIRepository();
+            try
+            {
+                var prodList = new List<Product>();
+                prodList.Add(new Product { id = prodId });
+                this.model.ProductDetail = await objRepository.GetProductDetailById(prodList);
+                if (this.model.ProductDetail != null)
+                {
+                    this.model.ProductDetail.description_detail = this.model.ProductDetail.description_detail.Replace("\r\n\r\n", "");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return PartialView("productDetailPage", this.model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetCartProductList()
+        {
+            this.model = new Dashboard();
+            this.objRepository = new APIRepository();
+            if (CheckLoginUserStatus())
+            {
+                try
+                {
+                    var cart = new CartFilter();
+                    //cart.username = Session["Username"].ToString();
+                    //cart.password = Session["Password"].ToString();
+                    cart.username = "admin";
+                    cart.password = "1234";
+                    var response = await objRepository.ManageCart(cart, CartProductListAction);
+                    if (response != null && response.Status)
+                    {
+                        this.model.Products = JsonConvert.DeserializeObject<List<Product>>(response.ResponseValue);
+                        this.model.UsersPoints = response.Points;
+                        if (this.model.Products != null)
+                        {
+                            this.model.NetPayment = 0;
+                            var prodPrice = 0;
+                            foreach (var prod in this.model.Products)
+                            {
+                                if (prod.offer_price == null || prod.offer_price == "0")
+                                {
+                                    prodPrice = Convert.ToInt32(prod.market_price);
+                                }
+                                else
+                                {
+                                    prodPrice = Convert.ToInt32(prod.offer_price);
+                                }
+                                this.model.TotalProductPoints += (prod.RBV ?? 0) * (prod.vendor_qty ?? 1);
+                                this.model.NetPayment += prodPrice * (prod.vendor_qty ?? 1) + prod.shippng_charge ?? 0;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return PartialView("cartDetailView", this.model);
+        }
+
+        private bool CheckLoginUserStatus()
+        {
+            if (Session["Username"] == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public async Task<ActionResult> AddProductInToCart(int ProductId, int Quantity)
+        {
+            this.model = new Dashboard();
+            this.objRepository = new APIRepository();
+            try
+            {
+                if (CheckLoginUserStatus())
+                {
+                    var cart = new CartFilter();
+                    cart.productId = ProductId;
+                    cart.quantity = Quantity;
+                    //cart.username = Session["Username"].ToString();
+                    //cart.password = Session["Password"].ToString();
+                    cart.username = "admin";
+                    cart.password = "123456";
+                    var response = await objRepository.ManageCart(cart, AddAction);
+                    return Json(response);
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return PartialView("productDetailPage", this.model);
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -32,9 +160,9 @@ namespace DTShopping.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -299,7 +427,7 @@ namespace DTShopping.Controllers
             });
         }
 
-      
+
 
         //
         // GET: /Manage/LinkLoginCallback
@@ -325,7 +453,7 @@ namespace DTShopping.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -376,6 +504,6 @@ namespace DTShopping.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

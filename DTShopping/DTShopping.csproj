@@ -403,6 +403,8 @@
     <Content Include="vendor\font-awesome\scss\_variables.scss" />
     <Content Include="vendor\jquery\jquery.min.map" />
     <Content Include="vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Views\Manage\productDetailPage.cshtml" />
+    <Content Include="Views\Manage\cartDetailView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

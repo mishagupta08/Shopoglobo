@@ -117,7 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddtoCart" xml:space="preserve">
+    <value>Add to Cart</value>
+  </data>
+  <data name="Availability" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="CurrentAvailablePoints" xml:space="preserve">
+    <value>Do You Want To Use Current Available Points</value>
+  </data>
+  <data name="EUPoints" xml:space="preserve">
+    <value>EU Points</value>
+  </data>
+  <data name="InStockText" xml:space="preserve">
+    <value>In stock-Shipping with in 7-15 Working Days</value>
+  </data>
+  <data name="MarketPrice" xml:space="preserve">
+    <value>Market Price</value>
+  </data>
+  <data name="OfferPrice" xml:space="preserve">
+    <value>Offer Price </value>
+  </data>
+  <data name="OutOfStock" xml:space="preserve">
+    <value>OUT OF STOCK</value>
+  </data>
+  <data name="ProductDescription" xml:space="preserve">
+    <value>Product Description</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="ShippingCharge" xml:space="preserve">
+    <value>Shipping Charge</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="TAndC" xml:space="preserve">
+    <value>Terms &amp;amp; Conditions</value>
+  </data>
+  <data name="TandCText" xml:space="preserve">
+    <value>Reject or cancel any order without rendering any reason or explanation to customer.</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Vendor</value>
   </data>
 </root>

@@ -1,0 +1,155 @@
+﻿@using DTShopping.Properties
+@model DTShopping.Models.Dashboard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Azrouel Dress, unishop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/ext/jquery/ui/redmond/jquery-ui-1.8.22.css" />
+
+    <script type="text/javascript" src="~/ext/jquery/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="~/ext/jquery/ui/jquery-ui-1.8.22.min.js"></script>
+    <script type="text/javascript">
+        if ($.attrFn) { $.attrFn.text = true; }
+    </script>
+    <script type="text/javascript" src="~/ext/jquery/bxGallery/jquery.bxGallery.1.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/ext/jquery/fancybox/jquery.fancybox-1.3.4.css" />
+    <script type="text/javascript" src="~/ext/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/ext/960gs/960_24_col.css" />
+    <link rel="stylesheet" type="text/css" href="~/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/base.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/skeleton.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/unishop.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/sliders_styles.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/layout.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/layerslider.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/effects.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/light-theme.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/light-theme.css" />
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery-ui.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/layerslider.kreaturamedia.jquery.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/slider-light.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.elastislide.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/cloud-zoom.1.0.2.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/custom.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <!-- begin bodyWrapper //-->
+    <div id="bodyWrapper" class="product_info_page">
+        @*Need to work on this*@
+        <div class="et-content-bg">
+            @*<div class="">
+                    <div class="container">
+                        <div class="sixteen columns">
+                            <div class="breadcrumbs_box">
+                                <a href="~/http://www.ethemeuk.com" class="headerNavigation1">Top</a><a href="~/index.php" class="headerNavigation1">Catalog</a><a href="~/index.php?cPath=1" class="headerNavigation1">Women</a><span class="headerNavigation">MSINTKB</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="product-info-nostyle">
+                <div class="product-info-nostyle">
+                    <div id="bodyContent" class="product_info_page_central">
+                        <div class="container">
+                            <div class="sixteen columns">
+                                <div class="contentContainer">
+                                    <div itemscope itemtype="http://data-vocabulary.org/Product" class="clearfix contentText product_page">
+                                        <div class="product_img_wrapper">
+                                            @****Product Image here****@
+                                            <div class="cloudzoom_gallery">
+                                                <div class="gallery_bigimg">
+                                                    @*<a href="~/images/24_2.jpg" class="cloud-zoom" id="zoom1"
+                                                        rel="adjustX:-4, adjustY:-4, softFocus:true"><img src="~/@Model.ProductDetail.large_image" alt="" itemprop="image" /></a>*@
+                                                    <a href="https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2383796/2018/2/8/11518086356737-HERENOW-Women-Jeans-2701518086356609-1.jpg" class="cloud-zoom" id="zoom1"
+                                                       rel="adjustX:-4, adjustY:-4, softFocus:true"><img src="~/https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2383796/2018/2/8/11518086356737-HERENOW-Women-Jeans-2701518086356609-1.jpg" alt="" itemprop="image" /></a>
+
+                                                </div>
+                                                <div class="gallery_note">Roll over the image to view it</div>
+                                                <div class="clearfix gallery_smallimg_wrapper">
+                                                    <div class="gallery_smallimg">
+                                                        <a href="~/@Model.ProductDetail.small_image" class="cloud-zoom-gallery"
+                                                           rel="useZoom:'zoom1', smallImage: '@Model.ProductDetail.small_image' "><img src="~/@Model.ProductDetail.small_image" alt="" /></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @***Product detail here ****@
+                                        <div class="product_info_wrapper">
+                                            <div class="clearfix" style="overflow: hidden;">
+                                                <div class="left_info">
+                                                    <form name="cart_quantity" action="#" method="post">
+                                                        <div class="prod_info_name_price">
+                                                            <div class="prod_info_name">
+                                                                <h1 itemprop="name">
+                                                                    @Model.ProductDetail.title<br />
+                                                                    @*<span class="smallText">[MSINTKB]</span>*@
+                                                                </h1>
+                                                            </div>
+                                                            @if (Model.ProductDetail.instock == 1)
+                                                            {
+                                                                <p class="availability">@Resources.Availability :<strong itemprop="availability"> @Resources.InStockText </strong> </p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p class="availability">@Resources.Availability :<strong itemprop="availability"> @Resources.OutOfStock </strong> </p>
+                                                            }
+
+                                                            <div itemprop="offerDetails" itemscope class="prod_info_price">
+                                                                <p class="old_price_box"><span class="old_price_label">@Resources.Vendor :</span> Rs. @Model.ProductDetail.VendorName</p>
+                                                                <p class="old_price_box"><span class="old_price_label">@Resources.MarketPrice :</span><s> Rs. @Model.ProductDetail.market_price</s></p>
+                                                                <p class="new_price_box">
+                                                                    <span class="special_price_label"> @Resources.OfferPrice :</span> <span itemprop="price" class="new-special-price">
+                                                                        Rs. @Model.ProductDetail.offer_price<br>
+                                                                    </span><span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
+                                                                        <strong>@Resources.EUPoints : @Model.ProductDetail.RBV</strong><br>
+                                                                        <strong>@Resources.Size : @Model.ProductDetail.product_size</strong><br>
+                                                                    </span>
+                                                                </p>
+                                                                <div class="clear"></div>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="clearfix add-to-cart-box">
+                                                            <div class="add-to-cart-button">
+                                                                <input type="hidden" id="product_id" name="product_id" value="@Model.ProductDetail.id" />
+                                                                @Html.TextBoxFor(m => m.ProductDetail.vendor_qty, new { @value="1", @type = "number", @id = "quantity", @required = "required", @placeholder = "" })
+                                                                <br />
+                                                                <button class="unishop_button" id="addToCart" type="button">@Resources.AddtoCart</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <div class="orderpolicy">
+                                                        <strong>@Resources.TAndC</strong> :
+                                                        @Resources.TandCText
+                                                    </div>
+                                                    <div class="product_description">
+                                                        <h1>@Resources.ProductDescription</h1>
+                                                        @Html.Raw(Model.ProductDetail.description_detail)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- bodyContent //-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- bodyWrapper //-->
+</body>
+</html>
+<script src="~/Scripts/dashboard.js"></script>

@@ -5,7 +5,41 @@
     $('#stateList').change(function (e) {
         GetCityByState();
     });
+
+    $('#addToCart').click(function (e) {
+        var prodId = $("#product_id").val();
+        var quantity = $("#quantity").val();
+        AddProductInCart(prodId, quantity);
+    });
 });
+
+function AddProductInCart(prodId, quantity) {
+
+    $(".preloader").show();
+    $.ajax({
+        url: '/Manage/AddProductInToCart',
+        type: 'Post',
+        datatype: 'Json',
+        data: { ProductId: prodId, Quantity: quantity }
+    }).done(function (result) {
+        if (result == null || result == undefined || result == "") {
+            alert("Something went wrong, Please try again later.");
+        }
+        else if (result.Status == false) {
+            alert(result.ResponseValue);
+        }
+        else {
+            $("#cartCount").val(result.CartProductCount);
+        }
+
+        $(".preloader").hide();
+    }).fail(function (error) {
+        alert(error.statusText);
+        $(".preloader").hide();
+    });
+
+    return false;
+}
 
 function GetCityByState() {
     var id = $("#stateList").val();

@@ -61,11 +61,146 @@ namespace DTShopping.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add to Cart.
+        /// </summary>
+        public static string AddtoCart {
+            get {
+                return ResourceManager.GetString("AddtoCart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Availability.
+        /// </summary>
+        public static string Availability {
+            get {
+                return ResourceManager.GetString("Availability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do You Want To Use Current Available Points.
+        /// </summary>
+        public static string CurrentAvailablePoints {
+            get {
+                return ResourceManager.GetString("CurrentAvailablePoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EU Points.
+        /// </summary>
+        public static string EUPoints {
+            get {
+                return ResourceManager.GetString("EUPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In stock-Shipping with in 7-15 Working Days.
+        /// </summary>
+        public static string InStockText {
+            get {
+                return ResourceManager.GetString("InStockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Market Price.
+        /// </summary>
+        public static string MarketPrice {
+            get {
+                return ResourceManager.GetString("MarketPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offer Price .
+        /// </summary>
+        public static string OfferPrice {
+            get {
+                return ResourceManager.GetString("OfferPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OUT OF STOCK.
+        /// </summary>
+        public static string OutOfStock {
+            get {
+                return ResourceManager.GetString("OutOfStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Description.
+        /// </summary>
+        public static string ProductDescription {
+            get {
+                return ResourceManager.GetString("ProductDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipping Charge.
+        /// </summary>
+        public static string ShippingCharge {
+            get {
+                return ResourceManager.GetString("ShippingCharge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size.
+        /// </summary>
+        public static string Size {
+            get {
+                return ResourceManager.GetString("Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terms &amp;amp; Conditions.
+        /// </summary>
+        public static string TAndC {
+            get {
+                return ResourceManager.GetString("TAndC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reject or cancel any order without rendering any reason or explanation to customer..
+        /// </summary>
+        public static string TandCText {
+            get {
+                return ResourceManager.GetString("TandCText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vendor.
+        /// </summary>
+        public static string Vendor {
+            get {
+                return ResourceManager.GetString("Vendor", resourceCulture);
             }
         }
     }

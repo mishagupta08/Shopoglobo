@@ -1,0 +1,297 @@
+﻿@using DTShopping.Properties
+@model DTShopping.Models.Dashboard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>unishop</title>
+    <!-- Mobile Specific Metas
+       ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/ext/jquery/ui/redmond/jquery-ui-1.8.22.css" />
+    <script type="text/javascript" src="~/ext/jquery/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="~/ext/jquery/ui/jquery-ui-1.8.22.min.js"></script>
+    <script type="text/javascript" src="~/ext/jquery/bxGallery/jquery.bxGallery.1.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/ext/jquery/fancybox/jquery.fancybox-1.3.4.css" />
+    <script type="text/javascript" src="~/ext/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/ext/960gs/960_24_col.css" />
+    <link rel="stylesheet" type="text/css" href="~/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/base.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/skeleton.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/unishop.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/sliders_styles.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/layout.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/layerslider.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/effects.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/light-theme.css" />
+    <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/light-theme.css" />
+    <!--[if IE 8 ]><link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/ie8.css" /><![endif]-->
+    <!--[if IE 9]><link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/ie.css" /><![endif]-->
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery-ui.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/layerslider.kreaturamedia.jquery.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/slider-light.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.elastislide.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/cloud-zoom.1.0.2.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/custom.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <meta name="robots" content="noindex,follow" />
+</head>
+<body>
+    <!-- begin bodyWrapper //-->
+    <div id="bodyWrapper" class="default_page">
+
+        <div class="et-content-bg">
+            @*<div class="">
+                    <div class="container">
+                        <div class="sixteen columns">
+                            <div class="breadcrumbs_box">
+                                <a href="~/http://www.ethemeuk.com" class="headerNavigation1">Top</a><a href="~/index.php" class="headerNavigation1">Catalog</a><span class="headerNavigation">Create an Account</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="container">
+                <div class="sixteen columns">
+                    <div id="bodyContent" class="twelve columns omega main_part_wrapper">
+                        <h1>your cart details</h1>
+
+                        <table cellspacing="5" cellpadding="5" border="0" style="width: 97%; border-collapse: collapse;" id="ItemList" class="shoptable">
+                            <tbody>
+                                <tr align="left" class="dgrdheader product-headborder">
+
+                                    <td bgcolor="#E4E4E4"><h3>Product</h3></td>
+                                    <td bgcolor="#E4E4E4"><h3>Quantity</h3></td>
+                                    <td bgcolor="#E4E4E4"><h3>Market Price</h3></td>
+                                    <td bgcolor="#E4E4E4"><h3>Offer Price</h3></td>
+                                    <td bgcolor="#E4E4E4"><h3>Discount Points</h3></td>
+                                    <td bgcolor="#E4E4E4"><h3>Shipping Charge</h3></td>
+                                    <td bgcolor="#E4E4E4"><h3>Net Price</h3></td>
+                                </tr>
+
+                                @foreach (var product in Model.Products)
+                                {
+                                    <tr align="left" class="dgrdcell">
+
+                                        <td bgcolor="#C5C5C5"><span>@product.title</span> <br>&nbsp;                    </td>
+                                        <td bgcolor="#C5C5C5">@product.vendor_qty</td>
+
+                                        <td bgcolor="#C5C5C5">@product.market_price</td>
+
+                                        <td bgcolor="#C5C5C5">@product.offer_price</td>
+
+                                        <td bgcolor="#C5C5C5">@product.RBV</td>
+
+                                        <td bgcolor="#C5C5C5">@product.shippng_charge</td>
+
+                                        <td bgcolor="#C5C5C5">@product.cost_price</td>
+                                    </tr>
+                                }
+                                <tr align="left" class="dgrdcell">
+                                    <td colspan="4">Your Cart Total</td>
+                                    <td colspan="3" align="right"><h3><span id="labelTotalCharge2">Rs. @Model.NetPayment</span></h3></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>&nbsp;</p>
+                        <table width="97%" border="0" cellspacing="0" cellpadding="0" class="shoptable">
+
+                            <tr>
+                                <td width="15%" height="29"><strong>@Resources.CurrentAvailablePoints</strong></td>
+                                <td width="54%">
+                                    <span class="fieldValue">
+                                        <input type="radio" value="usePoints" name="usePoints" id="Pay1">
+                                        @Model.UsersPoints
+                                </td>
+                                @*<td align="right"><h2><a href="~/#">Apply Voucher</a></h2></td>*@
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td align="right">&nbsp;</td>
+                            </tr>
+                        </table>
+                        <p>&nbsp;</p>
+                        <table width="97%" border="0" cellspacing="5" cellpadding="5">
+                            <tr>
+                                <td width="53%" bgcolor="#E4E4E4" class="bordertop"><h3>Final Amount to Pay :</h3></td>
+                                <td width="47%" align="right" bgcolor="#E4E4E4" class="bordertop"><h3><span id="labelTotalCharge">Rs.2585.00</span></h3></td>
+                            </tr>
+                        </table>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <table width="97%" border="0" cellspacing="5" cellpadding="5" class="shoptable" style="border:1px solid #CCCCCC;">
+                            <tr>
+                                <td width="53%"><h2>Payment Options</h2></td>
+                                <td width="47%">&nbsp;</td>
+                            </tr>
+                            <tr bgcolor="#EBC6AD">
+                                <td>
+                                    <div class="Paymenttd">
+                                        <ul>
+                                            <li>
+                                                <input type="radio" value="offline" name="paymentmethod" id="Pay1">
+                                                <b>Cheque / DD / Cash / NEFT / RTGS</b><br>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="Paymenttd">
+                                        <ul>
+                                            <li>
+                                                <input type="radio" value="dtcard" name="paymentmethod" id="Pay3">
+                                                <b>e-Wallet Payment</b>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>You can Deposit a cheque / DD / Cash /NEFT /RTGS </td>
+                                <td>Prepaid Card /e-Wallet Card. </td>
+                            </tr>
+                        </table>
+
+                        <p>
+                            <div class="buttonSet">
+                                <span class="buttonAction"><a class="unishop_submit" href="~/#">Make Payment</a></span>
+                            </div>
+                        </p>
+
+
+                        <p>&nbsp;</p>
+                    </div>
+                    <!-- bodyContent //--><div id="columnLeft" style="float: left;" class="product_info_page_left four columns alpha">
+                        <div class="infoBox infoBoxCategory">
+                            <div class="infoBoxHeading">
+                                <p class="icon_box_category">&nbsp;</p>
+                                Category
+                            </div>
+                            <div class="infoBoxContents">
+                                <div class="cat_parent"><a href="~/#">Book &amp; Stationary</a></div>
+                                <div class="clear"></div>
+                                <div class="cat_parent"><a href="~/#">Clothing</a></div>
+                                <div class="clear"></div>
+                                <div class="cat_parent"><a href="~/#">Electronics</a></div>
+                                <div class="clear"></div>
+                                <div class="cat_parent"><a href="~/#">Home &amp; Kitchen</a></div>
+                                <div class="clear"></div>
+                                <div class="cat_parent"><a href="~/#">IT Products</a></div>
+                                <div class="clear"></div>
+                                <div class="cat_parent"><a href="~/#">Lifestyle</a></div>
+                                <div class="clear"></div>
+                                <div class="cat_parent"><a href="~/#">Shoes</a></div>
+                                <div class="clear"></div>
+                                <div class="cat_parent"><a href="~/#">Daily Deals</a></div>
+                                <div class="clear"></div>
+                                <div class="cat_parent"><a href="~/#">Combo Offers</a></div>
+
+                                <div class="clear"></div>
+
+                            </div>
+                        </div>
+                        <div class="infoBox infoBoxWhatsNew">
+                            <div class="infoBoxHeading">
+                                <p class="icon_box_new">&nbsp;</p>
+                                <a href="~/">What's New?</a>
+                            </div>
+                            <div class="product">
+                                <div class="img_border">
+                                    <div class="product-image-wrapper">
+                                        <span class="product_sticker sticker_onsale_top_left sticker_display">
+                                            Save up <br>
+                                            to 30%
+                                        </span><a class="product_img" href="~/product_info.php?products_id=25">
+                                            <div><img src="~/images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
+                                            <div class="roll_over_img"><img src="~/images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
+                                            <div class="product-image-wrapper-hover"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="wrapper-hover">
+                                    <div class="product-name"> <a href="~/product_info.php?products_id=25"> Azrouel Dress </a> </div>
+                                    <div class="clearfix">
+                                        <div class="icon_cart_title product-price">
+                                            <span class="new_price">
+                                                <s>Rs.1600</s><br>
+                                                <span class="new-special-price">Rs.1100.00</span>
+                                            </span><br>
+                                            <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
+                                                Discount Points : 0.00<br>
+                                                Point Value : 300.00
+                                            </span>
+                                        </div>
+                                        <div class="icon_cart_rollover"><a href="~/index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- footer info -->
+        <div class="footer_bg_color">
+            <div id="back-top"><a href="~/#top"></a></div>
+            <div id="footer">
+                <div class="container">
+                    <div class="four columns footer-block footer-copyright">
+                        <div id="copyright"> <a class="logo_footer" href="~/index.php"><img src="~/images/light/store_logo.png" alt="unishop" title="unishop" width="177" height="46" class="scale-with-grid" /></a> &copy; 2013 dicounttadka. All Rights Reserved. </div>
+                    </div>
+                    <div class="four columns footer-block footer_information">
+                        <h2>Information</h2>
+                        <nav>
+                            <ul>
+                                <li><a href="~/http://www.discounttadka.com" target="_blank">About Us</a></li>
+                                <li><a href="~/privacy.php">Privacy Policy</a></li>
+                                <li><a href="~/conditions.php">Terms &amp; Conditions</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="four columns footer-block footer_customer_service">
+                        <h2>Customer Assistance</h2>
+                        <nav>
+                            <ul>
+                                <li><a href="~/contact_us.php">Contact us</a></li>
+                                <li><a href="~/shipping.php">Shipping &amp; Returns</a></li>
+                                <li><a href="~/products_new.php">New Products</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="four columns footer-block footer_my_account">
+                        <h2>My Account</h2>
+                        <nav>
+                            <ul>
+                                <li><a href="~/create_account.php">My Account</a></li>
+                                <li><a href="~/create_account.php">My Shopping Cart</a></li>
+                                <li><a href="~/account_history.php">Order history</a></li>
+                                <li><a href="~/login.php">Log In</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="four columns footer-block footer_my_account">
+                        <h2>Other links</h2>
+                        <nav>
+                            <ul>
+                                <li><a href="~/create_account.php">Free Shipping</a></li>
+                                <li><a href="~/create_account.php">Flight Booking</a></li>
+                                <li><a href="~/account_history.php">Hotel Booking</a></li>
+                                <li><a href="~/login.php">24 x 6 Customer Support</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end footer info -->
+    </div>
+    <!-- bodyWrapper //-->
+</body>
+</html>
