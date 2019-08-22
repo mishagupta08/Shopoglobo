@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using DTShopping.Models;
 using System.Threading.Tasks;
 using System.Linq;
+using PagedList;
 using System.Threading;
+using Newtonsoft.Json;
 
 namespace DTShopping.Controllers
 {
@@ -39,20 +41,33 @@ namespace DTShopping.Controllers
             return View();
         }
 
+        public ActionResult ProductList(string cat)
+        {
+            return View("");
+        }
+
         [HttpGet]
         public async Task<ActionResult> GetCategories()
         {
             List<Category> list = new List<Category>();
             try
             {
-                var MenuItems = await objRepository.GetMenuList();
-                list = getNestedChildren(MenuItems.Where(r => r.parent_id == 1 && r.parent_id != r.id).ToList(), MenuItems);                                                        
+                if (Session["MenuList"] != null)
+                {
+
+                }
+                else
+                {
+                    var MenuItems = await objRepository.GetMenuList();
+                    list = getNestedChildren(MenuItems.Where(r => r.parent_id == 1 && r.parent_id != r.id).ToList(), MenuItems);
+                    Session["MenuList"] = list;
+                }                                                      
             }
             catch (Exception ex)
             {
 
             }
-            return PartialView("Category",list);
+            return PartialView("Category", list);
         }
        
         public List<Category> getNestedChildren(List<Category> ParentList, List<Category> MenuList)
@@ -75,7 +90,16 @@ namespace DTShopping.Controllers
             return orderedList;
         }
 
-
-
+        public async Task<ActionResult> ListProducts(string category, int? page)
+        { 
+            Filters c = new Filters();            
+            var result = await objRepository.GetCategoryProducts(c);
+            List<Product> listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
+            int pageSize = 5;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var Filteredlist = listProducts.ToPagedList(pageIndex, pageSize);
+            return View(Filteredlist);
+        }        
     }
 }

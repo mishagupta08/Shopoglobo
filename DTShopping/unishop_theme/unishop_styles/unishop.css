@@ -1,3 +1,4 @@
+@import url('unishop.css');
 #bodyWrapper{overflow: hidden;}
 
 
@@ -314,8 +315,7 @@
 /* layers for main page*/
 .default_page .et-content-bg,
 .product_info_page .et-content-bg{
-    text-align: left;
-    padding-top: 20px;
+    text-align: left;    
     padding-bottom:40px
 }
 
