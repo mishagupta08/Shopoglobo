@@ -66,6 +66,20 @@ namespace DTShopping.Repository
             }
         }
 
+        public async Task<ShoppingPortalFrontPageProdList> GetShoppingPortalFrontPageProdList(string Id)
+        {
+            var result = await CallPostFunction(string.Empty, "GetShoppingPortalAllFrontPageProductsList/" + Id);
+            if (result == null || !result.Status)
+            {
+                return null;
+            }
+            else
+            {
+                var HomePageSections = JsonConvert.DeserializeObject<ShoppingPortalFrontPageProdList>(result.ResponseValue);
+                return HomePageSections;
+            }
+        }
+
         public async Task<UserDetails> Login(UserDetails user)
         {
             var result = await CallPostFunction(string.Empty, "LoginShoppigPortalUser");

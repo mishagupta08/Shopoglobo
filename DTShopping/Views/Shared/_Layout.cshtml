@@ -42,7 +42,7 @@ if ( $.attrFn ) { $.attrFn.text = true; }
 
 <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.elastislide.js"></script>
 <script type="text/javascript" src="~/unishop_theme/unishop_js/cloud-zoom.1.0.2.js"></script>
-<script type="text/javascript" src="~/unishop_theme/unishop_js/custom.js"></script>
+<script type="text/javascript" src="~/unishop_theme/unishop_js/custom.js?v=1"></script>
 <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 
 
@@ -206,8 +206,7 @@ if ( $.attrFn ) { $.attrFn.text = true; }
             type: "GET",
             async: false,
             url: "/Home/GetCategories",
-            success: function (result) {
-                //alert(result);
+            success: function (result) {                
                 $("#DivCategories").html(result);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {

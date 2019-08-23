@@ -34,31 +34,10 @@
                 @*}*@
                 </ul><a class="rslides_nav rslides1_nav prev" href="#">Previous</a><a class="rslides_nav rslides1_nav next" href="#">Next</a>
             </div>
+            
             <div class="container">
                 <div class="sixteen columns">
-                    <h1 id="brands_title"><span class="icon_brands">&nbsp;</span>Brands</h1>
-                    <div id="carousel_brands" class="es-carousel-wrapper">
-                        <div class="es-carousel container">
-                            <div class="es-carousel-inner">
-                                <ul>
-                                    <li class="two columns brands-image"> <a onClick="location.href='index.php?manufacturers_id=1';"> <img src="images/brand-light-03.png" alt="LEXIS" title="LEXIS" width="140" height="66" class="scale-with-grid" /> </a> </li>
-                                    <li class="two columns brands-image"> <a onClick="location.href='index.php?manufacturers_id=2';"> <img src="images/brand-light-08.png" alt="SMART" title="SMART" width="140" height="66" class="scale-with-grid" /> </a> </li>
-                                    <li class="two columns brands-image"> <a onClick="location.href='index.php?manufacturers_id=3';"> <img src="images/brand-light-05.png" alt="ABC" title="ABC" width="140" height="66" class="scale-with-grid" /> </a> </li>
-                                    <li class="two columns brands-image"> <a onClick="location.href='index.php?manufacturers_id=4';"> <img src="images/brand-light-02.png" alt="CANVAS" title="CANVAS" width="140" height="66" class="scale-with-grid" /> </a> </li>
-                                    <li class="two columns brands-image"> <a onClick="location.href='index.php?manufacturers_id=6';"> <img src="images/brand-light-01.png" alt="GABRIEL" title="GABRIEL" width="140" height="66" class="scale-with-grid" /> </a> </li>
-                                    <li class="two columns brands-image"> <a onClick="location.href='index.php?manufacturers_id=7';"> <img src="images/brand-light-06.png" alt="DOWNBRIDGE" title="DOWNBRIDGE" width="140" height="66" class="scale-with-grid" /> </a> </li>
-                                    <li class="two columns brands-image"> <a onClick="location.href='index.php?manufacturers_id=8';"> <img src="images/brand-light-07.png" alt="REVOLUTION" title="REVOLUTION" width="140" height="66" class="scale-with-grid" /> </a> </li>
-                                    <li class="two columns brands-image"> <a onClick="location.href='index.php?manufacturers_id=9';"> <img src="images/brand-light-04.png" alt="SCAPOLO" title="SCAPOLO" width="140" height="66" class="scale-with-grid" /> </a> </li>
-                                    <li class="two columns brands-image"> <a onClick="location.href='index.php?manufacturers_id=10';"> <img src="images/brand-light-09.png" alt="DOLOREX" title="DOLOREX" width="140" height="66" class="scale-with-grid" /> </a> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="sixteen columns">
-                    <h1 id="bestsellers_title"><span class="icon_bestsellers">&nbsp;</span>Bestsellers</h1>
+                    <h1 id="bestsellers_title"><span class="icon_bestsellers">&nbsp;</span>Special Segment</h1>
                 </div>
             </div>
 
@@ -67,372 +46,39 @@
                     <div id="carousel_bestsellers" class="es-carousel-wrapper">
                         <div class="es-carousel-inner">
                             <ul>
-
+                                @if (Model.FontpageSections!= null && Model.FontpageSections.SpeacialSegment != null && Model.FontpageSections.SpeacialSegment.Count > 0)
+                                {
+                                    foreach (var segment in Model.FontpageSections.SpeacialSegment)
+                                    {
                                 <li class="four columns product">
                                     <div class="img_border">
                                         <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/manclo_1_1 (1).jpg" alt="Advintage Hoodie with Tye-Dye" title="Advintage Hoodie with Tye-Dye" width="180" height="180" class="scale-with-grid" /></div>
+                                             <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
+                                                <div><img src="@imageUrl/@segment.small_image" alt="Advintage Hoodie with Tye-Dye" title="Advintage Hoodie with Tye-Dye" width="180" height="180" class="scale-with-grid" /></div>
                                                 <!--<div class="roll_over_img"><img src="images/manclo_1_1 (2).jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>-->
                                                 <div class="product-image-wrapper-hover"></div>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
+                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> @segment.title </a> </div>
                                         <div class="clearfix">
                                             <div class="icon_cart_title product-price">
                                                 <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
+                                                    <s>@segment.cost_price</s><br>
+                                                    <span class="new-special-price">@segment.offer_price</span>
                                                 </span><br>
                                                 <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
+                                                    
+                                                    Point Value : @segment.point_adjusted
                                                 </span>
                                             </div>
                                             <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
                                         </div>
                                     </div>
                                 </li>
-
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/12_1.jpg" alt="Bandage dress" title="Bandage dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/12_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/1_1.jpg" alt="Rose-print bandage dress" title="Rose-print bandage dress" width="329" height="417" class="scale-with-grid" /></div>
-
-                                                <div class="product-image-wrapper"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/4_1.jpg" alt="Aero Draped-front wool cardigan" title="Aero Draped-front wool cardigan" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/4_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/4_1.jpg" alt="Aero Draped-front wool cardigan" title="Aero Draped-front wool cardigan" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/4_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-
-
-
-
-
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=51';">
-                                                <div><img src="images/ws_01 (23).jpg" alt="Anashria Womens Premier Leather Sandal" title="Anashria Womens Premier Leather Sandal" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/ws_01 (22).jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=51';"> Anashria Womens Premier Leather Sandal </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$46.73</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=51';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=43';">
-                                                <div><img src="images/11_1.jpg" alt="Angela Dress" title="Angela Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/11_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=43';"> Angela Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$90.00</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=43';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=39';">
-                                                <div><img src="images/19_1.jpg" alt="Asymmetric embellished silk dress" title="Asymmetric embellished silk dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/19_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=39';"> Asymmetric embellished silk dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price"><s>$95.00</s><span class="new-special-price">$60.00</span></span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=39';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=80';">
-                                                <div><img src="images/mopho_1_1 (7).jpg" alt="AT&T 8525 PDA" title="AT&T 8525 PDA" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/mopho_1_1 (8).jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=80';"> AT&T 8525 PDA </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$186.92</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=80';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=44';">
-                                                <div><img src="images/5_1.jpg" alt="Green Twill Crop Jacket" title="Green Twill Crop Jacket" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/5_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=44';"> Green Twill Crop Jacket </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$168.22</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=44';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=79';">
-                                                <div><img src="images/mopho_1_1 (9).jpg" alt="HTC Touch Diamond" title="HTC Touch Diamond" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/mopho_1_1 (10).jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=79';"> HTC Touch Diamond </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$700.93</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=79';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=34';">
-                                                <div><img src="images/26_1.jpg" alt="Petites Mink Twill Jacket" title="Petites Mink Twill Jacket" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/26_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=34';"> Petites Mink Twill Jacket </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$45.00</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=34';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=33';">
-                                                <div><img src="images/21_1.jpg" alt="Strapless Ruffled Cocktail Dress" title="Strapless Ruffled Cocktail Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/21_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=33';"> Strapless Ruffled Cocktail Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$69.99</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=33';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=32';">
-                                                <div><img src="images/13_1.jpg" alt="Summer Dress" title="Summer Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/13_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=32';"> Summer Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$69.99</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=32';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-
-
-
-
-
-
-
-
-
-
-
+                                }  
+                                }
                             </ul>
                         </div>
                     </div>
@@ -442,7 +88,7 @@
 
             <div class="container">
                 <div class="sixteen columns">
-                    <h1 id="bestsellers_title"><span class="icon_bestsellers">&nbsp;</span>Hot Selling</h1>
+                    <h1 id="bestsellers_title"><span class="icon_bestsellers">&nbsp;</span>Deal Of Day</h1>
                 </div>
             </div>
 
@@ -451,360 +97,39 @@
                     <div id="carousel_hotselling" class="es-carousel-wrapper">
                         <div class="es-carousel-inner">
                             <ul>
-
+@if (Model.FontpageSections != null && Model.FontpageSections.DealOfDay != null && Model.FontpageSections.DealOfDay.Count > 0)
+{
+    foreach (var segment in Model.FontpageSections.DealOfDay)
+    {
                                 <li class="four columns product">
                                     <div class="img_border">
                                         <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/manclo_1_1 (1).jpg" alt="Advintage Hoodie with Tye-Dye" title="Advintage Hoodie with Tye-Dye" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/manclo_1_1 (2).jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
+                                            <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
+                                                <div><img src="@imageUrl/@segment.small_image" alt="Advintage Hoodie with Tye-Dye" title="Advintage Hoodie with Tye-Dye" width="329" height="417" class="scale-with-grid" /></div>
+                                                <div class="roll_over_img"><img src="@imageUrl/@segment.small_image" alt="" width="329" height="417" class="scale-with-grid" /></div>
                                                 <div class="product-image-wrapper-hover"></div>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
+                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';">@segment.title</a> </div>
                                         <div class="clearfix">
                                             <div class="icon_cart_title product-price">
                                                 <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
+                                                    <s>@segment.cost_price</s><br>
+                                                    <span class="new-special-price">@segment.offer_price</span>
                                                 </span><br>
                                                 <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
+                                                    <br>
+                                                    Point Value : @segment.point_adjusted
                                                 </span>
                                             </div>
                                             <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
                                         </div>
                                     </div>
                                 </li>
-
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/12_1.jpg" alt="Bandage dress" title="Bandage dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/12_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/1_1.jpg" alt="Rose-print bandage dress" title="Rose-print bandage dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/1_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/4_1.jpg" alt="Aero Draped-front wool cardigan" title="Aero Draped-front wool cardigan" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/4_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
-                                                <div><img src="images/4_1.jpg" alt="Aero Draped-front wool cardigan" title="Aero Draped-front wool cardigan" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/4_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';"> A.L.C - Gerry Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-
-
-
-
-
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=51';">
-                                                <div><img src="images/ws_01 (23).jpg" alt="Anashria Womens Premier Leather Sandal" title="Anashria Womens Premier Leather Sandal" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/ws_01 (22).jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=51';"> Anashria Womens Premier Leather Sandal </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$46.73</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=51';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=43';">
-                                                <div><img src="images/11_1.jpg" alt="Angela Dress" title="Angela Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/11_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=43';"> Angela Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$90.00</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=43';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=39';">
-                                                <div><img src="images/19_1.jpg" alt="Asymmetric embellished silk dress" title="Asymmetric embellished silk dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/19_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=39';"> Asymmetric embellished silk dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price"><s>$95.00</s><span class="new-special-price">$60.00</span></span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=39';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=80';">
-                                                <div><img src="images/mopho_1_1 (7).jpg" alt="AT&T 8525 PDA" title="AT&T 8525 PDA" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/mopho_1_1 (8).jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=80';"> AT&T 8525 PDA </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$186.92</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=80';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=44';">
-                                                <div><img src="images/5_1.jpg" alt="Green Twill Crop Jacket" title="Green Twill Crop Jacket" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/5_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=44';"> Green Twill Crop Jacket </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$168.22</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=44';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=79';">
-                                                <div><img src="images/mopho_1_1 (9).jpg" alt="HTC Touch Diamond" title="HTC Touch Diamond" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/mopho_1_1 (10).jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=79';"> HTC Touch Diamond </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$700.93</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=79';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=34';">
-                                                <div><img src="images/26_1.jpg" alt="Petites Mink Twill Jacket" title="Petites Mink Twill Jacket" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/26_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=34';"> Petites Mink Twill Jacket </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$45.00</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=34';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=33';">
-                                                <div><img src="images/21_1.jpg" alt="Strapless Ruffled Cocktail Dress" title="Strapless Ruffled Cocktail Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/21_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=33';"> Strapless Ruffled Cocktail Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$69.99</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=33';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="four columns product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_options_bottom_right sticker_display_none"></span> <span class="product_sticker sticker_onsale_top_left sticker_display_none"></span> <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=32';">
-                                                <div><img src="images/13_1.jpg" alt="Summer Dress" title="Summer Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/13_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a onClick="location.href='product_info.php?products_id=32';"> Summer Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price"><span class="new_price">$69.99</span></div>
-                                            <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=32';"></a> </div>
-                                        </div>
-                                    </div>
-                                </li>
+    }
+}                               
                             </ul>
                         </div>
                     </div>
@@ -812,6 +137,163 @@
                 </div>
             </div>
 
+@if (Model.FontpageSections != null && Model.FontpageSections.SevenDaySaver != null)
+{
+            <div class="container">
+                <div class="sixteen columns">
+                    <h1 id="bestsellers_title"><span class="icon_bestsellers">&nbsp;</span>Seven Day Saver Deal</h1>
+                </div>
+            </div>
+}
+            <div class="carousel_bestsellers_outer">
+                <div class="container">
+                    <div id="carousel_sevensaver" class="es-carousel-wrapper">
+                        <div class="es-carousel-inner">
+                            <ul>
+                                @if (Model.FontpageSections != null && Model.FontpageSections.SevenDaySaver != null && Model.FontpageSections.SevenDaySaver.Count > 0)
+                                {
+                                    foreach (var segment in Model.FontpageSections.SevenDaySaver)
+                                    {
+                                        <li class="four columns product">
+                                            <div class="img_border">
+                                                <div class="product-image-wrapper">
+                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
+                                                        <div><img src="@imageUrl/@segment.small_image" alt="Advintage Hoodie with Tye-Dye" title="Advintage Hoodie with Tye-Dye" width="329" height="417" class="scale-with-grid" /></div>
+                                                        <div class="roll_over_img"><img src="@imageUrl/@segment.small_image" alt="" width="329" height="417" class="scale-with-grid" /></div>
+                                                        <div class="product-image-wrapper-hover"></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="wrapper-hover">
+                                                <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';">@segment.title</a> </div>
+                                                <div class="clearfix">
+                                                    <div class="icon_cart_title product-price">
+                                                        <span class="new_price">
+                                                            <s>@segment.cost_price</s><br>
+                                                            <span class="new-special-price">@segment.offer_price</span>
+                                                        </span><br>
+                                                        <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
+                                                            <br>
+                                                            Point Value : @segment.point_adjusted
+                                                        </span>
+                                                    </div>
+                                                    <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+@if (Model.FontpageSections != null && Model.FontpageSections.FashionProdList != null && Model.FontpageSections.FashionProdList.Count > 0)
+{
+            <div class="container">
+                <div class="sixteen columns">
+                    <h1 id="bestsellers_title"><span class="icon_bestsellers">&nbsp;</span>Faishon</h1>
+                </div>
+            </div>
+}
+            <div class="carousel_bestsellers_outer">
+                <div class="container">
+                    <div id="carousel_fashion" class="es-carousel-wrapper">
+                        <div class="es-carousel-inner">
+                            <ul>
+                                @if (Model.FontpageSections != null && Model.FontpageSections.FashionProdList != null)
+                                {
+                                    foreach (var segment in Model.FontpageSections.FashionProdList)
+                                    {
+                                        <li class="four columns product">
+                                            <div class="img_border">
+                                                <div class="product-image-wrapper">
+                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
+                                                        <div><img src="@imageUrl/@segment.small_image" alt="Advintage Hoodie with Tye-Dye" title="Advintage Hoodie with Tye-Dye" width="329" height="417" class="scale-with-grid" /></div>
+                                                        <div class="roll_over_img"><img src="@imageUrl/@segment.small_image" alt="" width="329" height="417" class="scale-with-grid" /></div>
+                                                        <div class="product-image-wrapper-hover"></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="wrapper-hover">
+                                                <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';">@segment.title</a> </div>
+                                                <div class="clearfix">
+                                                    <div class="icon_cart_title product-price">
+                                                        <span class="new_price">
+                                                            <s>@segment.cost_price</s><br>
+                                                            <span class="new-special-price">@segment.offer_price</span>
+                                                        </span><br>
+                                                        <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
+                                                            <br>
+                                                            Point Value : @segment.point_adjusted
+                                                        </span>
+                                                    </div>
+                                                    <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+@if (Model.FontpageSections != null && Model.FontpageSections.ElectronicProdList != null && Model.FontpageSections.ElectronicProdList.Count>0)
+{
+
+            <div class="container">
+                <div class="sixteen columns">
+                    <h1 id="bestsellers_title"><span class="icon_bestsellers">&nbsp;</span>Electronics</h1>
+                </div>
+            </div>
+}
+            <div class="carousel_bestsellers_outer">
+                <div class="container">
+                    <div id="carousel_electronics" class="es-carousel-wrapper">
+                        <div class="es-carousel-inner">
+                            <ul>
+                                @if (Model.FontpageSections != null && Model.FontpageSections.ElectronicProdList != null)
+                                {
+                                    foreach (var segment in Model.FontpageSections.ElectronicProdList)
+                                    {
+                                        <li class="four columns product">
+                                            <div class="img_border">
+                                                <div class="product-image-wrapper">
+                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onClick="location.href='product_info.php?products_id=45';">
+                                                        <div><img src="@imageUrl/@segment.small_image" alt="Advintage Hoodie with Tye-Dye" title="Advintage Hoodie with Tye-Dye" width="329" height="417" class="scale-with-grid" /></div>
+                                                        <div class="roll_over_img"><img src="@imageUrl/@segment.small_image" alt="" width="329" height="417" class="scale-with-grid" /></div>
+                                                        <div class="product-image-wrapper-hover"></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="wrapper-hover">
+                                                <div class="product-name"> <a onClick="location.href='product_info.php?products_id=45';">@segment.title</a> </div>
+                                                <div class="clearfix">
+                                                    <div class="icon_cart_title product-price">
+                                                        <span class="new_price">
+                                                            <s>@segment.cost_price</s><br>
+                                                            <span class="new-special-price">@segment.offer_price</span>
+                                                        </span><br>
+                                                        <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
+                                                            <br>
+                                                            Point Value : @segment.point_adjusted
+                                                        </span>
+                                                    </div>
+                                                    <div class="icon_cart_rollover"> <a onClick="location.href='index.php?action=buy_now&amp;products_id=45';"></a> </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
         </div>
     </div>
