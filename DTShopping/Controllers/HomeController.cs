@@ -20,8 +20,12 @@ namespace DTShopping.Controllers
             Dashboard objDashboardDetails = new Dashboard();
             string companyId = System.Configuration.ConfigurationManager.AppSettings["CompanyId"];
             try
-            {                
+            {
+                objDashboardDetails.Banners = new List<Banners>();           
                 objDashboardDetails.Banners = await objRepository.GetBannerImageList(companyId);
+
+                objDashboardDetails.FontpageSections = new ShoppingPortalFrontPageProdList();
+                objDashboardDetails.FontpageSections =  await objRepository.GetShoppingPortalFrontPageProdList(companyId);
             }
             catch (Exception ex)
             {
@@ -41,9 +45,19 @@ namespace DTShopping.Controllers
             return View();
         }
 
-        public ActionResult ProductList(string cat)
+        public async Task<ActionResult> ProductList(string cat,int? page)
         {
-            return View("");
+            Filters c = new Filters();
+            c.CategoryId = Convert.ToInt16(cat);
+            c.pageNo = page;
+            c.NoOfRecord = 10;
+            var result = await objRepository.GetCategoryProducts(c);
+            List<Product> listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
+            int pageSize = 5;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var Filteredlist = listProducts.ToPagedList(pageIndex, pageSize);
+            return View(Filteredlist);           
         }
 
         [HttpGet]

@@ -138,7 +138,21 @@ jQuery(document).ready(function () {
 jQuery('#carousel_hotselling').elastislide({
         easing		: 'easeInOutQuad',
         speed		: 1200
-    });
+});
+
+jQuery('#carousel_sevensaver').elastislide({
+    easing: 'easeInOutQuad',
+    speed: 1200
+});
+
+jQuery('#carousel_fashion').elastislide({
+    easing: 'easeInOutQuad',
+    speed: 1200
+});
+jQuery('#carousel_electronics').elastislide({
+    easing: 'easeInOutQuad',
+    speed: 1200
+});
 
 
 

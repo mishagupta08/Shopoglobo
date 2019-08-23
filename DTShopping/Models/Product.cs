@@ -45,5 +45,5 @@ namespace DTShopping.Models
         public string vendor_offer { get; set; }
         public string VendorName { get; set; }
         public Nullable<int> RBV { get; set; }
-    }
+    }    
 }
