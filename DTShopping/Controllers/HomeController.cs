@@ -53,7 +53,7 @@ namespace DTShopping.Controllers
             c.NoOfRecord = 10;
             var result = await objRepository.GetCategoryProducts(c);
             List<Product> listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
-            int pageSize = 5;
+            int pageSize = 10;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var Filteredlist = listProducts.ToPagedList(pageIndex, pageSize);

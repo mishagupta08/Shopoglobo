@@ -1,7 +1,10 @@
 ﻿@using PagedList.Mvc
+@using DTShopping.Properties
 @model  PagedList.IPagedList<DTShopping.Models.Product>  
 @{
     ViewBag.Title = "ProductList";
+    string imageUrl = System.Configuration.ConfigurationManager.AppSettings["ImageUrl"];
+    var count = 0;
 }
 
 <style>
@@ -517,272 +520,53 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="four columns product_wrapper count_3cols_col_1 count_2cols_col_1">
+                            @foreach (var product in Model)
+                            {
+                                count = count + 1;
+                                if (count == 5)
+                                {
+                                    count = 1;
+                                }
+                            <div class="four columns product_wrapper count_3cols_col_@count count_2cols_col_1">
                                 <div class="product">
                                     <div class="img_border">
                                         <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_onsale_top_left sticker_display">
+                                            @*<span class="product_sticker sticker_onsale_top_left sticker_display">
                                                 Save up <br>
                                                 to 30%
-                                            </span><a class="product_img" href="product_info.php?products_id=25">
-                                                <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
+                                            </span>*@<a class="product_img" href="~/Manage/GetProductDetail?prodId=@product.product_code">
+                                                <div><img src="@imageUrl@product.large_image" alt="@product.title" title="@product.title" width="329" height="417" class="scale-with-grid" /></div>
+                                                <div class="roll_over_img"><img src="@imageUrl@product.large_image" alt="" width="329" height="417" class="scale-with-grid" /></div>
                                                 <div class="product-image-wrapper-hover"></div>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="wrapper-hover">
-                                        <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
+                                        <div class="product-name"> <a href="~/Manage/GetProductDetail?prodId=@product.product_code"> @product.title </a> </div>
                                         <div class="clearfix">
                                             <div class="icon_cart_title product-price">
                                                 <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
+                                                    <s>Rs.@product.market_price</s><br>
+                                                    <span class="new-special-price">Rs.@product.offer_price</span>
                                                 </span><br>
                                                 <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
                                                     Discount Points : 0.00<br>
-                                                    Point Value : 300.00
+                                                    @Resources.EUPoints : @{var t = product.RBV != null ? product.RBV : 0;}@t
                                                 </span>
                                             </div>
-                                            <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
+                                            <div class="icon_cart_rollover"><a href=""></a> </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="four columns product_wrapper count_3cols_col_2 count_2cols_col_2">
-                                <div class="product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span><a class="product_img" href="product_info.php?products_id=25">
-                                                <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four columns product_wrapper count_3cols_col_3 count_2cols_col_1">
-                                <div class="product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span><a class="product_img" href="product_info.php?products_id=25">
-                                                <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four columns product_wrapper count_3cols_col_4 count_2cols_col_1">
-                                <div class="product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span><a class="product_img" href="product_info.php?products_id=25">
-                                                <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four columns product_wrapper count_3cols_col_1 count_2cols_col_2">
-                                <div class="product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span><a class="product_img" href="product_info.php?products_id=25">
-                                                <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four columns product_wrapper count_3cols_col_2 count_2cols_col_1">
-                                <div class="product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span><a class="product_img" href="product_info.php?products_id=25">
-                                                <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four columns product_wrapper count_3cols_col_3 count_2cols_col_2">
-                                <div class="product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span><a class="product_img" href="product_info.php?products_id=25">
-                                                <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four columns product_wrapper count_3cols_col_4 count_2cols_col_1">
-                                <div class="product">
-                                    <div class="img_border">
-                                        <div class="product-image-wrapper">
-                                            <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                                Save up <br>
-                                                to 30%
-                                            </span><a class="product_img" href="product_info.php?products_id=25">
-                                                <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                                <div class="product-image-wrapper-hover"></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper-hover">
-                                        <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
-                                        <div class="clearfix">
-                                            <div class="icon_cart_title product-price">
-                                                <span class="new_price">
-                                                    <s>Rs.1600</s><br>
-                                                    <span class="new-special-price">Rs.1100.00</span>
-                                                </span><br>
-                                                <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                                    Discount Points : 0.00<br>
-                                                    Point Value : 300.00
-                                                </span>
-                                            </div>
-                                            <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="et_pager">
-                            <span>
-                                <label>Result Pages:</label>
-                                &nbsp;<strong>1</strong>&nbsp;
-                            </span>
-                        </div>
+                            }
+
+                        </div>                        
                     </div>
                 </div>
+                
             </div>
+            
             <!-- bodyContent //-->
             <div id="columnLeft" style="float: left;" class="product_info_page_left four columns alpha">
                 <div class="infoBox infoBoxCategory">
@@ -907,12 +691,12 @@
         </div>
     </div>
 
-<div id="container" style="margin-left: 20px">
+ <div id="container" style="margin-left: 20px">
     <p></p>
     <p></p>
     <div class="pagination" style="margin-left: 400px">
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
         of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("ProductList", new { page }))
     </div>
-</div> 
+</div>
 
