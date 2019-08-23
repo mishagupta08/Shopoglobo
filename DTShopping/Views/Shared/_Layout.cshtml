@@ -207,7 +207,7 @@ if ( $.attrFn ) { $.attrFn.text = true; }
             async: false,
             url: "/Home/GetCategories",
             success: function (result) {
-                alert(result);
+                //alert(result);
                 $("#DivCategories").html(result);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
