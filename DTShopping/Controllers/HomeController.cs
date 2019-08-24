@@ -79,7 +79,7 @@ namespace DTShopping.Controllers
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var Filteredlist = listProducts.ToPagedList(pageIndex, pageSize);
-            return View(Filteredlist);           
+            return View(listProducts);           
         }
 
         [HttpGet]

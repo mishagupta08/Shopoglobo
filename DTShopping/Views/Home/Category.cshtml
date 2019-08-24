@@ -25,7 +25,7 @@
                             var t = category.Childern != null && category.Childern.Count > 0;
 
                             <div class="cat-name">
-                                <a class="main_category" href="Home/ProductList?cat=@category.id"><span class="main_category_border item-@item">@category.title</span></a>
+                                <a class="main_category" href="~/Home/ProductList?cat=@category.id"><span class="main_category_border item-@item">@category.title</span></a>
                                 @if (t)
                                 {
                                     <div class="drop-box-subcat">
@@ -34,13 +34,13 @@
 
                                             var tt = subcategory.Childern != null && subcategory.Childern.Count > 0;
                                             <div class="sub-cat-name">
-                                                <a href="Home/Category?cPath=@subcategory.id">@subcategory.title</a>
+                                                <a href="~/Home/Category?cPath=@subcategory.id">@subcategory.title</a>
                                                 @if (tt)
                                                 {
                                                     <div class="drop-box-subsubcat responsive_position">
                                                         @foreach (var subsubcategory in subcategory.Childern)
                                                         {
-                                                            <div class="subsub-cat-name"> <a href="Home/ProductList?cat=@subsubcategory.id">@subsubcategory.title</a></div>
+                                                            <div class="subsub-cat-name"> <a href="~/Home/ProductList?cat=@subsubcategory.id">@subsubcategory.title</a></div>
                                                         }
                                                     </div>
                                                 }

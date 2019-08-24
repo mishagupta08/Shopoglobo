@@ -1,6 +1,6 @@
-﻿@using PagedList.Mvc
+﻿
 @using DTShopping.Properties
-@model  PagedList.IPagedList<DTShopping.Models.Product>  
+@model  IEnumerable<DTShopping.Models.Product>  
 @{
     ViewBag.Title = "ProductList";
     string imageUrl = System.Configuration.ConfigurationManager.AppSettings["ImageUrl"];
@@ -690,13 +690,4 @@
             </div>
         </div>
     </div>
-
- <div id="container" style="margin-left: 20px">
-    <p></p>
-    <p></p>
-    <div class="pagination" style="margin-left: 400px">
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-        of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("ProductList", new { page }))
-    </div>
-</div>
 
