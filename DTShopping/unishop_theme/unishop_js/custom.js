@@ -59,22 +59,7 @@ function validate() {
 
 jQuery(document).ready(function () {
 
-    jQuery("#back-top").css({"bottom":jQuery("#footer").height()+150+"px"});
-
-
-    jQuery('#et_categ_box_scroll .cat-name').click(
-        function(){ $('.drop-box-subcat',this).show() },
-        function(){ $('.drop-box-subcat',this).hide() }
-    );
-    jQuery('#et_categ_box_scroll .sub-cat-name').hover(
-        function(){ $('.drop-box-subsubcat',this).toggle() }
-    );
-    jQuery('#et_categ_box_scroll .subsub-cat-name').hover(
-        function(){ $('.drop-box-3subcat',this).toggle() }
-    );
-    jQuery('#et_categ_box_scroll .3sub-cat-name').hover(
-        function(){ $('.drop-box-4subcat',this).toggle() }
-    );
+    jQuery("#back-top").css({"bottom":jQuery("#footer").height()+150+"px"});  
 
 
     jQuery('#nav_block_head').click(function() {
