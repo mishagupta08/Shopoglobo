@@ -34,6 +34,28 @@ namespace DTShopping.Controllers
             return View(objDashboardDetails);
         }
 
+        public async Task<ActionResult> GetProductDetail(int prodId)
+        {
+            var dashboard = new Dashboard();
+            this.objRepository = new APIRepository();
+            try
+            {
+                var prodList = new List<Product>();
+                prodList.Add(new Product { id = prodId });
+                dashboard.ProductDetail = await objRepository.GetProductDetailById(prodList);
+                if (dashboard.ProductDetail != null)
+                {
+                    dashboard.ProductDetail.description_detail = dashboard.ProductDetail.description_detail.Replace("\r\n\r\n", "");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return View("productDetailPage", dashboard);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

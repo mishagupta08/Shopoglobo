@@ -410,7 +410,7 @@
     <Content Include="Views\Home\ListProducts.cshtml" />
     <Content Include="Views\Home\CategoryDetail.cshtml" />
     <Content Include="Views\Home\ProductList.cshtml" />
-    <Content Include="Views\Manage\productDetailPage.cshtml" />
+    <Content Include="Views\Home\productDetailPage.cshtml" />
     <Content Include="Views\Manage\cartDetailView.cshtml" />
   </ItemGroup>
   <ItemGroup>
