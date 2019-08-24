@@ -30,7 +30,7 @@ namespace DTShopping.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult> GetProductDetail(int prodId)
         {
             this.model = new Dashboard();
@@ -50,7 +50,7 @@ namespace DTShopping.Controllers
 
             }
 
-            return PartialView("productDetailPage", this.model);
+            return View("productDetailPage", this.model);
         }
 
         [HttpGet]
