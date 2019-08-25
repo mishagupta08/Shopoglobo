@@ -213,5 +213,19 @@ if ( $.attrFn ) { $.attrFn.text = true; }
                 alert("Status: " + textStatus); alert("Error: " + errorThrown);
             }
         });
+
+        $('#et_categ_box_scroll .cat-name').hover(
+        function(){ $('.drop-box-subcat',this).show() },
+        function(){ $('.drop-box-subcat',this).hide() }
+    );
+    $('#et_categ_box_scroll .sub-cat-name').hover(
+        function(){ $('.drop-box-subsubcat',this).toggle() }
+    );
+    $('#et_categ_box_scroll .subsub-cat-name').hover(
+        function(){ $('.drop-box-3subcat',this).toggle() }
+    );
+    $('#et_categ_box_scroll .3sub-cat-name').hover(
+        function(){ $('.drop-box-4subcat',this).toggle() }
+    );
     });
 </script>
