@@ -34,7 +34,7 @@
 
                                             var tt = subcategory.Childern != null && subcategory.Childern.Count > 0;
                                             <div class="sub-cat-name">
-                                                <a href="~/Home/Category?cPath=@subcategory.id">@subcategory.title</a>
+                                                <a href="~/Home/ProductList?cat=@subcategory.id">@subcategory.title</a>
                                                 @if (tt)
                                                 {
                                                     <div class="drop-box-subsubcat responsive_position">

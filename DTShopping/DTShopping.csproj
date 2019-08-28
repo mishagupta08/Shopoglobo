@@ -485,6 +485,7 @@
     <Content Include="Views\Home\ProductList.cshtml" />
     <Content Include="Views\Home\productDetailPage.cshtml" />
     <Content Include="Views\Manage\cartDetailView.cshtml" />
+    <Content Include="Views\Home\_filterSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
