@@ -107,14 +107,14 @@ namespace DTShopping.Controllers
 
         private bool CheckLoginUserStatus()
         {
-            if (Session["Username"] == null)
-            {
-                return false;
-            }
-            else
-            {
+            //if (Session["Username"] == null)
+            //{
+            //    return false;
+            //}
+            //else
+            //{
                 return true;
-            }
+            //}
         }
 
         public async Task<ActionResult> AddProductInToCart(int ProductId, int Quantity)
@@ -131,7 +131,7 @@ namespace DTShopping.Controllers
                     //cart.username = Session["Username"].ToString();
                     //cart.password = Session["Password"].ToString();
                     cart.username = "admin";
-                    cart.password = "123456";
+                    cart.password = "1234";
                     var response = await objRepository.ManageCart(cart, AddAction);
                     return Json(response);
                 }

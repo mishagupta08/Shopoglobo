@@ -9,13 +9,17 @@
     $('#addToCart').click(function (e) {
         var prodId = $("#product_id").val();
         var quantity = $("#quantity").val();
+        
         AddProductInCart(prodId, quantity);
     });
 });
 
 function AddProductInCart(prodId, quantity) {
-
     $(".preloader").show();
+    if (quantity == null || quantity == "" || quantity == undefined)
+    {
+        quantity = 1;
+    }
     $.ajax({
         url: '/Manage/AddProductInToCart',
         type: 'Post',
@@ -29,6 +33,7 @@ function AddProductInCart(prodId, quantity) {
             alert(result.ResponseValue);
         }
         else {
+            alert("Product added to cart.");
             $("#cartCount").val(result.CartProductCount);
         }
 
