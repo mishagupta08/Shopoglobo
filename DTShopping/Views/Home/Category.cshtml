@@ -34,13 +34,13 @@
 
                                             var tt = subcategory.Childern != null && subcategory.Childern.Count > 0;
                                             <div class="sub-cat-name">
-                                                <a href="~/Home/ProductList?cat=@subcategory.id">@subcategory.title</a>
+                                                <a href="~/Home/ProductList?cat=@subcategory.id&root=@category.id">@subcategory.title</a>
                                                 @if (tt)
                                                 {
                                                     <div class="drop-box-subsubcat responsive_position">
                                                         @foreach (var subsubcategory in subcategory.Childern)
                                                         {
-                                                            <div class="subsub-cat-name"> <a href="~/Home/ProductList?cat=@subsubcategory.id">@subsubcategory.title</a></div>
+                                                            <div class="subsub-cat-name"> <a href="~/Home/ProductList?cat=@subsubcategory.id&root=@category.id">@subsubcategory.title</a></div>
                                                         }
                                                     </div>
                                                 }

@@ -36,7 +36,7 @@
             }
 </style>
     
-    <div class="">
+    @*<div class="">
         <div class="container">
             <div class="sixteen columns">
                 <div class="breadcrumbs_box">
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="container">
         <div class="sixteen columns">
             <div id="bodyContent" class="twelve columns omega main_part_wrapper">
@@ -72,22 +72,26 @@
                                 <table class="table_style productListingHeader1">
                                     <tr>
                                         <td class="padding0">
-                                            Sort by : <a href="javascript:AM_xListings_Sort(5,'ASC');">Product Name</a> | <a href="javascript:AM_xListings_Sort(4,'ASC');">Product Code</a> | <a href="javascript:AM_xListings_Sort(14,'ASC');">Discount Points</a> | <a href="javascript:AM_xListings_Sort(12,'ASC');">MRP</a> | <a href="javascript:AM_xListings_Sort(13,'ASC');">Offer Price<img 0px}="" src="http://www.discounttadka.com/themes/yebhi/images/am_descending.gif" alt="" title="Showing in Descending Order" border="0"></a>
+                                            Sort by :                                          
+                                            <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&SortBy=points&Order=desc" class="SortProduct" data-SortBy="Points" data-SortOrder="DESC">High Points</a> | 
+                                            <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&SortBy=points&Order=asc" class="SortProduct" data-SortBy="Points" data-SortOrder="ASC">Low Points</a> | 
+                                            <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&SortBy=price&Order=desc" class="SortProduct" data-SortBy="OfferPrice" data-SortOrder="DESC">High Price </a> |
+                                            <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&SortBy=price&Order=asc" class="SortProduct" data-SortBy="OfferPrice" data-SortOrder="ASC">Low Price </a>
                                             <div></div>
                                             <a id="anchorSearchForm" href="http://www.discounttadka.com/index.php?mod=product_search&srch_category_id=137#" onClick="javascript:$('#searchFormDiv').toggle('dropdown');return(false);"></a>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    @*<tr>
                                         <td>
                                             <span class="advancedsearch"> <a href="#" id="advan_btn">Advanced Search</a> </span>
                                         </td>
-                                    </tr>
+                                    </tr>*@
 
                                 </table>
 
                             </div>
-                            <div id="searchform">
-                                <form name="create_account" action="#" method="post" onSubmit="return check_form(create_account);">
+                            @*<div id="searchform">
+                                <form name="create_account" action="#" method="post" onSubmit="return check_form(create_account)">
                                     <input type="hidden" name="formid" value="e77a43c4c12f4fbfe82280d444af171e" /><input type="hidden" name="action" value="process" />
                                     <div class="contentContainer">
                                         <div>
@@ -519,7 +523,7 @@
 
                                     </div>
                                 </form>
-                            </div>
+                            </div>*@
                             @foreach (var product in Model)
                             {
                                 count = count + 1;
@@ -554,7 +558,7 @@
                                                     @Resources.EUPoints : @{var t = product.RBV != null ? product.RBV : 0;}@t
                                                 </span>
                                             </div>
-                                            <div class="icon_cart_rollover"><a href=""></a> </div>
+                                            <div class="icon_cart_rollover"><a  onclick="AddProductInCart(@product.id, 1)"> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -566,127 +570,10 @@
                 </div>
                 
             </div>
-            <div id="columnLeft" style="float: left;" class="product_info_page_left four columns alpha">
-                <div class="infoBox infoBoxCategory">
-                    <div class="infoBoxHeading">
-                        <p class="icon_box_category">&nbsp;</p>
-                        Category
-                    </div>
-                    <div class="infoBoxContents">
-                        <div class="cat_parent"><a class="active_cat" href="index.php?cPath=1">Women</a></div>
-                        <div class="clear"></div>
-                        <div class="cat_child"><a class="active_cat" href="index.php?cPath=1_17"><span class='space_cat'>&nbsp;</span>Club Dresses&nbsp;(6)</a></div>
-                        <div class="clear"></div>
-                        <div class="cat_child">
-                            <div class="padding_child"><a href="index.php?cPath=1_17_22"><span class='space_cat'>&nbsp;</span><span class='space_cat'>&nbsp;</span>Maxi dress&nbsp;(0)</a></div>
-                        </div>
-                        <div class="clear"></div>
-                        <div class="cat_child">
-                            <div class="padding_child"><a href="index.php?cPath=1_17_23"><span class='space_cat'>&nbsp;</span><span class='space_cat'>&nbsp;</span>Midi dress&nbsp;(0)</a></div>
-                        </div>
-                        <div class="clear"></div>
-                        <div class="cat_child">
-                            <div class="padding_child"><a href="index.php?cPath=1_17_24"><span class='space_cat'>&nbsp;</span><span class='space_cat'>&nbsp;</span>Mini dress&nbsp;(0)</a></div>
-                        </div>
-                        <div class="clear"></div>
-                        <div class="cat_child"><a href="index.php?cPath=1_4"><span class='space_cat'>&nbsp;</span>Coats&nbsp;(3)</a></div>
-                        <div class="clear"></div>
-                        <div class="cat_child"><a href="index.php?cPath=1_8"><span class='space_cat'>&nbsp;</span>Evening Dresses&nbsp;(6)</a></div>
-                        <div class="clear"></div>
-                        <div class="cat_child"><a href="index.php?cPath=1_16"><span class='space_cat'>&nbsp;</span>Hoodies&nbsp;(3)</a></div>
-                        <div class="clear"></div>
-                        <div class="cat_child"><a href="index.php?cPath=1_9"><span class='space_cat'>&nbsp;</span>Prom Dresses&nbsp;(6)</a></div>
-                        <div class="clear"></div>
-                        <div class="cat_child"><a href="index.php?cPath=1_5"><span class='space_cat'>&nbsp;</span>Shoes&nbsp;(6)</a></div>
-                        <div class="clear"></div>
-                        <div class="cat_parent"><a href="index.php?cPath=2">Men</a></div>
-                        <div class="clear"></div>
-                        <div class="cat_parent"><a href="index.php?cPath=3">Electronics</a></div>
-                        <div class="clear"></div>
-                        <div class="cat_parent"><a href="index.php?cPath=21">Furniture</a></div>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-                <div class="infoBox infoBoxBrands">
-                    <div class="infoBoxHeading">Price Range</div>
-                    <div class="infoBoxContents">
-                        <ul>
-                            <li><a href="index.php?manufacturers_id=3">Rs. 0 - 1000</a></li>
-                            <li><a href="index.php?manufacturers_id=4">Rs.1000 - 2000</a></li>
-                            <li><a href="index.php?manufacturers_id=10">Rs.2000 - 3000</a></li>
-                            <li><a href="index.php?manufacturers_id=7">Rs.4000 - 5000</a></li>
-                            <li><a href="index.php?manufacturers_id=6">Rs.6000 - 7000</a></li>
-                            <li><a href="index.php?manufacturers_id=1">Rs.8000 - 9000</a></li>
-                            <li><a href="index.php?manufacturers_id=3">Rs. 0 - 1000</a></li>
-                            <li><a href="index.php?manufacturers_id=4">Rs.1000 - 2000</a></li>
-                            <li><a href="index.php?manufacturers_id=10">Rs.2000 - 3000</a></li>
-                            <li><a href="index.php?manufacturers_id=7">Rs.4000 - 5000</a></li>
-                            <li><a href="index.php?manufacturers_id=6">Rs.6000 - 7000</a></li>
-                            <li><a href="index.php?manufacturers_id=1">Rs.8000 - 9000</a></li>
-                            <li><a href="index.php?manufacturers_id=8">Above 9000</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="infoBox infoBoxBrands">
-                    <div class="infoBoxHeading">Points</div>
-                    <div class="infoBoxContents">
-                        <ul>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                            <li><a href="#">Point 0 - 500</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="infoBox infoBoxWhatsNew">
-                    <div class="infoBoxHeading">
-                        <p class="icon_box_new">&nbsp;</p>
-                        <a href="">What's New?</a>
-                    </div>
-                    <div class="product">
-                        <div class="img_border">
-                            <div class="product-image-wrapper">
-                                <span class="product_sticker sticker_onsale_top_left sticker_display">
-                                    Save up <br>
-                                    to 30%
-                                </span><a class="product_img" href="product_info.php?products_id=25">
-                                    <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                                    <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                                    <div class="product-image-wrapper-hover"></div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="wrapper-hover">
-                            <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
-                            <div class="clearfix">
-                                <div class="icon_cart_title product-price">
-                                    <span class="new_price">
-                                        <s>Rs.1600</s><br>
-                                        <span class="new-special-price">Rs.1100.00</span>
-                                    </span><br>
-                                    <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                                        Discount Points : 0.00<br>
-                                        Point Value : 300.00
-                                    </span>
-                                </div>
-                                <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          @Html.Action("getCatHeirarchy","Home",new { Cat = ViewBag.ParentId, subCat = ViewBag.category })
 
         </div>
     </div>
+
+<script src="~/Scripts/dashboard.js"></script>
 

@@ -67,18 +67,54 @@ namespace DTShopping.Controllers
             return View();
         }
 
-        public async Task<ActionResult> ProductList(string cat,int? page)
+        public async Task<ActionResult> ProductList(string cat,string root,int? page,string SortBy, string Order,string FilterFromPoint ,string FilterToPoint)
         {
             Filters c = new Filters();
             c.CategoryId = Convert.ToInt16(cat);
             c.pageNo = page;
             c.NoOfRecord = 10;
+            if (!string.IsNullOrEmpty(SortBy))
+            {
+                if (SortBy.ToLower() == "price")
+                {
+                    c.SortByPrice = true;
+                    if (Order.ToLower() == "asc")
+                    {
+                        c.IsPriceLowToHigh = true;
+                    }
+                    else
+                    {
+                        c.IsPriceLowToHigh = false;
+                    }
+                }
+                else if (SortBy.ToLower() == "points")
+                {
+                    c.SortByPoints = true;
+                    if (Order.ToLower() == "asc")
+                    {
+                        c.IsPointLowToHigh = true;
+                    }
+                    else
+                    {
+                        c.IsPointLowToHigh = false;
+                    }
+                }
+            }
+            if (!string.IsNullOrEmpty(FilterFromPoint) && !string.IsNullOrEmpty(FilterToPoint))
+            {
+                c.FilterFromPoint = Convert.ToInt32(FilterFromPoint);
+                c.FilterToPoint = Convert.ToInt32(FilterToPoint);
+            }
+
             var result = await objRepository.GetCategoryProducts(c);
             List<Product> listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
             int pageSize = 10;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var Filteredlist = listProducts.ToPagedList(pageIndex, pageSize);
+            ViewBag.category = cat;
+            ViewBag.Page = page;
+            ViewBag.ParentId = root;            
             return View(listProducts);           
         }
 
@@ -88,22 +124,42 @@ namespace DTShopping.Controllers
             List<Category> list = new List<Category>();
             try
             {
-                if (Session["MenuList"] != null)
-                {
+                //if (Session["MenuList"] != null)
+                //{
 
-                }
-                else
-                {
+                //}
+                //else
+                //{
                     var MenuItems = await objRepository.GetMenuList();
-                    list = getNestedChildren(MenuItems.Where(r => r.parent_id == 1 && r.parent_id != r.id).ToList(), MenuItems);
+                    list = getNestedChildren(MenuItems.Where(r => r.status == true &&  r.parent_id == 1 && r.parent_id != r.id  ).ToList(), MenuItems);
                     Session["MenuList"] = list;
-                }                                                      
+                //}                                                      
             }
             catch (Exception ex)
             {
 
             }
             return PartialView("Category", list);
+        }
+
+        public ActionResult getCatHeirarchy(string Cat,string subCat)
+        {
+            var CategoryList = new List<Category>();
+            int categor = 1;
+            if (!string.IsNullOrEmpty(Cat))
+            {
+                categor = Convert.ToInt16(Cat);
+            }
+            if (Session["MenuList"] != null)
+            {
+                var MenuItems = Session["MenuList"] as List<Category>;
+                CategoryList = getNestedChildren(MenuItems.Where(r => r.status == true && r.id == categor).ToList(), MenuItems);
+            }
+            ViewBag.ParentId = Cat;
+            ViewBag.category = subCat;
+            ViewBag.Page = 1;
+            
+            return PartialView("_filterSideBar", CategoryList);
         }
        
         public List<Category> getNestedChildren(List<Category> ParentList, List<Category> MenuList)
@@ -136,6 +192,11 @@ namespace DTShopping.Controllers
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var Filteredlist = listProducts.ToPagedList(pageIndex, pageSize);
             return View(Filteredlist);
-        }        
+        }
+
+        public ActionResult Claims()
+        {
+            return View();
+        }
     }
 }

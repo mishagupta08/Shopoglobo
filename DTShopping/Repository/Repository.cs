@@ -82,15 +82,17 @@ namespace DTShopping.Repository
 
         public async Task<UserDetails> Login(UserDetails user)
         {
-            var result = await CallPostFunction(string.Empty, "LoginShoppigPortalUser");
-            if (result == null || !result.Status)
-            {
-                return null;
-            }
-            else
+            var detail = JsonConvert.SerializeObject(user);
+            var result = await CallPostFunction(detail, "LoginShoppigPortalUser");
+            if (result != null )
             {
                 var UserDetails = JsonConvert.DeserializeObject<UserDetails>(result.ResponseValue);
                 return UserDetails;
+                
+            }
+            else
+            {
+                return null;
             }
         }
 

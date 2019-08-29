@@ -4,6 +4,7 @@ using DTShopping.Models;
 using DTShopping.Repository;
 using System.Collections.Generic;
 using System;
+using System.Web.Security;
 
 namespace DTShopping
 {
@@ -44,11 +45,14 @@ namespace DTShopping
                 var companyId = System.Configuration.ConfigurationManager.AppSettings["CompanyId"];
                 if(!string.IsNullOrEmpty(companyId))
                 User.company_id = Convert.ToInt16(companyId);
+                User.role_id = 1;
+                _APIManager = new APIRepository();
                 var result = await _APIManager.Login(User);
                 if (result != null)
                 {
-                    Session["UserDetail"] = result;
-                    return RedirectToAction("Home", "Index");
+                    Session["UserDetail"] = result;                   
+                    FormsAuthentication.SetAuthCookie(result.username, false);
+                    return Json("Success", JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -88,6 +92,7 @@ namespace DTShopping
         public ActionResult LogOff()
         {
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            FormsAuthentication.SignOut();            
             return RedirectToAction("Index", "Home");
         }
 

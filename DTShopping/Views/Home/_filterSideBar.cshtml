@@ -1,120 +1,95 @@
-﻿<div id="columnLeft" style="float: left;" class="product_info_page_left four columns alpha">
-    <div class="infoBox infoBoxCategory">
-        <div class="infoBoxHeading">
-            <p class="icon_box_category">&nbsp;</p>
-            Category
-        </div>
-        <div class="infoBoxContents">
-            <div class="cat_parent"><a class="active_cat" href="index.php?cPath=1">Women</a></div>
-            <div class="clear"></div>
-            <div class="cat_child"><a class="active_cat" href="index.php?cPath=1_17"><span class='space_cat'>&nbsp;</span>Club Dresses&nbsp;(6)</a></div>
-            <div class="clear"></div>
-            <div class="cat_child">
-                <div class="padding_child"><a href="index.php?cPath=1_17_22"><span class='space_cat'>&nbsp;</span><span class='space_cat'>&nbsp;</span>Maxi dress&nbsp;(0)</a></div>
+﻿@model IEnumerable<DTShopping.Models.Category>
+
+    <div id="columnLeft" style="float: left;" class="product_info_page_left four columns alpha">
+        <div class="infoBox infoBoxCategory">
+            <div class="infoBoxHeading">
+                <p class="icon_box_category">&nbsp;</p>
+                Category
             </div>
-            <div class="clear"></div>
-            <div class="cat_child">
-                <div class="padding_child"><a href="index.php?cPath=1_17_23"><span class='space_cat'>&nbsp;</span><span class='space_cat'>&nbsp;</span>Midi dress&nbsp;(0)</a></div>
+            <div class="infoBoxContents">                
+                @foreach (var cat in Model)
+                {                    
+                    var t = cat.Childern != null && cat.Childern.Count > 0;
+                    <div class="cat_parent"><a class="active_cat" href="~/Home/ProductList?cat=@cat.id&root=@ViewBag.ParentId">@cat.title</a></div>
+                    <div class="clear"></div>
+                    if (t)
+                    {        
+                        foreach (var subcategory in cat.Childern)
+                        {
+                            <div class="cat_child"><a class="active_cat" href="~/Home/ProductList?cat=@subcategory.id&root=@ViewBag.ParentId"><span class='space_cat'>&nbsp;</span>@subcategory.title</a></div>
+                            <div class="clear"></div>
+                        }
+                    }
+                }
             </div>
-            <div class="clear"></div>
-            <div class="cat_child">
-                <div class="padding_child"><a href="index.php?cPath=1_17_24"><span class='space_cat'>&nbsp;</span><span class='space_cat'>&nbsp;</span>Mini dress&nbsp;(0)</a></div>
+        </div>
+        @*<div class="infoBox infoBoxBrands">
+            <div class="infoBoxHeading">Price Range</div>
+            <div class="infoBoxContents">
+                <ul>
+                    <li><a href="index.php?manufacturers_id=3">Rs. 0 - 1000</a></li>
+                    <li><a href="index.php?manufacturers_id=4">Rs.1000 - 2000</a></li>
+                    <li><a href="index.php?manufacturers_id=10">Rs.2000 - 3000</a></li>
+                    <li><a href="index.php?manufacturers_id=7">Rs.4000 - 5000</a></li>
+                    <li><a href="index.php?manufacturers_id=6">Rs.6000 - 7000</a></li>
+                    <li><a href="index.php?manufacturers_id=1">Rs.8000 - 9000</a></li>
+                    <li><a href="index.php?manufacturers_id=3">Rs. 0 - 1000</a></li>
+                    <li><a href="index.php?manufacturers_id=4">Rs.1000 - 2000</a></li>
+                    <li><a href="index.php?manufacturers_id=10">Rs.2000 - 3000</a></li>
+                    <li><a href="index.php?manufacturers_id=7">Rs.4000 - 5000</a></li>
+                    <li><a href="index.php?manufacturers_id=6">Rs.6000 - 7000</a></li>
+                    <li><a href="index.php?manufacturers_id=1">Rs.8000 - 9000</a></li>
+                    <li><a href="index.php?manufacturers_id=8">Above 9000</a></li>
+                </ul>
             </div>
-            <div class="clear"></div>
-            <div class="cat_child"><a href="index.php?cPath=1_4"><span class='space_cat'>&nbsp;</span>Coats&nbsp;(3)</a></div>
-            <div class="clear"></div>
-            <div class="cat_child"><a href="index.php?cPath=1_8"><span class='space_cat'>&nbsp;</span>Evening Dresses&nbsp;(6)</a></div>
-            <div class="clear"></div>
-            <div class="cat_child"><a href="index.php?cPath=1_16"><span class='space_cat'>&nbsp;</span>Hoodies&nbsp;(3)</a></div>
-            <div class="clear"></div>
-            <div class="cat_child"><a href="index.php?cPath=1_9"><span class='space_cat'>&nbsp;</span>Prom Dresses&nbsp;(6)</a></div>
-            <div class="clear"></div>
-            <div class="cat_child"><a href="index.php?cPath=1_5"><span class='space_cat'>&nbsp;</span>Shoes&nbsp;(6)</a></div>
-            <div class="clear"></div>
-            <div class="cat_parent"><a href="index.php?cPath=2">Men</a></div>
-            <div class="clear"></div>
-            <div class="cat_parent"><a href="index.php?cPath=3">Electronics</a></div>
-            <div class="clear"></div>
-            <div class="cat_parent"><a href="index.php?cPath=21">Furniture</a></div>
-            <div class="clear"></div>
-        </div>
-    </div>
-    <div class="infoBox infoBoxBrands">
-        <div class="infoBoxHeading">Price Range</div>
-        <div class="infoBoxContents">
-            <ul>
-                <li><a href="index.php?manufacturers_id=3">Rs. 0 - 1000</a></li>
-                <li><a href="index.php?manufacturers_id=4">Rs.1000 - 2000</a></li>
-                <li><a href="index.php?manufacturers_id=10">Rs.2000 - 3000</a></li>
-                <li><a href="index.php?manufacturers_id=7">Rs.4000 - 5000</a></li>
-                <li><a href="index.php?manufacturers_id=6">Rs.6000 - 7000</a></li>
-                <li><a href="index.php?manufacturers_id=1">Rs.8000 - 9000</a></li>
-                <li><a href="index.php?manufacturers_id=3">Rs. 0 - 1000</a></li>
-                <li><a href="index.php?manufacturers_id=4">Rs.1000 - 2000</a></li>
-                <li><a href="index.php?manufacturers_id=10">Rs.2000 - 3000</a></li>
-                <li><a href="index.php?manufacturers_id=7">Rs.4000 - 5000</a></li>
-                <li><a href="index.php?manufacturers_id=6">Rs.6000 - 7000</a></li>
-                <li><a href="index.php?manufacturers_id=1">Rs.8000 - 9000</a></li>
-                <li><a href="index.php?manufacturers_id=8">Above 9000</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="infoBox infoBoxBrands">
-        <div class="infoBoxHeading">Points</div>
-        <div class="infoBoxContents">
-            <ul>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-                <li><a href="#">Point 0 - 500</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="infoBox infoBoxWhatsNew">
-        <div class="infoBoxHeading">
-            <p class="icon_box_new">&nbsp;</p>
-            <a href="">What's New?</a>
-        </div>
-        <div class="product">
-            <div class="img_border">
-                <div class="product-image-wrapper">
-                    <span class="product_sticker sticker_onsale_top_left sticker_display">
-                        Save up <br>
-                        to 30%
-                    </span><a class="product_img" href="product_info.php?products_id=25">
-                        <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
-                        <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
-                        <div class="product-image-wrapper-hover"></div>
-                    </a>
-                </div>
+        </div>*@
+        <div class="infoBox infoBoxBrands">
+            <div class="infoBoxHeading">Points</div>
+            <div class="infoBoxContents">
+                <ul>
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=0&FilterToPoint=50">Point 0 - 50</a></li>
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=50&FilterToPoint=100">Point 50 - 100</a></li>
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=100&FilterToPoint=150">Point 100 - 150</a></li>
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=150&FilterToPoint=200">Point 150- 200</a></li>
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=200&FilterToPoint=250">Point 200 - 250</a></li>
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=250&FilterToPoint=300">Point 250 - 300</a></li>                    
+                </ul>
             </div>
-            <div class="wrapper-hover">
-                <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
-                <div class="clearfix">
-                    <div class="icon_cart_title product-price">
-                        <span class="new_price">
-                            <s>Rs.1600</s><br>
-                            <span class="new-special-price">Rs.1100.00</span>
-                        </span><br>
-                        <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
-                            Discount Points : 0.00<br>
-                            Point Value : 300.00
-                        </span>
+        </div>
+        @*<div class="infoBox infoBoxWhatsNew">
+            <div class="infoBoxHeading">
+                <p class="icon_box_new">&nbsp;</p>
+                <a href="">What's New?</a>
+            </div>
+            <div class="product">
+                <div class="img_border">
+                    <div class="product-image-wrapper">
+                        <span class="product_sticker sticker_onsale_top_left sticker_display">
+                            Save up <br>
+                            to 30%
+                        </span><a class="product_img" href="product_info.php?products_id=25">
+                            <div><img src="images/29_1.jpg" alt="A.L.C - Gerry Dress" title="A.L.C - Gerry Dress" width="329" height="417" class="scale-with-grid" /></div>
+                            <div class="roll_over_img"><img src="images/29_2.jpg" alt="" width="329" height="417" class="scale-with-grid" /></div>
+                            <div class="product-image-wrapper-hover"></div>
+                        </a>
                     </div>
-                    <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
+                </div>
+                <div class="wrapper-hover">
+                    <div class="product-name"> <a href="product_info.php?products_id=25"> Azrouel Dress </a> </div>
+                    <div class="clearfix">
+                        <div class="icon_cart_title product-price">
+                            <span class="new_price">
+                                <s>Rs.1600</s><br>
+                                <span class="new-special-price">Rs.1100.00</span>
+                            </span><br>
+                            <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
+                                Discount Points : 0.00<br>
+                                Point Value : 300.00
+                            </span>
+                        </div>
+                        <div class="icon_cart_rollover"><a href="index.php?cPath=1_17&amp;sort=2a&amp;action=buy_now&amp;products_id=25"></a> </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
-</div>

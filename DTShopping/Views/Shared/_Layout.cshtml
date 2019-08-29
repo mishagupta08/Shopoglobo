@@ -95,12 +95,22 @@ if ( $.attrFn ) { $.attrFn.text = true; }
             </div>
             <div class="nav_block_dropdown">
               <ul class="links">
-                <li class="first"><a href="/Home/Index">Home</a></li>
-                <li><a href="contact_us.php">Shopping Cart</a></li>
-                  <li><a href="contact_us.php">My Account</a></li>
-                <li><a href="/Account/Login">DB Login</a></li>
-                <li class="last"><a href="privacy.php">Claims</a></li>
-                <li class="last"><a href="privacy.php">Logout</a></li>
+                 <li class="first"><a href="/Home/Index">Home</a></li>
+                
+                 @if (Request.IsAuthenticated)
+                 {
+                    <li><a href="/Manage/GetCartProductList">Shopping Cart</a></li>
+                    <li><a href="/Manage/UserAccount">My Account</a></li>
+                 }
+                 else
+                 {
+                    <li><a href="/Account/Login">My Account</a></li>                       
+                 }
+                  @if (Request.IsAuthenticated)
+                  {
+                    <li class="last"><a href="/Home/Claims">Claims</a></li>
+                    <li class="last"><a href="/Account/LogOff">Logout</a></li>
+                  }
               </ul>
             </div>
           </div>
@@ -174,7 +184,7 @@ if ( $.attrFn ) { $.attrFn.text = true; }
           <nav>
             <ul>
               <li><a href="create_account.php">My Account</a></li>
-              <li><a href="create_account.php">My Shopping Cart</a></li>
+              <li><a href="/Manage/GetCartProductList">My Shopping Cart</a></li>
               <li><a href="account_history.php">Order history</a></li>
               <li><a href="login.php">Log In</a></li>
             </ul>
@@ -228,4 +238,34 @@ if ( $.attrFn ) { $.attrFn.text = true; }
         function(){ $('.drop-box-4subcat',this).toggle() }
     );
     });
+    function AddProductInCart(prodId, quantity) {
+        $(".preloader").show();        
+        if (quantity == null || quantity == "" || quantity == undefined) {
+            quantity = 1;
+        }
+        $.ajax({
+            url: '/Manage/AddProductInToCart',
+            type: 'Post',
+            datatype: 'Json',
+            data: { ProductId: prodId, Quantity: quantity }
+        }).done(function (result) {
+            if (result == null || result == undefined || result == "") {
+                alert("Something went wrong, Please try again later.");
+            }
+            else if (result.Status == false) {
+                alert(result.ResponseValue);
+            }
+            else {
+                alert("Product added to cart.");
+                $("#cartCount").val(result.CartProductCount);
+            }
+
+            $(".preloader").hide();
+        }).fail(function (error) {
+            alert(error.statusText);
+            $(".preloader").hide();
+        });
+
+        return false;
+    }
 </script>

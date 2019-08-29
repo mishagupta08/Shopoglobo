@@ -39,8 +39,7 @@
                     {
                         <li id="rslides1_s0" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 800ms ease-in-out 0s;" class=""><a href="index.php?cPath=1_17"><img alt="" src="images/slider-simple/slide-1.jpg"></a></li>
                         <li id="rslides1_s1" style="float: none; position: absolute; opacity: 0; z-index: 1; display: list-item; transition: opacity 800ms ease-in-out 0s;" class=""><a href="index.php?cPath=1_8"><img alt="" src="images/slider-simple/slide-2.jpg"></a></li>
-                        <li id="rslides1_s2" style="float: left; position: relative; opacity: 1; z-index: 2; display: list-item; transition: opacity 800ms ease-in-out 0s;" class="rslides1_on"><a href="index.php?cPath=1_9"><img alt="" src="images/slider-simple/slide-3.jpg"></a></li>
-                       
+                        <li id="rslides1_s2" style="float: left; position: relative; opacity: 1; z-index: 2; display: list-item; transition: opacity 800ms ease-in-out 0s;" class="rslides1_on"><a href="index.php?cPath=1_9"><img alt="" src="images/slider-simple/slide-3.jpg"></a></li>                       
                     }
 
                 </ul>
@@ -66,7 +65,7 @@
                                         <li class="four columns product">
                                             <div class="img_border">
                                                 <div class="product-image-wrapper">
-                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a href="~/Home/GetProductDetail?prodId=@segment.id">
+                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onclick="callDetailPage('@segment.id')" href="~/Home/GetProductDetail?prodId=@segment.id">
                                                         <div><img src="@imageUrl/@segment.small_image" alt="@segment.title" title="@segment.title" width="180" height="180" class="scale-with-grid" /></div>
                                                         <div class="roll_over_img"><img src="@imageUrl/@segment.small_image" alt="" width="329" height="417" class="scale-with-grid" /></div>
                                                         <div class="product-image-wrapper-hover"></div>
@@ -74,16 +73,16 @@
                                                 </div>
                                             </div>
                                             <div class="wrapper-hover">
-                                                <div class="product-name"> <a href="~/Home/GetProductDetail?prodId=@segment.id"> @segment.title </a> </div>
+                                                <div class="product-name"> <a onclick="callDetailPage('@segment.id')" href="~/Home/GetProductDetail?prodId=@segment.id"> @segment.title </a> </div>
                                                 <div class="clearfix">
                                                     <div class="icon_cart_title product-price">
                                                         <span class="new_price">
                                                             <s>@segment.cost_price</s><br>
-                                                            <span class="new-special-price">@segment.offer_price</span>
+                                                            <span class="new-special-price">@Html.Raw(segment.offer_price)</span>
                                                         </span><br>
                                                         <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
 
-                                                            @Resources.EUPoints : @segment.RBV
+                                                            @Resources.EUPoints : @Html.Raw(segment.RBV)
                                                         </span>
                                                     </div>
                                                     <div class="icon_cart_rollover"> <a onclick="AddProductInCart(@segment.id, 1)"></a> </div>
@@ -118,7 +117,7 @@
                                         <li class="four columns product">
                                             <div class="img_border">
                                                 <div class="product-image-wrapper">
-                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a href="~/Home/GetProductDetail?prodId=@segment.id">
+                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onclick="callDetailPage('@segment.id')" href="~/Home/GetProductDetail?prodId=@segment.id">
                                                         <div><img src="@imageUrl/@segment.small_image" alt="@segment.title" title="@segment.title" width="180" height="180" class="scale-with-grid" /></div>
                                                         <div class="roll_over_img"><img src="@imageUrl/@segment.small_image" alt="" width="329" height="417" class="scale-with-grid" /></div>
                                                         <div class="product-image-wrapper-hover"></div>
@@ -126,16 +125,16 @@
                                                 </div>
                                             </div>
                                             <div class="wrapper-hover">
-                                                <div class="product-name"> <a href="~/Home/GetProductDetail?prodId=@segment.id">@segment.title</a> </div>
+                                                <div class="product-name"> <a onclick="callDetailPage('@segment.id')" href="~/Home/GetProductDetail?prodId=@segment.id">@segment.title</a> </div>
                                                 <div class="clearfix">
                                                     <div class="icon_cart_title product-price">
                                                         <span class="new_price">
                                                             <s>@segment.cost_price</s><br>
-                                                            <span class="new-special-price">@segment.offer_price</span>
+                                                            <span class="new-special-price">@Html.Raw(segment.offer_price)</span>
                                                         </span><br>
                                                         <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
                                                             <br>
-                                                            @Resources.EUPoints : @segment.RBV
+                                                            @Resources.EUPoints : @Html.Raw(segment.RBV)
                                                         </span>
                                                     </div>
                                                     <div class="icon_cart_rollover"> <a onclick="AddProductInCart(@segment.id, 1)"></a> </div>
@@ -171,7 +170,7 @@
                                         <li class="four columns product">
                                             <div class="img_border">
                                                 <div class="product-image-wrapper">
-                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a href="~/Home/GetProductDetail?prodId=@segment.id">
+                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onclick="callDetailPage('@segment.id')" href="~/Home/GetProductDetail?prodId=@segment.id">
                                                         <div><img src="@imageUrl/@segment.small_image" alt="@segment.title" title="@segment.title" width="180" height="180" class="scale-with-grid" /></div>
                                                         <div class="roll_over_img"><img src="@imageUrl/@segment.small_image" alt="" width="329" height="417" class="scale-with-grid" /></div>
                                                         <div class="product-image-wrapper-hover"></div>
@@ -179,17 +178,16 @@
                                                 </div>
                                             </div>
                                             <div class="wrapper-hover">
-                                                <div class="product-name"> <a href="~/Home/GetProductDetail?prodId=@segment.id">@segment.title</a> </div>
+                                                <div class="product-name"> <a onclick="callDetailPage('@segment.id')" href="~/Home/GetProductDetail?prodId=@segment.id">@segment.title</a> </div>
                                                 <div class="clearfix">
                                                     <div class="icon_cart_title product-price">
                                                         <span class="new_price">
                                                             <s>@segment.cost_price</s><br>
-                                                            <span class="new-special-price">@segment.offer_price</span>
+                                                            <span class="new-special-price">@Html.Raw(segment.offer_price)</span>
                                                         </span><br>
                                                         <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
                                                             <br>
-                                                            @Resources.EUPoints : @segment.RBV
-                                                        </span>
+                                                            @Resources.EUPoints : @Html.Raw(segment.RBV)                                                        </span>
                                                     </div>
                                                     <div class="icon_cart_rollover"> <a onclick="AddProductInCart(@segment.id, 1)"></a> </div>
                                                 </div>
@@ -223,7 +221,7 @@
                                         <li class="four columns product">
                                             <div class="img_border">
                                                 <div class="product-image-wrapper">
-                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a href="~/Home/GetProductDetail?prodId=@segment.id">
+                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onclick="callDetailPage('@segment.id')" href="~/Home/GetProductDetail?prodId=@segment.id">
                                                         <div><img src="@imageUrl/@segment.small_image" alt="@segment.title" title="@segment.title" width="180" height="180" class="scale-with-grid" /></div>
                                                         <div class="roll_over_img"><img src="@imageUrl/@segment.small_image" alt="" width="329" height="417" class="scale-with-grid" /></div>
                                                         <div class="product-image-wrapper-hover"></div>
@@ -231,16 +229,16 @@
                                                 </div>
                                             </div>
                                             <div class="wrapper-hover">
-                                                <div class="product-name"> <a href="~/Home/GetProductDetail?prodId=@segment.id">@segment.title</a> </div>
+                                                <div class="product-name"> <a onclick="callDetailPage('@segment.id')" href="~/Home/GetProductDetail?prodId=@segment.id">@segment.title</a> </div>
                                                 <div class="clearfix">
                                                     <div class="icon_cart_title product-price">
                                                         <span class="new_price">
                                                             <s>@segment.cost_price</s><br>
-                                                            <span class="new-special-price">@segment.offer_price</span>
+                                                            <span class="new-special-price">@Html.Raw(segment.offer_price)</span>
                                                         </span><br>
                                                         <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
                                                             <br>
-                                                            @Resources.EUPoints : @segment.RBV
+                                                            @Resources.EUPoints : @Html.Raw(segment.RBV)
                                                         </span>
                                                     </div>
                                                     <div class="icon_cart_rollover"> <a onclick="AddProductInCart(@segment.id, 1)"></a> </div>
@@ -276,7 +274,7 @@
                                         <li class="four columns product">
                                             <div class="img_border">
                                                 <div class="product-image-wrapper">
-                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a href="~/Home/GetProductDetail?prodId=@segment.id">
+                                                    <span class="product_sticker sticker_new_top_right sticker_display_none"></span> <a onclick="callDetailPage('@segment.id')" href="~/Home/GetProductDetail?prodId=@segment.id">
                                                         <div><img src="@imageUrl/@segment.small_image" alt="@segment.title" title="@segment.title" width="180" height="180" class="scale-with-grid" /></div>
                                                         <div class="roll_over_img"><img src="@imageUrl/@segment.small_image" alt="" width="329" height="417" class="scale-with-grid" /></div>
                                                         <div class="product-image-wrapper-hover"></div>
@@ -284,16 +282,16 @@
                                                 </div>
                                             </div>
                                             <div class="wrapper-hover">
-                                                <div class="product-name"> <a href="~/Home/GetProductDetail?prodId=@segment.id">@segment.title</a> </div>
+                                                <div class="product-name"> <a onclick="callDetailPage('@segment.id')" href="~/Home/GetProductDetail?prodId=@segment.id">@segment.title</a> </div>
                                                 <div class="clearfix">
                                                     <div class="icon_cart_title product-price">
                                                         <span class="new_price">
                                                             <s>@segment.cost_price</s><br>
-                                                            <span class="new-special-price">@segment.offer_price</span>
+                                                            <span class="new-special-price">@Html.Raw(segment.offer_price)</span>
                                                         </span><br>
                                                         <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
                                                             <br>
-                                                            @Resources.EUPoints : @segment.RBV
+                                                            @Resources.EUPoints : @Html.Raw(segment.RBV)
                                                         </span>
                                                     </div>
                                                     <div class="icon_cart_rollover"> <a onClick="AddProductInCart(@segment.id, 1)"></a> </div>
@@ -312,5 +310,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+      
+
+    });
+
+    function callDetailPage(productID)
+    {
+        window.location.href = "/Home/GetProductDetail?prodId=" + productID;
+    }
+
+</script>
 
 

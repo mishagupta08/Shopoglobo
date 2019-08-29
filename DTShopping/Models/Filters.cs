@@ -22,5 +22,21 @@ namespace DTShopping.Models
         public string pageName { get; set; }
 
         public Nullable<int> Id { get; set; }
+
+        public bool SortByPrice { get; set; }
+
+        public bool IsPriceLowToHigh { get; set; }
+
+        public bool SortByPoints { get; set; }
+
+        public bool IsPointLowToHigh { get; set; }
+
+        public int? FilterFromPrice { get; set; }
+
+        public int? FilterToPrice { get; set; }
+
+        public int? FilterFromPoint { get; set; }
+
+        public int? FilterToPoint { get; set; }
     }
 }

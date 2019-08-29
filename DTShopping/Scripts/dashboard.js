@@ -12,39 +12,11 @@
         
         AddProductInCart(prodId, quantity);
     });
-});
 
-function AddProductInCart(prodId, quantity) {
-    $(".preloader").show();
-    if (quantity == null || quantity == "" || quantity == undefined)
-    {
-        quantity = 1;
-    }
-    $.ajax({
-        url: '/Manage/AddProductInToCart',
-        type: 'Post',
-        datatype: 'Json',
-        data: { ProductId: prodId, Quantity: quantity }
-    }).done(function (result) {
-        if (result == null || result == undefined || result == "") {
-            alert("Something went wrong, Please try again later.");
-        }
-        else if (result.Status == false) {
-            alert(result.ResponseValue);
-        }
-        else {
-            alert("Product added to cart.");
-            $("#cartCount").val(result.CartProductCount);
-        }
-
-        $(".preloader").hide();
-    }).fail(function (error) {
-        alert(error.statusText);
-        $(".preloader").hide();
+    
     });
 
-    return false;
-}
+
 
 function GetCityByState() {
     var id = $("#stateList").val();
@@ -106,7 +78,7 @@ function Login_Account() {
         datatype: 'Json',
         data: loginDetail
     }).done(function (result) {
-        if (result == "Success") {
+        if (result =="Success") {
             window.location.href = "/Home/Index";
         }
         else {
