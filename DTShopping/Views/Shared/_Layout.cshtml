@@ -97,7 +97,7 @@ if ( $.attrFn ) { $.attrFn.text = true; }
               <ul class="links">
                  <li class="first"><a href="/Home/Index">Home</a></li>
                 
-                 @if (Request.IsAuthenticated)
+                 @if (Session["UserDetail"] != null)
                  {
                     <li><a href="/Manage/GetCartProductList">Shopping Cart</a></li>
                     <li><a href="/Manage/UserAccount">My Account</a></li>
@@ -106,7 +106,7 @@ if ( $.attrFn ) { $.attrFn.text = true; }
                  {
                     <li><a href="/Account/Login">My Account</a></li>                       
                  }
-                  @if (Request.IsAuthenticated)
+                  @if (Session["UserDetail"]!=null)
                   {
                     <li class="last"><a href="/Home/Claims">Claims</a></li>
                     <li class="last"><a href="/Account/LogOff">Logout</a></li>

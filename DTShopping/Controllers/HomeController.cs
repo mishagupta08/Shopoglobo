@@ -131,8 +131,12 @@ namespace DTShopping.Controllers
                 //else
                 //{
                     var MenuItems = await objRepository.GetMenuList();
-                    list = getNestedChildren(MenuItems.Where(r => r.status == true &&  r.parent_id == 1 && r.parent_id != r.id  ).ToList(), MenuItems);
+                if (MenuItems != null)
+                {
+                    MenuItems = MenuItems.Where(r => r.status == true).OrderBy(r => r.ordar).ToList();
+                    list = getNestedChildren(MenuItems.Where(r => r.status == true && r.parent_id == 1 && r.parent_id != r.id).ToList(), MenuItems.Where(r => r.status == true).ToList());
                     Session["MenuList"] = list;
+                }
                 //}                                                      
             }
             catch (Exception ex)
