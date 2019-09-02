@@ -75,10 +75,10 @@
                                             Sort by :                                          
                                             <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&SortBy=points&Order=desc" class="SortProduct" data-SortBy="Points" data-SortOrder="DESC">High Points</a> | 
                                             <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&SortBy=points&Order=asc" class="SortProduct" data-SortBy="Points" data-SortOrder="ASC">Low Points</a> | 
-                                            <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&SortBy=price&Order=desc" class="SortProduct" data-SortBy="OfferPrice" data-SortOrder="DESC">High Price </a> |
-                                            <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&SortBy=price&Order=asc" class="SortProduct" data-SortBy="OfferPrice" data-SortOrder="ASC">Low Price </a>
+                                            <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&SortBy=price&Order=desc" class="SortProduct" data-SortBy="price" data-SortOrder="DESC">High Price </a> |
+                                            <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&SortBy=price&Order=asc" class="SortProduct" data-SortBy="price" data-SortOrder="ASC">Low Price </a>
                                             <div></div>
-                                            <a id="anchorSearchForm" href="http://www.discounttadka.com/index.php?mod=product_search&srch_category_id=137#" onClick="javascript:$('#searchFormDiv').toggle('dropdown');return(false);"></a>
+                                            @*<a id="anchorSearchForm" href="http://www.discounttadka.com/index.php?mod=product_search&srch_category_id=137#" onClick="javascript:$('#searchFormDiv').toggle('dropdown');return(false)"></a>*@
                                         </td>
                                     </tr>
                                     @*<tr>
@@ -524,13 +524,15 @@
                                     </div>
                                 </form>
                             </div>*@
-                            @foreach (var product in Model)
+                            @if (Model.Count() > 0)
                             {
-                                count = count + 1;
-                                if (count == 5)
+                                foreach (var product in Model)
                                 {
-                                    count = 1;
-                                }
+                                    count = count + 1;
+                                    if (count == 5)
+                                    {
+                                        count = 1;
+                                    }
                             <div class="four columns product_wrapper count_3cols_col_@count count_2cols_col_1">
                                 <div class="product">
                                     <div class="img_border">
@@ -555,15 +557,21 @@
                                                 </span><br>
                                                 <span class="icon_cart_title product-price" style="font-size:11px; font-family:Arial, Helvetica, sans-serif; line-height:18px;">
                                                     Discount Points : 0.00<br>
-                                                    @Resources.EUPoints : @{var t = product.RBV != null ? product.RBV : 0;}@t
+                                                    @Resources.EUPoints : @{var t = product.point_adjusted != null ? product.point_adjusted : 0;}@t
                                                 </span>
                                             </div>
-                                            <div class="icon_cart_rollover"><a  onclick="AddProductInCart(@product.id, 1)"> </div>
+                                            <div class="icon_cart_rollover" onclick="AddProductInCart(@product.id, 1)"><a></a></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            }
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="Eight columns"><h2>No Products found</h2></div>
+                                                        }
+
 
                         </div>                        
                     </div>

@@ -107,7 +107,12 @@ namespace DTShopping.Controllers
             }
 
             var result = await objRepository.GetCategoryProducts(c);
-            List<Product> listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
+            List<Product> listProducts = new List<Product>();
+            if (result.Status == true && result.ResponseValue != null)
+            {
+                 listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
+            }
+           
             int pageSize = 10;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
