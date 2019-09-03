@@ -30,6 +30,8 @@ namespace DTShopping.Repository
 
         private string ManageShoppingProductsListWithFilter = "ManageShoppingProductsListWithFilter/";
 
+        private string ManageCategory = "CategoryDetail/";
+
         public async Task<List<Category>> GetMenuList()
         {
             var result = await CallPostFunction(string.Empty, "ManageCategories/List");
@@ -211,6 +213,21 @@ namespace DTShopping.Repository
             else
             {
                 return result;
+            }
+        }
+
+        public async Task<Category> GetCategoryDetail(Filters FilterDetails)
+        {
+            var productData = JsonConvert.SerializeObject(FilterDetails);
+            var result = await CallPostFunction(productData, ManageCategory + FilterDetails.CategoryId);
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                var catDetail = JsonConvert.DeserializeObject<Category>(result.ResponseValue);
+                return catDetail;
             }
         }
 

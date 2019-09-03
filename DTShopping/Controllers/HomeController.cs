@@ -112,12 +112,17 @@ namespace DTShopping.Controllers
             {
                  listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
             }
-           
+
+            string catName = string.Empty;            
+            var catDetail = await objRepository.GetCategoryDetail(c);
+            catName = catDetail.title;
+
             int pageSize = 10;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var Filteredlist = listProducts.ToPagedList(pageIndex, pageSize);
             ViewBag.category = cat;
+            ViewBag.CategoryName = catName;
             ViewBag.Page = page;
             ViewBag.ParentId = root;            
             return View(listProducts);           

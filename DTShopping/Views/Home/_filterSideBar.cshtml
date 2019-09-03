@@ -18,6 +18,15 @@
                         {
                             <div class="cat_child"><a class="active_cat" href="~/Home/ProductList?cat=@subcategory.id&root=@ViewBag.ParentId"><span class='space_cat'>&nbsp;</span>@subcategory.title</a></div>
                             <div class="clear"></div>
+                            var c = subcategory.Childern != null && subcategory.Childern.Count > 0;
+                            if (c)
+                            {
+                                foreach (var subsubcategory in subcategory.Childern)
+                                {
+                                    <div class="cat_child" style="margin-left:10px;"><a class="active_cat" href="~/Home/ProductList?cat=@subsubcategory.id&root=@ViewBag.ParentId"><span class='space_cat'>&nbsp;</span>@subsubcategory.title</a></div>
+                                    <div class="clear"></div>
+                                }
+                            }
                         }
                     }
                 }
@@ -53,6 +62,12 @@
                     <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=150&FilterToPoint=200">Point 150- 200</a></li>
                     <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=200&FilterToPoint=250">Point 200 - 250</a></li>
                     <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=250&FilterToPoint=300">Point 250 - 300</a></li>                    
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=300&FilterToPoint=350">Point 300 - 350</a></li>                    
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=350&FilterToPoint=400">Point 350 - 400</a></li>                    
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=400&FilterToPoint=450">Point 400 - 450</a></li>                    
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=450&FilterToPoint=500">Point 450 - 500</a></li>                    
+                    <li><a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=@ViewBag.Page&FilterFromPoint=500&FilterToPoint=1000">Point 500 - Above</a></li>                    
+                                    
                 </ul>
             </div>
         </div>
