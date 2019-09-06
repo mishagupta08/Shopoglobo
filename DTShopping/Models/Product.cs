@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -45,5 +46,14 @@ namespace DTShopping.Models
         public string vendor_offer { get; set; }
         public string VendorName { get; set; }
         public Nullable<int> RBV { get; set; }
-    }    
+    }
+
+    public class PagewiseProducts {
+        public IPagedList<int> pagerCount { get; set; }
+        public List<Product> ProductList{get;set;}
+        public string order { get; set; }
+        public string sortby { get; set; }
+        public string SearchString { get; set; }
+
+    }
 }

@@ -67,12 +67,17 @@ namespace DTShopping.Controllers
             return View();
         }
 
-        public async Task<ActionResult> ProductList(string cat,string root,int? page,string SortBy, string Order,string FilterFromPoint ,string FilterToPoint)
+        public async Task<ActionResult> ProductList(string cat,string root,int? page,string SortBy, string Order,string FilterFromPoint ,string FilterToPoint,string searchString)
         {
             Filters c = new Filters();
-            c.CategoryId = Convert.ToInt16(cat);
-            c.pageNo = page;
+            if (!string.IsNullOrEmpty(cat))
+            {
+                c.CategoryId = Convert.ToInt16(cat);
+            }            
+            c.pageNo = page??1;
             c.NoOfRecord = 10;
+            c.SelectedFilterName = "Title";
+            c.FilterValue = searchString;
             if (!string.IsNullOrEmpty(SortBy))
             {
                 if (SortBy.ToLower() == "price")
@@ -108,24 +113,34 @@ namespace DTShopping.Controllers
 
             var result = await objRepository.GetCategoryProducts(c);
             List<Product> listProducts = new List<Product>();
+            double totalcount = 0;
             if (result.Status == true && result.ResponseValue != null)
             {
-                 listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
+                totalcount = result.TotalRecords;
+                listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
             }
 
             string catName = string.Empty;            
             var catDetail = await objRepository.GetCategoryDetail(c);
             catName = catDetail.title;
 
-            int pageSize = 10;
-            int pageIndex = 1;
-            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var Filteredlist = listProducts.ToPagedList(pageIndex, pageSize);
+            PagewiseProducts finalprodlist = new PagewiseProducts();            
+            finalprodlist.ProductList = listProducts;
+
+            var list = new List<int>();
+            for (var i = 1; i <= totalcount; i++)
+            {
+                list.Add(i);
+            }
+            finalprodlist.pagerCount = list.ToPagedList(Convert.ToInt32(c.pageNo), 10);           
+
+
             ViewBag.category = cat;
             ViewBag.CategoryName = catName;
             ViewBag.Page = page;
-            ViewBag.ParentId = root;            
-            return View(listProducts);           
+            ViewBag.ParentId = root;   
+                     
+            return View(finalprodlist);           
         }
 
         [HttpGet]
@@ -196,21 +211,140 @@ namespace DTShopping.Controllers
             return orderedList;
         }
 
-        public async Task<ActionResult> ListProducts(string category, int? page)
-        { 
-            Filters c = new Filters();            
-            var result = await objRepository.GetCategoryProducts(c);
-            List<Product> listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
-            int pageSize = 5;
-            int pageIndex = 1;
-            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var Filteredlist = listProducts.ToPagedList(pageIndex, pageSize);
-            return View(Filteredlist);
-        }
-
         public ActionResult Claims()
         {
             return View();
         }
+
+        public async Task<ActionResult> SearchProductList( int? page, string SortBy, string Order, string searchString)
+        {
+            Filters c = new Filters();
+            
+            c.pageNo = page;
+            c.NoOfRecord = 10;
+            c.SelectedFilterName = "Title";
+            c.FilterValue = searchString;
+            if (!string.IsNullOrEmpty(SortBy))
+            {
+                if (SortBy.ToLower() == "price")
+                {
+                    c.SortByPrice = true;
+                    if (Order.ToLower() == "asc")
+                    {
+                        c.IsPriceLowToHigh = true;
+                    }
+                    else
+                    {
+                        c.IsPriceLowToHigh = false;
+                    }
+                }
+                else if (SortBy.ToLower() == "points")
+                {
+                    c.SortByPoints = true;
+                    if (Order.ToLower() == "asc")
+                    {
+                        c.IsPointLowToHigh = true;
+                    }
+                    else
+                    {
+                        c.IsPointLowToHigh = false;
+                    }
+                }
+            }            
+
+            var result = await objRepository.GetCategoryProducts(c);
+            List<Product> listProducts = new List<Product>();
+            double totalcount = 0;
+            if (result.Status == true && result.ResponseValue != null)
+            {
+                totalcount = result.TotalRecords;
+                listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
+            }
+
+            PagewiseProducts finalprodlist = new PagewiseProducts();
+            finalprodlist.SearchString = searchString;
+            finalprodlist.ProductList = listProducts;
+
+            var list = new List<int>();
+            for (var i = 1; i <= totalcount; i++)
+            {
+                list.Add(i);
+            }
+            finalprodlist.pagerCount = list.ToPagedList(Convert.ToInt32(page), 10);                                
+            ViewBag.Page = page; 
+                      
+            return View(finalprodlist);
+        }
+
+        public async Task<ActionResult> GetAllDealProducts(string Deal, int? page, string SortBy, string Order)
+        {
+            PagewiseProducts productlist = new PagewiseProducts();
+            try {
+                Filters c = new Filters();
+                string companyId = System.Configuration.ConfigurationManager.AppSettings["CompanyId"];
+
+                c.CompanyId = Convert.ToInt16(companyId);
+                c.pageNo = page;
+                c.NoOfRecord = 10;
+                productlist.SearchString = Deal;
+                productlist.sortby = SortBy;
+                productlist.order = Order;
+
+                if (!string.IsNullOrEmpty(SortBy))
+                {
+                    if (SortBy.ToLower() == "price")
+                    {
+                        c.SortByPrice = true;
+                        if (Order.ToLower() == "asc")
+                        {
+                            c.IsPriceLowToHigh = true;
+                        }
+                        else
+                        {
+                            c.IsPriceLowToHigh = false;
+                        }
+                    }
+                    else if (SortBy.ToLower() == "points")
+                    {
+                        c.SortByPoints = true;
+                        if (Order.ToLower() == "asc")
+                        {
+                            c.IsPointLowToHigh = true;
+                        }
+                        else
+                        {
+                            c.IsPointLowToHigh = false;
+                        }
+                    }
+                }
+
+                var result = await objRepository.GetDealProductsFullList(c,Deal);
+                List<Product> listProducts = new List<Product>();
+                double totalcount = 0;
+                if (result.Status == true && result.ResponseValue != null)
+                {
+                    totalcount = result.TotalRecords;
+                    listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
+                }
+               
+                productlist.ProductList = listProducts;
+
+                var list = new List<int>();
+                for (var i = 1; i <= totalcount; i++)
+                {
+                    list.Add(i);
+                }
+
+                productlist.pagerCount = list.ToPagedList(Convert.ToInt32(page), 10);
+                ViewBag.Page = page;
+            }
+            catch (Exception ex)
+            {
+            }
+            return View("DealProducts",productlist);
+
+        }
+
+
     }
 }

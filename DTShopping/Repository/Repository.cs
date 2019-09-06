@@ -32,6 +32,8 @@ namespace DTShopping.Repository
 
         private string ManageCategory = "CategoryDetail/";
 
+        private string ManageDealProducts = "GetDealProductsFullList/";
+
         public async Task<List<Category>> GetMenuList()
         {
             var result = await CallPostFunction(string.Empty, "ManageCategories/List");
@@ -231,6 +233,27 @@ namespace DTShopping.Repository
             }
         }
 
+        public async Task<Response> ManageListWithFilter(Filters filter)
+        {
+            var detail = JsonConvert.SerializeObject(filter);
+            var result = await CallPostFunction(detail, ManageListWithFilterAction);
+            return result;
+        }
+
+        public async Task<Response> GetDealProductsFullList(Filters FilterDetails,string Deal)
+        {
+            var productData = JsonConvert.SerializeObject(FilterDetails);
+            var result = await CallPostFunction(productData, ManageDealProducts + Deal);
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
         private async Task<Response> CallPostFunction(string detail, string action)
         {
             using (var httpClient = new HttpClient())
@@ -275,13 +298,6 @@ namespace DTShopping.Repository
 
             return null;
         }
-
-        //send ProductByCategory in pageName for parod list with page no detail.
-        public async Task<Response> ManageListWithFilter(Filters filter)
-        {
-            var detail = JsonConvert.SerializeObject(filter);
-            var result = await CallPostFunction(detail, ManageListWithFilterAction);
-            return result;
-        }
+       
     }
 }

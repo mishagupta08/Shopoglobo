@@ -38,5 +38,9 @@ namespace DTShopping.Models
         public int? FilterFromPoint { get; set; }
 
         public int? FilterToPoint { get; set; }
+
+        public string SelectedFilterName { get; set; }
+
+        public string FilterValue { get; set; }
     }
 }

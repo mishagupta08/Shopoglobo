@@ -118,14 +118,14 @@ if ( $.attrFn ) { $.attrFn.text = true; }
 
         <div class="row">
           <div id="top_search">
-          <form name="et_quick_find" action="advanced_search_result.php" method="get">
+          <form name="et_quick_find" id="et_quick_find" onsubmit="return false">
             <div class="clearfix">
               <div id="search">
-                <input type="text" name="keywords" value="Product search..." id="search_input" onFocus="if(this.value == 'Product search...') {this.value = '';}" onBlur="if (this.value == '') {this.value = 'Product search...';}" />
+                <input type="text" name="keywords" placeholder="Product search..." id="search_input"  />
                 &nbsp;</div>
-              <div class="submit_button">
+               <div class="submit_button">
                 <input name="search" value="" type="submit"/>
-              </div>
+               </div>
             </div>
           </form>
         </div>
@@ -237,6 +237,17 @@ if ( $.attrFn ) { $.attrFn.text = true; }
     $('#et_categ_box_scroll .3sub-cat-name').hover(
         function(){ $('.drop-box-4subcat',this).toggle() }
     );
+
+    $("#et_quick_find").submit(function () {
+        var searchString = $("#search_input").val();
+
+        uri = '/Home/SearchProductList?page=1&searchString=' + searchString;
+
+        uri = uri.trim().replace(/ /g, '%20');
+        window.location.href = (uri);
+        return false;
+    })
+
     });
     function AddProductInCart(prodId, quantity) {
         $(".preloader").show();        
