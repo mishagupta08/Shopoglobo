@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using DTShopping.Models
+@{ 
+    UserDetails current_user = (Session["LoginUser"] != null)?  Session["LoginUser"] as UserDetails : null;
+    string username = current_user!=null? current_user.username : "";
+    double? points = current_user != null ? current_user.balance_point : 0.0;
+
+}
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
 <head>
@@ -57,86 +64,106 @@ if ( $.attrFn ) { $.attrFn.text = true; }
 <div id="bodyWrapper" class="default_page">
   <div id="header">
     <div class="container">
-      <div id="logo" class="six columns">
+        <div class="row">
+            <div class="row phone offset-by-eleven five columns"  style="margin-top:0px;font-size:12px;">
 
-        <div id="storeLogo"> <a class="logo_inner" href="~/Home/Index"><img src="~/images/light/store_logo.png" alt="unishop" title="unishop" width="177" height="46" class="scale-with-grid" /></a></div>
-      </div>
-      <div id="header_blocks" class="ten columns">
-        <div class="row">
-          <div class="shopping_cart">
-            <div class="shopping_cart_b">
-              <div class="cart_wrapper">
-                <div class="clearfix">
-                  <p class="img_cart"> <a href="/Manage/GetCartProductList"></a> </p>
-                  <div class="open"> <span> Cart (<span id="cartCount"></span>)</span> <span class="price">$0.00</span> </div>
-                  <a class="cart_link" href="checkout_shipping.php">Checkout</a> </div>
-              </div>
+                <span>Call us:(91) 8875286682 </span>&nbsp;&nbsp;<span>Email Us:ccareutility@gmail.com </span>
             </div>
-            <div id="shopping_cart_mini">
-              <div class="inner-wrapper">
-                <p class="empty">You have no items in your shopping cart.</p>
-              </div>
+            <div class="row">
+            <div id="logo" class="five columns">
+
+                <div id="storeLogo"> <a class="logo_inner" href="~/Home/Index"><img src="~/images/light/store_logo.png" alt="unishop" title="unishop" width="177" height="46" class="scale-with-grid" /></a></div>
             </div>
-          </div>
-          <div class="balancepoints" style="float:right; font-family:Oswald; font-size:12px; margin:15px 20px 0 20px;">Balance Points 48975</div>
-          <div class="welcome" style="float:right; font-family:Oswald; font-size:14px; margin:12px 0 0 0;">Welcome Demo Agent
-            <div class="clear"></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="phone">
-            <p class="img_phone">&nbsp;</p>
-            <span>(91) 8875286682 </span>  </div>
-          <div id="nav_first">
-            <div id="nav_block_head">
-              <div class="nav_block_head_field">Customer Tools</div>
-              <span class="nav_block_head_button"> </span>
-              <div class="clear"></div>
-            </div>
-            <div class="nav_block_dropdown">
-              <ul class="links">
-                 <li class="first"><a href="/Home/Index">Home</a></li>
+                <div class="six columns">
+                    
+                        <div id="top_search">
+                            <form name="et_quick_find" id="et_quick_find" onsubmit="return false">
+                                <div class="clearfix">
+                                    <div id="search">
+                                        <input type="text" name="keywords" placeholder="Product search..." id="search_input" />
+                                        &nbsp;
+                                    </div>
+                                    <div class="submit_button">
+                                        <input name="search" value="" type="submit" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>                
+            <div id="header_blocks" class="five columns">
+
+                <div class="row">
+                    <div class="shopping_cart">
+                        <div class="shopping_cart_b">
+                            <div class="cart_wrapper">
+                                <div class="clearfix">
+                                    @if (Session["UserDetail"] != null)
+                                    {
+                                        <p class="img_cart"> <a href="/Manage/GetCartProductList"></a> </p>
+                                        <div class="open"> <span> Cart (<span id="cartCount"></span>)</span></div>
+                                        <a class="cart_link" href="checkout_shipping.php">Checkout</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div id="shopping_cart_mini">
+                            <div class="inner-wrapper">
+                                <p class="empty">You have no items in your shopping cart.</p>
+                            </div>
+                        </div>
+                    </div>
+                    @if (Session["UserDetail"] != null)
+                    {
+                        <div class="balancepoints" style="float:right; font-family:Oswald; font-size:12px; margin:15px 20px 0 20px;">Balance Points @points</div>
+                        <div class="welcome" style="float:right; font-family:Oswald; font-size:14px; margin:12px 0 0 0;">
+                            Welcome @username
+                            <div class="clear"></div>
+                        </div>
+                    }
+                </div>
+                <div class="row">
+
+
+                    <div id="nav_first">
+                        <div id="nav_block_head">
+                            <div class="nav_block_head_field">Customer Tools</div>
+                            <span class="nav_block_head_button"> </span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="nav_block_dropdown">
+                            <ul class="links">
+                                <li class="first"><a href="/Home/Index">Home</a></li>
+
+                                @if (Session["UserDetail"] != null)
+                                {
+                                    <li><a href="/Manage/GetCartProductList">Shopping Cart</a></li>
+                                    <li><a href="/Home/MyAccount">My Account</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/Account/Login">My Account</a></li>
+                                    <li><a href="/Account/Login">Login</a></li>
+                                }
+                                @if (Session["UserDetail"] != null)
+                                {
+                                    <li class="last"><a href="/Home/Claims">Claims</a></li>
+                                    <li class="last"><a href="/Account/LogOff">Logout</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 
-                 @if (Session["UserDetail"] != null)
-                 {
-                    <li><a href="/Manage/GetCartProductList">Shopping Cart</a></li>
-                    <li><a href="/Manage/UserAccount">My Account</a></li>
-                 }
-                 else
-                 {
-                    <li><a href="/Account/Login">My Account</a></li>                       
-                 }
-                  @if (Session["UserDetail"]!=null)
-                  {
-                    <li class="last"><a href="/Home/Claims">Claims</a></li>
-                    <li class="last"><a href="/Account/LogOff">Logout</a></li>
-                  }
-              </ul>
+
+
+
             </div>
-          </div>
         </div>
-
-        <div class="row">
-          <div id="top_search">
-          <form name="et_quick_find" id="et_quick_find" onsubmit="return false">
-            <div class="clearfix">
-              <div id="search">
-                <input type="text" name="keywords" placeholder="Product search..." id="search_input"  />
-                &nbsp;</div>
-               <div class="submit_button">
-                <input name="search" value="" type="submit"/>
-               </div>
-            </div>
-          </form>
         </div>
-
-        </div>
-
-
-
-      </div>
-    </div>
   </div>
+      </div>
     <div id="DivCategories">
       
     </div>
@@ -164,8 +191,8 @@ if ( $.attrFn ) { $.attrFn.text = true; }
           <nav>
             <ul>
               <li><a href="http://www.discounttadka.com" target="_blank">About Us</a></li>
-              <li><a href="privacy.php">Privacy Policy</a></li>
-              <li><a href="conditions.php">Terms &amp; Conditions</a></li>
+              <li><a href="~/Home/PrivacyPolicy">Privacy Policy</a></li>
+              <li><a href="~/Home/TermsAndConditions">Terms &amp; Conditions</a></li>
             </ul>
           </nav>
         </div>
@@ -173,9 +200,9 @@ if ( $.attrFn ) { $.attrFn.text = true; }
           <h2>Customer Assistance</h2>
           <nav>
             <ul>
-              <li><a href="Contact">Contact us</a></li>
+              <li><a href="~/Home/Contact">Contact us</a></li>
               <li><a href="shipping.php">Shipping &amp; Returns</a></li>
-              <li><a href="products_new.php">New Products</a></li>
+              <li><a href="~/Home/Index">New Products</a></li>
             </ul>
           </nav>
         </div>
@@ -183,24 +210,26 @@ if ( $.attrFn ) { $.attrFn.text = true; }
           <h2>My Account</h2>
           <nav>
             <ul>
-              <li><a href="create_account.php">My Account</a></li>
-              <li><a href="/Manage/GetCartProductList">My Shopping Cart</a></li>
-              <li><a href="account_history.php">Order history</a></li>
-              <li><a href="login.php">Log In</a></li>
+              
+              
+              
+@if (Session["UserDetail"] != null)
+{
+    <li><a href="/Home/MyAccount">My Account</a></li>
+    <li><a href="/Manage/GetCartProductList">My Shopping Cart</a></li>
+    <li><a href="account_history.php">Order history</a></li>
+    <li><a href="/Account/LogOff">Log Out</a></li>
+}
+else
+{
+    <li><a href="/Account/Login">Log In</a></li>
+}
             </ul>
           </nav>
-        </div>
-        <div class="four columns footer-block footer_my_account">
-          <h2>Other links</h2>
-          <nav>
-            <ul>
-              <li><a href="create_account.php">Free Shipping</a></li>
-              <li><a href="create_account.php">Flight Booking</a></li>
-              <li><a href="account_history.php">Hotel Booking</a></li>
-              <li><a href="login.php">24 x 6 Customer Support</a></li>
-            </ul>
-          </nav>
-        </div>
+        </div>   
+          <div class="four columns footer-block footer_my_account">
+             &nbsp;
+          </div>     
       </div>
     </div>
   </div>

@@ -26,12 +26,40 @@ namespace DTShopping.Controllers
 
                 objDashboardDetails.FontpageSections = new ShoppingPortalFrontPageProdList();
                 objDashboardDetails.FontpageSections =  await objRepository.GetShoppingPortalFrontPageProdList(companyId);
+
+                Session["LatestProduct"] = objDashboardDetails.FontpageSections.SpeacialSegment;
             }
             catch (Exception ex)
             {
 
             }
             return View(objDashboardDetails);
+        }
+
+        public ActionResult TermsAndConditions()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View();
+        }
+
+        public  ActionResult PrivacyPolicy()
+        {
+            try
+            {
+               
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View();
         }
 
         public async Task<ActionResult> GetProductDetail(int prodId)
@@ -173,13 +201,14 @@ namespace DTShopping.Controllers
 
         public ActionResult getCatHeirarchy(string Cat,string subCat)
         {
+            SideBar objsidebar = new SideBar();
             var CategoryList = new List<Category>();
-            int categor = 1;
+            int categor = 0;
             if (!string.IsNullOrEmpty(Cat))
             {
                 categor = Convert.ToInt16(Cat);
             }
-            if (Session["MenuList"] != null)
+            if (Session["MenuList"] != null && categor!=0)
             {
                 var MenuItems = Session["MenuList"] as List<Category>;
                 CategoryList = getNestedChildren(MenuItems.Where(r => r.status == true && r.id == categor).ToList(), MenuItems);
@@ -187,8 +216,14 @@ namespace DTShopping.Controllers
             ViewBag.ParentId = Cat;
             ViewBag.category = subCat;
             ViewBag.Page = 1;
+            objsidebar.categoryList = CategoryList;
+            if (Session["LatestProduct"] != null)
+            {
+                var product = Session["LatestProduct"] as List<Product>;
+                objsidebar.latestProduct = product.FirstOrDefault();
+            }
             
-            return PartialView("_filterSideBar", CategoryList);
+            return PartialView("_filterSideBar", objsidebar);
         }
        
         public List<Category> getNestedChildren(List<Category> ParentList, List<Category> MenuList)
@@ -343,6 +378,26 @@ namespace DTShopping.Controllers
             }
             return View("DealProducts",productlist);
 
+        }
+
+        public ActionResult MyAccount()
+        {
+            return View();
+        }
+
+        public ActionResult DiscountCoupons()
+        {
+            return View();
+        }
+
+        public ActionResult Orders()
+        {
+            return View();
+        }
+
+        public ActionResult UpdateAccount()
+        {
+            return View();
         }
 
 

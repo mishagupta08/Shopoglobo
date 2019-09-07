@@ -84,15 +84,13 @@ namespace DTShopping.Repository
             }
         }
 
-        public async Task<UserDetails> Login(UserDetails user)
+        public async Task<Response> Login(UserDetails user)
         {
             var detail = JsonConvert.SerializeObject(user);
             var result = await CallPostFunction(detail, "LoginShoppigPortalUser");
             if (result != null )
-            {
-                var UserDetails = JsonConvert.DeserializeObject<UserDetails>(result.ResponseValue);
-                return UserDetails;
-                
+            {                
+                return result;                
             }
             else
             {
@@ -120,15 +118,10 @@ namespace DTShopping.Repository
             user.company_id = CompanyId;
             var detail = JsonConvert.SerializeObject(user);
             var result = await CallPostFunction(detail, "ManageVendor/Add");
-            if (result == null || !result.Status)
-            {
-                return null;
-            }
-            else
-            {
+            
                 //var result = JsonConvert.DeserializeObject<Response>(result.ResponseValue);
                 return result;
-            }
+            
         }
 
         public async Task<List<R_StateMaster>> GetStateList()
@@ -252,7 +245,8 @@ namespace DTShopping.Repository
             {
                 return result;
             }
-        }
+        }        
+        
 
         private async Task<Response> CallPostFunction(string detail, string action)
         {
@@ -298,6 +292,8 @@ namespace DTShopping.Repository
 
             return null;
         }
+
+
        
     }
 }

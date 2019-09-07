@@ -222,6 +222,7 @@
     <Compile Include="Models\R_CityMaster.cs" />
     <Compile Include="Models\R_StateMaster.cs" />
     <Compile Include="Models\ShoppingPortalFrontPageProdList.cs" />
+    <Compile Include="Models\SideBar.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -490,6 +491,12 @@
     <Content Include="Views\Home\Claims.cshtml" />
     <Content Include="Views\Home\SearchProductList.cshtml" />
     <Content Include="Views\Home\DealProducts.cshtml" />
+    <Content Include="Views\Home\TermsAndConditions.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Home\MyAccount.cshtml" />
+    <Content Include="Views\Home\DiscountCoupons.cshtml" />
+    <Content Include="Views\Home\Orders.cshtml" />
+    <Content Include="Views\Home\UpdateAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

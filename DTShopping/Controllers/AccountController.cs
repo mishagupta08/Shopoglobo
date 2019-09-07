@@ -5,6 +5,7 @@ using DTShopping.Repository;
 using System.Collections.Generic;
 using System;
 using System.Web.Security;
+using Newtonsoft.Json;
 
 namespace DTShopping
 {
@@ -48,11 +49,20 @@ namespace DTShopping
                 User.role_id = 1;
                 _APIManager = new APIRepository();
                 var result = await _APIManager.Login(User);
+                Session["UserDetail"] = null;
                 if (result != null)
                 {
-                    Session["UserDetail"] = result;                   
-                    FormsAuthentication.SetAuthCookie(result.username, false);
-                    return Json("Success", JsonRequestBehavior.AllowGet);
+                    if (result.Status == true)
+                    {                        
+                        UserDetails user = JsonConvert.DeserializeObject<UserDetails>(result.ResponseValue); 
+                        FormsAuthentication.SetAuthCookie(user.username, false);
+                        Session["UserDetail"] = user;
+                        return Json("Success", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(result.ResponseValue, JsonRequestBehavior.AllowGet);
+                    }
                 }
                 else
                 {
@@ -85,14 +95,11 @@ namespace DTShopping
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            FormsAuthentication.SignOut();            
+            FormsAuthentication.SignOut();
+            Session["UserDetail"] = null;
             return RedirectToAction("Index", "Home");
         }
 
@@ -134,9 +141,9 @@ namespace DTShopping
 
             this._APIManager = new APIRepository();
             var res = await this._APIManager.Register(dashboardModel.User);
-            if (res == null)
+            if (res.Status == false)
             {
-                return Json("Something went wrong. Please try again later.");
+                return Json(res.ResponseValue);
             }
             else
             {
@@ -173,6 +180,9 @@ namespace DTShopping
             }
             return Json(cityList);
         }
+
+        
+
 
     }
 }

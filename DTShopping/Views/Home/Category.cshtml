@@ -25,7 +25,7 @@
                             var t = category.Childern != null && category.Childern.Count > 0;
 
                             <div class="cat-name">
-                                <a class="main_category" href="#"><span class="main_category_border item-@item">@category.title</span></a>
+                                <a class="main_category" href="~/Home/ProductList?cat=@category.id&root=@category.id"><span class="main_category_border item-@item">@category.title</span></a>
                                 @if (t)
                                 {
                                     <div class="drop-box-subcat">

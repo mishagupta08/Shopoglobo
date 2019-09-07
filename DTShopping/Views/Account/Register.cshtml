@@ -36,6 +36,13 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="fieldKey">User Name :</td>
+                                <td class="fieldValue">
+                                    @Html.TextBoxFor(m => m.User.username, new { @type = "text", @id = "username", @required = "required", @placeholder = "" })
+                                    <span class="inputRequirement">*</span>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="fieldKey">E-Mail ID : </td>
                                 <td class="fieldValue">
                                     @Html.TextBoxFor(m => m.User.email, new { @type = "email", @id = "email", @required = "required", @placeholder = "" })
