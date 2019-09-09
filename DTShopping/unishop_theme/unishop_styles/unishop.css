@@ -347,7 +347,7 @@
 #search{
     float: left;
     height:0px;
-    padding-left: 10px;
+    padding-left: 0px;
 }
 #search input{
     border: none;
@@ -357,10 +357,10 @@
     color: #666666;
     font-family: arial;
     font-size: 12px;
-    padding: 4px 0px 4px 0px;
+    padding: 4px 0px 4px 2px;
     height: 22px;
     /* padding-left: 12px; */
-    width: 400px;
+    width: 430px;
     margin-left: 0px;
     float: right;
 }
