@@ -1,4 +1,4 @@
-﻿
+﻿@model DTShopping.Models.UserDetails
 @{
     ViewBag.Title = "UpdateAccount";
 }
@@ -20,12 +20,12 @@
             <h1>Update Account</h1>
 
 
-            <form name="create_account" action="create_account.php" method="post" onSubmit="return check_form(create_account);">
+            <form name="create_account" onSubmit="return check_form(create_account);">
                 <input type="hidden" name="formid" value="e77a43c4c12f4fbfe82280d444af171e" /><input type="hidden" name="action" value="process" />
                 <div class="contentContainer">
                     <div>
 
-                        <h2>wecome <strong>demo agent</strong></h2>
+                        <h2>wecome <strong>@Model.username</strong></h2>
                     </div>
 
                     <div class="contentText">
@@ -35,17 +35,17 @@
 
                             <tr>
                                 <td class="fieldKey">First Name:</td>
-                                <td class="fieldValue"><input type="text" name="firstname" />&nbsp;<span class="inputRequirement">*</span></td>
+                                <td class="fieldValue"> @Html.TextBoxFor(m => m.first_name, new { @type = "text", @id = "firstname", @required = "required", @placeholder = "" })&nbsp;<span class="inputRequirement">*</span></td>
                             </tr>
                             <tr>
                                 <td bgcolor="#EEEEEE" class="fieldKey">Last Name:</td>
-                                <td bgcolor="#EEEEEE" class="fieldValue"><input type="text" name="lastname" />&nbsp;<span class="inputRequirement">*</span></td>
+                                <td bgcolor="#EEEEEE" class="fieldValue">@Html.TextBoxFor(m => m.last_name, new { @type = "text", @id = "lastname", @required = "required", @placeholder = "" })&nbsp;<span class="inputRequirement">*</span></td>
                             </tr>
 
 
                             <tr>
                                 <td class="fieldKey">Old Password :</td>
-                                <td class="fieldValue"><input type="text" name="dob" id="dob" />&nbsp;<span class="inputRequirement">*</span></td>
+                                <td class="fieldValue">@Html.TextBoxFor(m => m.passwordDetail, new { @type = "text", @id = "lastname", @required = "required", @placeholder = "" })&nbsp;<span class="inputRequirement">*</span></td>
                             </tr>
 
 

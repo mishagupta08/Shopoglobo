@@ -385,21 +385,49 @@ namespace DTShopping.Controllers
             return View();
         }
 
+        public ActionResult UpdateAccount()
+        {
+            var userDetail = Session["UserDetail"] as UserDetails;            
+            return View(userDetail);
+        }
+
         public ActionResult DiscountCoupons()
         {
             return View();
         }
 
-        public ActionResult Orders()
+        public async Task<ActionResult> Orders(int? pageNo)
         {
-            return View();
-        }
+            var userID = 0;
+            var companyID = 0;
+            Filters objFilter = new Filters();
+            PagedOrderList UserOrderList = new PagedOrderList();
+            if (Session["UserDetail"] != null)
+            {
+                userID = (Session["UserDetail"] as UserDetails).id;
+                companyID = Convert.ToInt16(System.Configuration.ConfigurationManager.AppSettings["CompanyId"]);
 
-        public ActionResult UpdateAccount()
-        {
-            return View();
-        }
+                objFilter.CompanyId = companyID;
+                objFilter.VendorId = userID;
+                objFilter.pageNo = pageNo;
 
+                var result  = await objRepository.GetUserOrderList(objFilter);
+                double totalcount = 0;
+                if (result.Status == true && result.ResponseValue != null)
+                {
+                    totalcount = result.TotalRecords;
+                    UserOrderList.OrderList = JsonConvert.DeserializeObject<List<order>>(result.ResponseValue);
+                }
 
+                var list = new List<int>();
+                for (var i = 1; i <= totalcount; i++)
+                {
+                    list.Add(i);
+                }
+                UserOrderList.pagerCount = list.ToPagedList(Convert.ToInt32(pageNo??1), 10);
+
+            }
+            return View(UserOrderList);
+        }       
     }
 }

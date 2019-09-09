@@ -34,6 +34,8 @@ namespace DTShopping.Repository
 
         private string ManageDealProducts = "GetDealProductsFullList/";
 
+        private string ManageOrders = "ManageVendorProductOrderListWithFilter/";
+
         public async Task<List<Category>> GetMenuList()
         {
             var result = await CallPostFunction(string.Empty, "ManageCategories/List");
@@ -245,8 +247,23 @@ namespace DTShopping.Repository
             {
                 return result;
             }
-        }        
+        }
+
         
+        public async Task<Response> GetUserOrderList(Filters FilterDetails)
+        {
+            var productData = JsonConvert.SerializeObject(FilterDetails);
+            var result = await CallPostFunction(productData, ManageOrders);
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
 
         private async Task<Response> CallPostFunction(string detail, string action)
         {
