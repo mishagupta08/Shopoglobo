@@ -34,6 +34,7 @@ namespace DTShopping.Repository
 
         private string ManageDealProducts = "GetDealProductsFullList/";
 
+        private string ManageOrders = "ManageVendorProductOrderListWithFilter/";
 
         public async Task<List<Category>> GetMenuList()
         {
