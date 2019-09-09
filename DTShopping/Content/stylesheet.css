@@ -9,6 +9,24 @@
   Released under the GNU General Public License
 */
 
+.preloader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65) !important;
+    background: url(data:;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuNUmK/OAAAAATSURBVBhXY2RgYNgHxGAAYuwDAA78AjwwRoQYAAAAAElFTkSuQmCC) repeat scroll transparent\9 !important; /* ie fallback png background image */
+    z-index: 9999;
+    color: white;
+}
+
+    .preloader img {
+        position: absolute;
+        top: 47%;
+        left: 47%;
+    }
+
 .ui-widget {
   font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
   font-size: 11px;

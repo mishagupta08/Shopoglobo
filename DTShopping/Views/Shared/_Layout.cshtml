@@ -1,7 +1,7 @@
 ﻿@using DTShopping.Models
-@{ 
-    UserDetails current_user = (Session["LoginUser"] != null)?  Session["LoginUser"] as UserDetails : null;
-    string username = current_user!=null? current_user.username : "";
+@{
+    UserDetails current_user = (Session["LoginUser"] != null) ? Session["LoginUser"] as UserDetails : null;
+    string username = current_user != null ? current_user.username : "";
     double? points = current_user != null ? current_user.balance_point : 0.0;
 
 }
@@ -21,10 +21,10 @@
     <script type="text/javascript" src="~/ext/jquery/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="~/ext/jquery/ui/jquery-ui-1.8.22.min.js"></script>
     <script type="text/javascript">
-// fix jQuery 1.8.0 and jQuery UI 1.8.22 bug with dialog buttons; http://bugs.jqueryui.com/ticket/8484
-if ( $.attrFn ) { $.attrFn.text = true; }
+        // fix jQuery 1.8.0 and jQuery UI 1.8.22 bug with dialog buttons; http://bugs.jqueryui.com/ticket/8484
+        if ($.attrFn) { $.attrFn.text = true; }
     </script>
-  
+
     <link rel="stylesheet" type="text/css" href="~/Content/stylesheet.css" />
     <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/base.css" />
     <link rel="stylesheet" type="text/css" href="~/unishop_theme/unishop_styles/skeleton.css" />
@@ -41,202 +41,200 @@ if ( $.attrFn ) { $.attrFn.text = true; }
     <script>
         if (false) { document.documentElement.className += 'ie10'; }
     </script>
-<script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.jcarousel.min.js"></script>
-<script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="~/unishop_theme/unishop_js/layerslider.kreaturamedia.jquery.js"></script>
- <script type="text/javascript" src="~/unishop_theme/unishop_js/responsiveslides.js"></script>
-<script type="text/javascript" src="~/unishop_theme/unishop_js/slider-dark.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/layerslider.kreaturamedia.jquery.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/responsiveslides.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/slider-dark.js"></script>
 
-<script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.elastislide.js"></script>
-<script type="text/javascript" src="~/unishop_theme/unishop_js/cloud-zoom.1.0.2.js"></script>
-<script type="text/javascript" src="~/unishop_theme/unishop_js/custom.js?v=1"></script>
-<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-
-
-
-
-
-
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/jquery.elastislide.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/cloud-zoom.1.0.2.js"></script>
+    <script type="text/javascript" src="~/unishop_theme/unishop_js/custom.js?v=1"></script>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 
 </head>
 <body>
-<!-- begin bodyWrapper //-->
-<div id="bodyWrapper" class="default_page">
-  <div id="header">
-    <div class="container">
-        <div class="row">
-            <div class="row phone offset-by-eleven five columns"  style="margin-top:0px;font-size:12px;">
-
-                <span>Call us:(91) 8875286682 </span>&nbsp;&nbsp;<span>Email Us:ccareutility@gmail.com </span>
-            </div>
-            <div class="row">
-            <div id="logo" class="five columns">
-
-                <div id="storeLogo"> <a class="logo_inner" href="~/Home/Index"><img src="~/images/light/store_logo.png" alt="unishop" title="unishop" width="177" height="46" class="scale-with-grid" /></a></div>
-            </div>
-                <div class="six columns">
-                    
-                        <div id="top_search">
-                            <form name="et_quick_find" id="et_quick_find" onsubmit="return false">
-                                <div class="clearfix">
-                                    <div id="search">
-                                        <input type="text" name="keywords" placeholder="Product search..." id="search_input" />
-                                        &nbsp;
-                                    </div>
-                                    <div class="submit_button">
-                                        <input name="search" value="" type="submit" />
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>                
-            <div id="header_blocks" class="five columns">
-
+    <!-- Preloader -->
+    <div class="preloader">
+        <img src="~/images/wheel.gif" height="100" />
+    </div>
+    <!-- begin bodyWrapper //-->
+    <div id="bodyWrapper" class="default_page">
+        <div id="header">
+            <div class="container">
                 <div class="row">
-                    <div class="shopping_cart">
-                        <div class="shopping_cart_b">
-                            <div class="cart_wrapper">
-                                <div class="clearfix">
-                                    @if (Session["UserDetail"] != null)
-                                    {
-                                        <p class="img_cart"> <a href="/Manage/GetCartProductList"></a> </p>
-                                        <div class="open"> <span> Cart (<span id="cartCount"></span>)</span></div>
-                                        <a class="cart_link" href="checkout_shipping.php">Checkout</a>
-                                    }
+                    <div class="row phone offset-by-eleven five columns" style="margin-top:0px;font-size:12px;">
+
+                        <span>Call us:(91) 8875286682 </span>&nbsp;&nbsp;<span>Email Us:ccareutility@gmail.com </span>
+                    </div>
+                    <div class="row">
+                        <div id="logo" class="five columns">
+
+                            <div id="storeLogo"> <a class="logo_inner" href="~/Home/Index"><img src="~/images/light/store_logo.png" alt="unishop" title="unishop" width="177" height="46" class="scale-with-grid" /></a></div>
+                        </div>
+                        <div class="six columns">
+
+                            <div id="top_search">
+                                <form name="et_quick_find" id="et_quick_find" onsubmit="return false">
+                                    <div class="clearfix">
+                                        <div id="search">
+                                            <input type="text" name="keywords" placeholder="Product search..." id="search_input" />
+                                            &nbsp;
+                                        </div>
+                                        <div class="submit_button">
+                                            <input name="search" value="" type="submit" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div id="header_blocks" class="five columns">
+
+                            <div class="row">
+                                <div class="shopping_cart">
+                                    <div class="shopping_cart_b">
+                                        <div class="cart_wrapper">
+                                            <div class="clearfix">
+                                                @if (Session["UserDetail"] != null)
+                                                {
+                                                    <p class="img_cart"> <a href="/Manage/GetCartProductList"></a> </p>
+                                                    <div class="open"> <span> Cart (<span id="cartCount"></span>)</span></div>
+                                                    <a class="cart_link" href="checkout_shipping.php">Checkout</a>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="shopping_cart_mini">
+                                        <div class="inner-wrapper">
+                                            <p class="empty">You have no items in your shopping cart.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Session["UserDetail"] != null)
+                                {
+                                    <div class="balancepoints" style="float:right; font-family:Oswald; font-size:12px; margin:15px 20px 0 20px;">Balance Points @points</div>
+                                    <div class="welcome" style="float:right; font-family:Oswald; font-size:14px; margin:12px 0 0 0;">
+                                        Welcome @username
+                                        <div class="clear"></div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="row">
+
+
+                                <div id="nav_first">
+                                    <div id="nav_block_head">
+                                        <div class="nav_block_head_field">Customer Tools</div>
+                                        <span class="nav_block_head_button"> </span>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="nav_block_dropdown">
+                                        <ul class="links">
+                                            <li class="first"><a href="/Home/Index">Home</a></li>
+
+                                            @if (Session["UserDetail"] != null)
+                                            {
+                                                <li><a href="/Manage/GetCartProductList">Shopping Cart</a></li>
+                                                <li><a href="/Home/MyAccount">My Account</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/Account/Login">My Account</a></li>
+                                                <li><a href="/Account/Login">Login</a></li>
+                                            }
+                                            @if (Session["UserDetail"] != null)
+                                            {
+                                                <li class="last"><a href="/Home/Claims">Claims</a></li>
+                                                <li class="last"><a href="/Account/LogOff">Logout</a></li>
+                                            }
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="shopping_cart_mini">
-                            <div class="inner-wrapper">
-                                <p class="empty">You have no items in your shopping cart.</p>
-                            </div>
+
+
+
+
+
                         </div>
                     </div>
-                    @if (Session["UserDetail"] != null)
-                    {
-                        <div class="balancepoints" style="float:right; font-family:Oswald; font-size:12px; margin:15px 20px 0 20px;">Balance Points @points</div>
-                        <div class="welcome" style="float:right; font-family:Oswald; font-size:14px; margin:12px 0 0 0;">
-                            Welcome @username
-                            <div class="clear"></div>
-                        </div>
-                    }
                 </div>
-                <div class="row">
+            </div>
+        </div>
+        <div id="DivCategories">
 
+        </div>
+        <div class="et-content-bg">
 
-                    <div id="nav_first">
-                        <div id="nav_block_head">
-                            <div class="nav_block_head_field">Customer Tools</div>
-                            <span class="nav_block_head_button"> </span>
-                            <div class="clear"></div>
+            @RenderBody()
+            <!-- bodyContent //-->
+        </div>
+
+        <!-- dropdown footer block -->
+        <!-- end dropdown footer block -->
+        <!-- footer info -->
+        <div class="footer_bg_color">
+            <div id="back-top"><a href="#top"></a></div>
+            <div id="footer">
+                <div class="container">
+                    <div class="four columns footer-block footer-copyright">
+
+                        <div id="copyright">
+                            <a class="logo_footer" href="index.php"><img src="~/images/light/store_logo.png" alt="unishop" title="unishop" width="177" height="46" class="scale-with-grid" /></a> &copy; 2013 dicounttadka. All Rights Reserved.
                         </div>
-                        <div class="nav_block_dropdown">
-                            <ul class="links">
-                                <li class="first"><a href="/Home/Index">Home</a></li>
+                    </div>
+                    <div class="four columns footer-block footer_information">
+                        <h2>Information</h2>
+                        <nav>
+                            <ul>
+                                <li><a href="http://www.discounttadka.com" target="_blank">About Us</a></li>
+                                <li><a href="~/Home/PrivacyPolicy">Privacy Policy</a></li>
+                                <li><a href="~/Home/TermsAndConditions">Terms &amp; Conditions</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="four columns footer-block footer_customer_service">
+                        <h2>Customer Assistance</h2>
+                        <nav>
+                            <ul>
+                                <li><a href="~/Home/Contact">Contact us</a></li>
+                                <li><a href="shipping.php">Shipping &amp; Returns</a></li>
+                                <li><a href="~/Home/Index">New Products</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="four columns footer-block footer_my_account">
+                        <h2>My Account</h2>
+                        <nav>
+                            <ul>
+
+
 
                                 @if (Session["UserDetail"] != null)
                                 {
-                                    <li><a href="/Manage/GetCartProductList">Shopping Cart</a></li>
                                     <li><a href="/Home/MyAccount">My Account</a></li>
+                                    <li><a href="/Manage/GetCartProductList">My Shopping Cart</a></li>
+                                    <li><a href="account_history.php">Order history</a></li>
+                                    <li><a href="/Account/LogOff">Log Out</a></li>
                                 }
                                 else
                                 {
-                                    <li><a href="/Account/Login">My Account</a></li>
-                                    <li><a href="/Account/Login">Login</a></li>
-                                }
-                                @if (Session["UserDetail"] != null)
-                                {
-                                    <li class="last"><a href="/Home/Claims">Claims</a></li>
-                                    <li class="last"><a href="/Account/LogOff">Logout</a></li>
+                                    <li><a href="/Account/Login">Log In</a></li>
                                 }
                             </ul>
-                        </div>
+                        </nav>
+                    </div>
+                    <div class="four columns footer-block footer_my_account">
+                        &nbsp;
                     </div>
                 </div>
-
-                
-
-
-
             </div>
         </div>
-        </div>
-  </div>
-      </div>
-    <div id="DivCategories">
-      
+        <!-- end footer info -->
+
     </div>
-  <div class="et-content-bg">
-    
-          @RenderBody()
-        <!-- bodyContent //-->
-      </div>
-    
-  <!-- dropdown footer block -->
 
-  <!-- end dropdown footer block -->
-  <!-- footer info -->
-  <div class="footer_bg_color">
-    <div id="back-top"><a href="#top"></a></div>
-    <div id="footer">
-      <div class="container">
-        <div class="four columns footer-block footer-copyright">
-
-          <div id="copyright"> <a class="logo_footer" href="index.php"><img src="~/images/light/store_logo.png" alt="unishop" title="unishop" width="177" height="46" class="scale-with-grid" /></a> &copy; 2013 dicounttadka. All Rights Reserved.
-          </div>
-        </div>
-        <div class="four columns footer-block footer_information">
-          <h2>Information</h2>
-          <nav>
-            <ul>
-              <li><a href="http://www.discounttadka.com" target="_blank">About Us</a></li>
-              <li><a href="~/Home/PrivacyPolicy">Privacy Policy</a></li>
-              <li><a href="~/Home/TermsAndConditions">Terms &amp; Conditions</a></li>
-            </ul>
-          </nav>
-        </div>
-        <div class="four columns footer-block footer_customer_service">
-          <h2>Customer Assistance</h2>
-          <nav>
-            <ul>
-              <li><a href="~/Home/Contact">Contact us</a></li>
-              <li><a href="shipping.php">Shipping &amp; Returns</a></li>
-              <li><a href="~/Home/Index">New Products</a></li>
-            </ul>
-          </nav>
-        </div>
-        <div class="four columns footer-block footer_my_account">
-          <h2>My Account</h2>
-          <nav>
-            <ul>
-              
-              
-              
-@if (Session["UserDetail"] != null)
-{
-    <li><a href="/Home/MyAccount">My Account</a></li>
-    <li><a href="/Manage/GetCartProductList">My Shopping Cart</a></li>
-    <li><a href="account_history.php">Order history</a></li>
-    <li><a href="/Account/LogOff">Log Out</a></li>
-}
-else
-{
-    <li><a href="/Account/Login">Log In</a></li>
-}
-            </ul>
-          </nav>
-        </div>   
-          <div class="four columns footer-block footer_my_account">
-             &nbsp;
-          </div>     
-      </div>
-    </div>
-  </div>
-  <!-- end footer info -->
-
-</div>
-    
 </body>
 </html>
 <script>
@@ -245,7 +243,7 @@ else
             type: "GET",
             async: false,
             url: "/Home/GetCategories",
-            success: function (result) {                
+            success: function (result) {
                 $("#DivCategories").html(result);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -254,32 +252,34 @@ else
         });
 
         $('#et_categ_box_scroll .cat-name').hover(
-        function(){ $('.drop-box-subcat',this).show() },
-        function(){ $('.drop-box-subcat',this).hide() }
+        function () { $('.drop-box-subcat', this).show() },
+        function () { $('.drop-box-subcat', this).hide() }
     );
-    $('#et_categ_box_scroll .sub-cat-name').hover(
-        function(){ $('.drop-box-subsubcat',this).toggle() }
-    );
-    $('#et_categ_box_scroll .subsub-cat-name').hover(
-        function(){ $('.drop-box-3subcat',this).toggle() }
-    );
-    $('#et_categ_box_scroll .3sub-cat-name').hover(
-        function(){ $('.drop-box-4subcat',this).toggle() }
-    );
+        $('#et_categ_box_scroll .sub-cat-name').hover(
+            function () { $('.drop-box-subsubcat', this).toggle() }
+        );
+        $('#et_categ_box_scroll .subsub-cat-name').hover(
+            function () { $('.drop-box-3subcat', this).toggle() }
+        );
+        $('#et_categ_box_scroll .3sub-cat-name').hover(
+            function () { $('.drop-box-4subcat', this).toggle() }
+        );
 
-    $("#et_quick_find").submit(function () {
-        var searchString = $("#search_input").val();
+        $("#et_quick_find").submit(function () {
+            var searchString = $("#search_input").val();
 
-        uri = '/Home/SearchProductList?page=1&searchString=' + searchString;
+            uri = '/Home/SearchProductList?page=1&searchString=' + searchString;
 
-        uri = uri.trim().replace(/ /g, '%20');
-        window.location.href = (uri);
-        return false;
-    })
+            uri = uri.trim().replace(/ /g, '%20');
+            window.location.href = (uri);
+            return false;
+        })
+
+
 
     });
     function AddProductInCart(prodId, quantity) {
-        $(".preloader").show();        
+        $(".preloader").show();
         if (quantity == null || quantity == "" || quantity == undefined) {
             quantity = 1;
         }
@@ -309,3 +309,4 @@ else
         return false;
     }
 </script>
+<script src="~/Scripts/shopping.js"></script>

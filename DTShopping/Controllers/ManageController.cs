@@ -53,6 +53,84 @@ namespace DTShopping.Controllers
             return View("productDetailPage", this.model);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> UpdateProductQuantityDetail(int prodId, int quantity)
+        {
+            this.model = new Dashboard();
+            var message = string.Empty;
+            this.objRepository = new APIRepository();
+            try
+            {
+                if (CheckLoginUserStatus())
+                {
+                    var detail = (UserDetails)(Session["UserDetail"]);
+                    var filter = new CartFilter();
+                    filter.productId = prodId;
+                    filter.username = detail.username;
+                    filter.password = detail.password_str;
+                    filter.quantity = quantity;
+                    var res = await objRepository.ManageCart(filter, "UpdateQuantity");
+                    if (res == null)
+                    {
+                        message = "Something went wrong. Please try again later.";
+                    }
+                    else
+                    {
+                        message = res.ResponseValue;
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+
+            return Json(message);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteCartProduct(int prodId)
+        {
+            this.model = new Dashboard();
+            var message = string.Empty;
+            this.objRepository = new APIRepository();
+            try
+            {
+                if (CheckLoginUserStatus())
+                {
+                    var detail = (UserDetails)(Session["UserDetail"]);
+                    var filter = new CartFilter();
+                    filter.productId = prodId;
+                    filter.username = detail.username;
+                    filter.password = detail.password_str;
+
+                    var res = await objRepository.ManageCart(filter, "Remove");
+                    if (res == null)
+                    {
+                        message = "Something ent wrong. Please try again later.";
+                    }
+                    else
+                    {
+                        message = res.ResponseValue;
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+
+            return Json(message);
+        }
+
         [HttpGet]
         public async Task<ActionResult> GetCartProductList()
         {
@@ -63,10 +141,9 @@ namespace DTShopping.Controllers
                 try
                 {
                     var cart = new CartFilter();
-                    //cart.username = Session["Username"].ToString();
-                    //cart.password = Session["Password"].ToString();
-                    cart.username = "admin";
-                    cart.password = "1234";
+                    var detail = (UserDetails)(Session["UserDetail"]);
+                    cart.username = detail.username;
+                    cart.password = detail.password_str;
                     var response = await objRepository.ManageCart(cart, CartProductListAction);
                     if (response != null && response.Status)
                     {
@@ -75,19 +152,21 @@ namespace DTShopping.Controllers
                         if (this.model.Products != null)
                         {
                             this.model.NetPayment = 0;
-                            var prodPrice = 0;
+                            var prodPrice = 0.0;
                             foreach (var prod in this.model.Products)
                             {
                                 if (prod.offer_price == null || prod.offer_price == "0")
                                 {
-                                    prodPrice = Convert.ToInt32(prod.market_price);
+                                    prodPrice = Convert.ToDouble(prod.market_price);
                                 }
                                 else
                                 {
-                                    prodPrice = Convert.ToInt32(prod.offer_price);
+                                    prodPrice = Convert.ToDouble(prod.offer_price);
                                 }
+
+                                prod.TotalPayment = prodPrice * (prod.vendor_qty ?? 1) + (prod.shippng_charge ?? 0);
                                 this.model.TotalProductPoints += (prod.RBV ?? 0) * (prod.vendor_qty ?? 1);
-                                this.model.NetPayment += prodPrice * (prod.vendor_qty ?? 1) + prod.shippng_charge ?? 0;
+                                this.model.NetPayment += prod.TotalPayment;
                             }
                         }
                     }
@@ -107,14 +186,14 @@ namespace DTShopping.Controllers
 
         private bool CheckLoginUserStatus()
         {
-            //if (Session["Username"] == null)
-            //{
-            //    return false;
-            //}
-            //else
-            //{
+            if (Session["UserDetail"] == null)
+            {
+                return false;
+            }
+            else
+            {
                 return true;
-            //}
+            }
         }
 
         public async Task<ActionResult> AddProductInToCart(int ProductId, int Quantity)
@@ -128,10 +207,9 @@ namespace DTShopping.Controllers
                     var cart = new CartFilter();
                     cart.productId = ProductId;
                     cart.quantity = Quantity;
-                    //cart.username = Session["Username"].ToString();
-                    //cart.password = Session["Password"].ToString();
-                    cart.username = "admin";
-                    cart.password = "1234";
+                    var detail = (UserDetails)(Session["UserDetail"]);
+                    cart.username = detail.username;
+                    cart.password = detail.password_str;
                     var response = await objRepository.ManageCart(cart, AddAction);
                     return Json(response);
                 }

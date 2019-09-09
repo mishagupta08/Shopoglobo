@@ -278,8 +278,10 @@
     <Content Include="images\brand-light-09.png" />
     <Content Include="images\claim_icon.jpg" />
     <Content Include="images\cont_us.jpg" />
+    <Content Include="images\delete.png" />
     <Content Include="images\discount_coupon.jpg" />
     <Content Include="images\emailicon.png" />
+    <Content Include="images\emptyShoppingBag.jpg" />
     <Content Include="images\facebook-demo-light.gif" />
     <Content Include="images\furni_01 %283%29.jpg" />
     <Content Include="images\light\store_logo.png" />
@@ -333,6 +335,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\shopping.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="unishop_theme\unishop_images\all-sliders-markers.png" />
     <Content Include="unishop_theme\unishop_images\arrow-top.png" />
@@ -497,6 +500,7 @@
     <Content Include="Views\Home\DiscountCoupons.cshtml" />
     <Content Include="Views\Home\Orders.cshtml" />
     <Content Include="Views\Home\UpdateAccount.cshtml" />
+    <Content Include="Views\Manage\cartPaymentDetailView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
