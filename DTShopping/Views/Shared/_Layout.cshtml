@@ -1,8 +1,8 @@
 ﻿@using DTShopping.Models
 @{
-    UserDetails current_user = (Session["LoginUser"] != null) ? Session["LoginUser"] as UserDetails : null;
+    UserDetails current_user = (Session["UserDetail"] != null) ? Session["UserDetail"] as UserDetails : null;
     string username = current_user != null ? current_user.username : "";
-    double? points = current_user != null ? current_user.balance_point : 0.0;
+    double? points = current_user != null ? current_user.balance_point??0.0 : 0.0;
 
 }
 <!DOCTYPE html>
@@ -99,17 +99,17 @@
                                                 @if (Session["UserDetail"] != null)
                                                 {
                                                     <p class="img_cart"> <a href="/Manage/GetCartProductList"></a> </p>
-                                                    <div class="open"> <span> Cart (<span id="cartCount"></span>)</span></div>
-                                                    <a class="cart_link" href="checkout_shipping.php">Checkout</a>
+                                                    <div class="open"> <a href="/Manage/GetCartProductList"><span> Cart (<span id="cartCount"></span>)</span></a></div>
+                                                    @*<a class="cart_link" href="checkout_shipping.php">Checkout</a>*@
                                                 }
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="shopping_cart_mini">
+                                    @*<div id="shopping_cart_mini" >
                                         <div class="inner-wrapper">
                                             <p class="empty">You have no items in your shopping cart.</p>
                                         </div>
-                                    </div>
+                                    </div>*@
                                 </div>
                                 @if (Session["UserDetail"] != null)
                                 {
@@ -275,9 +275,28 @@
             return false;
         })
 
+        getCartCount();
 
 
     });
+
+
+    function getCartCount()
+    {
+        $.ajax({
+            type: "GET",
+            async: false,
+            url: "/Home/getCartCount",
+            success: function (result) {
+                $("#cartCount").html(result);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus); alert("Error: " + errorThrown);
+            }
+        });
+    }
+    
+
     function AddProductInCart(prodId, quantity) {
         $(".preloader").show();
         if (quantity == null || quantity == "" || quantity == undefined) {
@@ -297,7 +316,7 @@
             }
             else {
                 alert("Product added to cart.");
-                $("#cartCount").val(result.CartProductCount);
+                $("#cartCount").html(result.CartProductCount);
             }
 
             $(".preloader").hide();

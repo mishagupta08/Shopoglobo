@@ -34,7 +34,11 @@ namespace DTShopping.Repository
 
         private string ManageDealProducts = "GetDealProductsFullList/";
 
-        private string ManageOrders = "ManageVendorProductOrderListWithFilter/";
+        private string ManageOrderproducts = "ManageVendorProductOrderListWithFilter/";
+
+        private string ManageOrder = "ManageVendorProductOrderListWithFilter/";
+
+
 
         public async Task<List<Category>> GetMenuList()
         {
@@ -253,7 +257,7 @@ namespace DTShopping.Repository
         public async Task<Response> GetUserOrderList(Filters FilterDetails)
         {
             var productData = JsonConvert.SerializeObject(FilterDetails);
-            var result = await CallPostFunction(productData, ManageOrders);
+            var result = await CallPostFunction(productData, ManageOrderproducts);
             if (result == null)
             {
                 return null;
@@ -264,6 +268,41 @@ namespace DTShopping.Repository
             }
         }
 
+        
+
+           public async Task<Response> getCartCount(UserDetails userDetail)
+           {
+            CartFilter filter = new CartFilter();
+
+            filter.username = userDetail.username;
+            filter.password = userDetail.passwordDetail;
+
+            var productData = JsonConvert.SerializeObject(filter);
+            var result = await CallPostFunction(productData, ManageCartAction + "CartCount");
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        
+          public async Task<Response> CreateOrder(order orderDetail)
+          {            
+            var productData = JsonConvert.SerializeObject(orderDetail);
+            var result = await CallPostFunction(productData, "ManageOrder/Add");
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                return result;
+            }
+         }
 
         private async Task<Response> CallPostFunction(string detail, string action)
         {
