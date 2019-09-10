@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace DTShopping.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         APIRepository objRepository = new APIRepository();
@@ -21,11 +21,11 @@ namespace DTShopping.Controllers
             string companyId = System.Configuration.ConfigurationManager.AppSettings["CompanyId"];
             try
             {
-                objDashboardDetails.Banners = new List<Banners>();           
+                objDashboardDetails.Banners = new List<Banners>();
                 objDashboardDetails.Banners = await objRepository.GetBannerImageList(companyId);
 
                 objDashboardDetails.FontpageSections = new ShoppingPortalFrontPageProdList();
-                objDashboardDetails.FontpageSections =  await objRepository.GetShoppingPortalFrontPageProdList(companyId);
+                objDashboardDetails.FontpageSections = await objRepository.GetShoppingPortalFrontPageProdList(companyId);
 
                 Session["LatestProduct"] = objDashboardDetails.FontpageSections.SpeacialSegment;
             }
@@ -49,11 +49,11 @@ namespace DTShopping.Controllers
             return View();
         }
 
-        public  ActionResult PrivacyPolicy()
+        public ActionResult PrivacyPolicy()
         {
             try
             {
-               
+
             }
             catch (Exception ex)
             {
@@ -95,14 +95,14 @@ namespace DTShopping.Controllers
             return View();
         }
 
-        public async Task<ActionResult> ProductList(string cat,string root,int? page,string SortBy, string Order,string FilterFromPoint ,string FilterToPoint,string searchString)
+        public async Task<ActionResult> ProductList(string cat, string root, int? page, string SortBy, string Order, string FilterFromPoint, string FilterToPoint, string searchString)
         {
             Filters c = new Filters();
             if (!string.IsNullOrEmpty(cat))
             {
                 c.CategoryId = Convert.ToInt16(cat);
-            }            
-            c.pageNo = page??1;
+            }
+            c.pageNo = page ?? 1;
             c.NoOfRecord = 10;
             c.SelectedFilterName = "Title";
             c.FilterValue = searchString;
@@ -148,11 +148,11 @@ namespace DTShopping.Controllers
                 listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
             }
 
-            string catName = string.Empty;            
+            string catName = string.Empty;
             var catDetail = await objRepository.GetCategoryDetail(c);
             catName = catDetail.title;
 
-            PagewiseProducts finalprodlist = new PagewiseProducts();            
+            PagewiseProducts finalprodlist = new PagewiseProducts();
             finalprodlist.ProductList = listProducts;
 
             var list = new List<int>();
@@ -160,15 +160,15 @@ namespace DTShopping.Controllers
             {
                 list.Add(i);
             }
-            finalprodlist.pagerCount = list.ToPagedList(Convert.ToInt32(c.pageNo), 10);           
+            finalprodlist.pagerCount = list.ToPagedList(Convert.ToInt32(c.pageNo), 10);
 
 
             ViewBag.category = cat;
             ViewBag.CategoryName = catName;
             ViewBag.Page = page;
-            ViewBag.ParentId = root;   
-                     
-            return View(finalprodlist);           
+            ViewBag.ParentId = root;
+
+            return View(finalprodlist);
         }
 
         [HttpGet]
@@ -183,7 +183,7 @@ namespace DTShopping.Controllers
                 //}
                 //else
                 //{
-                    var MenuItems = await objRepository.GetMenuList();
+                var MenuItems = await objRepository.GetMenuList();
                 if (MenuItems != null)
                 {
                     MenuItems = MenuItems.Where(r => r.status == true).OrderBy(r => r.ordar).ToList();
@@ -199,7 +199,7 @@ namespace DTShopping.Controllers
             return PartialView("Category", list);
         }
 
-        public ActionResult getCatHeirarchy(string Cat,string subCat)
+        public ActionResult getCatHeirarchy(string Cat, string subCat)
         {
             SideBar objsidebar = new SideBar();
             var CategoryList = new List<Category>();
@@ -208,7 +208,7 @@ namespace DTShopping.Controllers
             {
                 categor = Convert.ToInt16(Cat);
             }
-            if (Session["MenuList"] != null && categor!=0)
+            if (Session["MenuList"] != null && categor != 0)
             {
                 var MenuItems = Session["MenuList"] as List<Category>;
                 CategoryList = getNestedChildren(MenuItems.Where(r => r.status == true && r.id == categor).ToList(), MenuItems);
@@ -222,10 +222,10 @@ namespace DTShopping.Controllers
                 var product = Session["LatestProduct"] as List<Product>;
                 objsidebar.latestProduct = product.FirstOrDefault();
             }
-            
+
             return PartialView("_filterSideBar", objsidebar);
         }
-       
+
         public List<Category> getNestedChildren(List<Category> ParentList, List<Category> MenuList)
         {
             var orderedList = new List<Category>();
@@ -251,10 +251,10 @@ namespace DTShopping.Controllers
             return View();
         }
 
-        public async Task<ActionResult> SearchProductList( int? page, string SortBy, string Order, string searchString)
+        public async Task<ActionResult> SearchProductList(int? page, string SortBy, string Order, string searchString)
         {
             Filters c = new Filters();
-            
+
             c.pageNo = page;
             c.NoOfRecord = 10;
             c.SelectedFilterName = "Title";
@@ -285,7 +285,7 @@ namespace DTShopping.Controllers
                         c.IsPointLowToHigh = false;
                     }
                 }
-            }            
+            }
 
             var result = await objRepository.GetCategoryProducts(c);
             List<Product> listProducts = new List<Product>();
@@ -305,16 +305,17 @@ namespace DTShopping.Controllers
             {
                 list.Add(i);
             }
-            finalprodlist.pagerCount = list.ToPagedList(Convert.ToInt32(page), 10);                                
-            ViewBag.Page = page; 
-                      
+            finalprodlist.pagerCount = list.ToPagedList(Convert.ToInt32(page), 10);
+            ViewBag.Page = page;
+
             return View(finalprodlist);
         }
 
         public async Task<ActionResult> GetAllDealProducts(string Deal, int? page, string SortBy, string Order)
         {
             PagewiseProducts productlist = new PagewiseProducts();
-            try {
+            try
+            {
                 Filters c = new Filters();
                 string companyId = System.Configuration.ConfigurationManager.AppSettings["CompanyId"];
 
@@ -353,7 +354,7 @@ namespace DTShopping.Controllers
                     }
                 }
 
-                var result = await objRepository.GetDealProductsFullList(c,Deal);
+                var result = await objRepository.GetDealProductsFullList(c, Deal);
                 List<Product> listProducts = new List<Product>();
                 double totalcount = 0;
                 if (result.Status == true && result.ResponseValue != null)
@@ -361,7 +362,7 @@ namespace DTShopping.Controllers
                     totalcount = result.TotalRecords;
                     listProducts = JsonConvert.DeserializeObject<List<Product>>(result.ResponseValue);
                 }
-               
+
                 productlist.ProductList = listProducts;
 
                 var list = new List<int>();
@@ -376,7 +377,7 @@ namespace DTShopping.Controllers
             catch (Exception ex)
             {
             }
-            return View("DealProducts",productlist);
+            return View("DealProducts", productlist);
 
         }
 
@@ -387,7 +388,7 @@ namespace DTShopping.Controllers
 
         public ActionResult UpdateAccount()
         {
-            var userDetail = Session["UserDetail"] as UserDetails;            
+            var userDetail = Session["UserDetail"] as UserDetails;
             return View(userDetail);
         }
 
@@ -411,7 +412,7 @@ namespace DTShopping.Controllers
                 objFilter.VendorId = userID;
                 objFilter.pageNo = pageNo;
 
-                var result  = await objRepository.GetUserOrderList(objFilter);
+                var result = await objRepository.GetUserOrderList(objFilter);
                 double totalcount = 0;
                 if (result.Status == true && result.ResponseValue != null)
                 {
@@ -424,7 +425,7 @@ namespace DTShopping.Controllers
                 {
                     list.Add(i);
                 }
-                UserOrderList.pagerCount = list.ToPagedList(Convert.ToInt32(pageNo??1), 10);
+                UserOrderList.pagerCount = list.ToPagedList(Convert.ToInt32(pageNo ?? 1), 10);
 
             }
             return View(UserOrderList);
@@ -434,7 +435,8 @@ namespace DTShopping.Controllers
         {
             order objUserOrder = new order();
 
-            try {
+            try
+            {
                 if (Session["UserDetail"] == null)
                 {
                     return RedirectToAction("Login", "Account");
@@ -456,7 +458,7 @@ namespace DTShopping.Controllers
             }
             return View(objUserOrder);
         }
-        
+
         [HttpGet]
         public async Task<ActionResult> getCartCount()
         {
@@ -466,13 +468,13 @@ namespace DTShopping.Controllers
             {
                 if (Session["UserDetail"] == null)
                 {
-                    cartCount =  0;                   
+                    cartCount = 0;
                 }
                 else
                 {
                     userDetail = Session["UserDetail"] as UserDetails;
                     var result = await objRepository.getCartCount(userDetail);
-                   
+
                     if (result.Status == true && result.ResponseValue != null)
                     {
                         cartCount = result.CartProductCount;
@@ -483,7 +485,7 @@ namespace DTShopping.Controllers
             {
 
             }
-            return Json(cartCount,JsonRequestBehavior.AllowGet);
+            return Json(cartCount, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -496,20 +498,23 @@ namespace DTShopping.Controllers
                 objorder.status = 2;
                 objorder.company_id = Convert.ToInt16(System.Configuration.ConfigurationManager.AppSettings["CompanyId"]);
 
-                var response = await objRepository.CreateOrder(objorder);
+                var response = await objRepository.CreateOrder(objorder, "Add");
                 if (response.Status == true)
                 {
+                    Session["OrderId"] = response.ResponseValue;
                     orderstatus = "Success";
+                    return RedirectToAction("GetCartProductList", "Manage", new { isWithPayment = true });
                 }
                 else
                 {
                     orderstatus = "Fail";
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 orderstatus = "Fail";
             }
-            return Json(orderstatus,JsonRequestBehavior.AllowGet);
+            return Json(orderstatus, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -518,7 +523,7 @@ namespace DTShopping.Controllers
             var orderstatus = string.Empty;
             try
             {
-                objorder.modified = DateTime.Now;               
+                objorder.modified = DateTime.Now;
                 var response = await objRepository.UpdateAccount(objorder);
                 if (response.Status == true)
                 {

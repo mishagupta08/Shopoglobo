@@ -10,6 +10,7 @@ using DTShopping.Models;
 using DTShopping.Repository;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using DTShopping.Properties;
 
 namespace DTShopping.Controllers
 {
@@ -29,6 +30,23 @@ namespace DTShopping.Controllers
         {
         }
 
+        public async Task<ActionResult> UpdateOrderDetail(Dashboard detailModel)
+        {
+            this.model = new Dashboard();
+            objRepository = new APIRepository();
+            var result = new Response();
+
+            result = await objRepository.CreateOrder(detailModel.OrderDetail, "Edit");
+
+            if (result == null)
+            {
+                return Json(Resources.ErrorMessage);
+            }
+            else
+            {
+                return Json(result.ResponseValue);
+            }
+        }
 
         [HttpPost]
         public async Task<ActionResult> GetProductDetail(int prodId)

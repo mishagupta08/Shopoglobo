@@ -59,20 +59,20 @@
                 <p>&nbsp;</p>
                 <table width="97%" border="0" cellspacing="0" cellpadding="0" class="shoptable">
 
-                        <tr>
-                            <td width="15%" height="29"><strong>@Resources.CurrentAvailablePoints</strong></td>
-                            <td width="54%">
-                                <span class="fieldValue">
-                                    <input type="radio" value="usePoints" name="usePoints" id="Pay1">
-                                    @Model.UsersPoints
-                            </td>
-                            <td align="right"><h2><a href="~/#">Apply Voucher</a></h2></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">&nbsp;</td>
-                            <td align="right">&nbsp;</td>
-                        </tr>
-                    </table>
+                    <tr>
+                        <td width="15%" height="29"><strong>@Resources.CurrentAvailablePoints</strong></td>
+                        <td width="54%">
+                            <span class="fieldValue">
+                                <input type="radio" value="usePoints" name="usePoints" id="Pay1">
+                                @Model.UsersPoints
+                        </td>
+                        <td align="right"><h2><a href="~/#">Apply Voucher</a></h2></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                        <td align="right">&nbsp;</td>
+                    </tr>
+                </table>
                 <p>&nbsp;</p>
                 <table width="97%" border="0" cellspacing="5" cellpadding="5">
                     <tr>
@@ -89,56 +89,86 @@
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
                 <table width="97%" border="0" cellspacing="5" cellpadding="5" class="shoptable" style="border:1px solid #CCCCCC;">
-                        <tr>
-                            <td width="53%"><h2>Payment Options</h2></td>
-                            <td width="47%">&nbsp;</td>
-                        </tr>
-                        <tr bgcolor="#EBC6AD">
-                            <td>
-                                <div class="Paymenttd">
-                                    <ul>
-                                        <li>
-                                            <input type="radio" value="offline" name="paymentmethod" id="Pay1">
-                                            <b>Cheque / DD / Cash / NEFT / RTGS</b><br>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="Paymenttd">
-                                    <ul>
-                                        <li>
-                                            <input type="radio" value="dtcard" name="paymentmethod" id="Pay3">
-                                            <b>e-Wallet Payment</b>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
+                    <tr>
+                        <td width="53%"><h2>Payment Options</h2></td>
+                        <td width="47%">&nbsp;</td>
+                    </tr>
+                    <tr bgcolor="#EBC6AD">
+                        <td>
+                            <div class="Paymenttd">
+                                <ul>
+                                    <li>
+                                        <input type="radio" value="offline" name="paymentmethod" id="Pay1">
+                                        <b>Cheque / DD / Cash / NEFT / RTGS</b><br>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="Paymenttd">
+                                <ul>
+                                    <li>
+                                        <input type="radio" value="dtcard" name="paymentmethod" id="Pay3">
+                                        <b>e-Wallet Payment</b>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    @*<tr>
                             <td>You can Deposit a cheque / DD / Cash /NEFT /RTGS </td>
                             <td>Prepaid Card /e-Wallet Card. </td>
-                        </tr>
-                    </table>
+                        </tr>*@
+                </table>
+                <div id="offline">
+                    <form data-parsley-validate class="validateForm form-horizontal form-style" id="addForm" onsubmit="return SaveDetailForm();">
+                        <div>
+                            <div class="col-md-4">
+                                <label for="username">@Resources.PaymentMode</label>
+                                @Html.DropDownListFor(m => m.OrderDetail.payment_mode, new SelectList(Model.PaymentModeList, "value", "value"), new { @required = "0", id = "brandDropDown", @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email">
+                                    @Resources.PaymentRefNo
+                                </label>
+                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_no, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email">
+                                    @Resources.PaymentRefDate
+                                </label>
+                                @Html.TextBoxFor(m => m.OrderDetail.dt_payment_ref_date, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email">
+                                    @Resources.PaymentRefBank
+                                </label>
+                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_bank, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email">
+                                    @Resources.PaymentRefBranch
+                                </label>
+                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_branch, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email">
+                                    @Resources.PaymentRefAmount
+                                </label>
+                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_amount, new { @type = "number", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
+                            </div>
+                        </div>
 
+                        <label id="loginError" style="color:red;"></label>
+                        <button class="btn btn-primary btn-block saveBtn" type="submit">
+                            @Resources.Save
+                        </button>
+                    </form>
+                </div>
                 <div id="dtcard">
-                    <div class="col-md-4">
-                        <label for="username">@Resources.PaymentMode</label>
-                        @Html.DropDownListFor(m => m.PaymentModeList.brand_id, new SelectList(Model.brandContainer.brandList, "id", "name"), new { @required = "0", id = "brandDropDown", @class = "form-control" })
-                    </div>
-                </div>               
-
-                @*<p>
-                    <div class="buttonSet">
-                        <span class="buttonAction"><a id="makePayment" class="unishop_submit" href="#">Make Payment</a></span>
-                    </div>
-                </p>*@
-
-
-                <p>&nbsp;</p>
+                    <span>dt care</span>
+                </div>
             </div>
-
-            @Html.Action("getCatHeirarchy", "Home", new { Cat = ViewBag.ParentId, subCat = ViewBag.category })
         </div>
     }
 </div>

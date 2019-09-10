@@ -94,9 +94,9 @@ namespace DTShopping.Repository
         {
             var detail = JsonConvert.SerializeObject(user);
             var result = await CallPostFunction(detail, "LoginShoppigPortalUser");
-            if (result != null )
-            {                
-                return result;                
+            if (result != null)
+            {
+                return result;
             }
             else
             {
@@ -124,10 +124,10 @@ namespace DTShopping.Repository
             user.company_id = CompanyId;
             var detail = JsonConvert.SerializeObject(user);
             var result = await CallPostFunction(detail, "ManageVendor/Add");
-            
-                //var result = JsonConvert.DeserializeObject<Response>(result.ResponseValue);
-                return result;
-            
+
+            //var result = JsonConvert.DeserializeObject<Response>(result.ResponseValue);
+            return result;
+
         }
 
         public async Task<List<R_StateMaster>> GetStateList()
@@ -239,7 +239,7 @@ namespace DTShopping.Repository
             return result;
         }
 
-        public async Task<Response> GetDealProductsFullList(Filters FilterDetails,string Deal)
+        public async Task<Response> GetDealProductsFullList(Filters FilterDetails, string Deal)
         {
             var productData = JsonConvert.SerializeObject(FilterDetails);
             var result = await CallPostFunction(productData, ManageDealProducts + Deal);
@@ -253,7 +253,7 @@ namespace DTShopping.Repository
             }
         }
 
-        
+
         public async Task<Response> GetUserOrderList(Filters FilterDetails)
         {
             var productData = JsonConvert.SerializeObject(FilterDetails);
@@ -268,10 +268,10 @@ namespace DTShopping.Repository
             }
         }
 
-        
 
-           public async Task<Response> getCartCount(UserDetails userDetail)
-           {
+
+        public async Task<Response> getCartCount(UserDetails userDetail)
+        {
             CartFilter filter = new CartFilter();
 
             filter.username = userDetail.username;
@@ -289,11 +289,11 @@ namespace DTShopping.Repository
             }
         }
 
-        
-          public async Task<Response> CreateOrder(order orderDetail)
-          {            
+
+        public async Task<Response> CreateOrder(order orderDetail, string action)
+        {
             var productData = JsonConvert.SerializeObject(orderDetail);
-            var result = await CallPostFunction(productData, "ManageOrder/Add");
+            var result = await CallPostFunction(productData, "ManageOrder/" + action);
             if (result == null)
             {
                 return null;
@@ -302,7 +302,7 @@ namespace DTShopping.Repository
             {
                 return result;
             }
-         }
+        }
 
         private async Task<Response> CallPostFunction(string detail, string action)
         {
@@ -354,7 +354,7 @@ namespace DTShopping.Repository
             user.role_id = RoleId;
             user.company_id = CompanyId;
             var detail = JsonConvert.SerializeObject(user);
-            var result = await CallPostFunction(detail, "ManageVendor/Edit");            
+            var result = await CallPostFunction(detail, "ManageVendor/Edit");
             return result;
         }
 

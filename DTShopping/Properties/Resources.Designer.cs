@@ -97,6 +97,15 @@ namespace DTShopping.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Something went wrong, Please try again later..
+        /// </summary>
+        public static string ErrorMessage {
+            get {
+                return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EU Points.
         /// </summary>
         public static string EUPoints {
@@ -147,6 +156,51 @@ namespace DTShopping.Properties {
         public static string PaymentMode {
             get {
                 return ResourceManager.GetString("PaymentMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Ref Amount.
+        /// </summary>
+        public static string PaymentRefAmount {
+            get {
+                return ResourceManager.GetString("PaymentRefAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Ref Bank.
+        /// </summary>
+        public static string PaymentRefBank {
+            get {
+                return ResourceManager.GetString("PaymentRefBank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Ref Branch.
+        /// </summary>
+        public static string PaymentRefBranch {
+            get {
+                return ResourceManager.GetString("PaymentRefBranch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Ref Date.
+        /// </summary>
+        public static string PaymentRefDate {
+            get {
+                return ResourceManager.GetString("PaymentRefDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Ref No.
+        /// </summary>
+        public static string PaymentRefNo {
+            get {
+                return ResourceManager.GetString("PaymentRefNo", resourceCulture);
             }
         }
         

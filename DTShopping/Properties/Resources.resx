@@ -129,6 +129,9 @@
   <data name="CurrentAvailablePoints" xml:space="preserve">
     <value>Do You Want To Use Current Available Points</value>
   </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Something went wrong, Please try again later.</value>
+  </data>
   <data name="EUPoints" xml:space="preserve">
     <value>EU Points</value>
   </data>
@@ -146,6 +149,21 @@
   </data>
   <data name="PaymentMode" xml:space="preserve">
     <value>Payment Mode</value>
+  </data>
+  <data name="PaymentRefAmount" xml:space="preserve">
+    <value>Payment Ref Amount</value>
+  </data>
+  <data name="PaymentRefBank" xml:space="preserve">
+    <value>Payment Ref Bank</value>
+  </data>
+  <data name="PaymentRefBranch" xml:space="preserve">
+    <value>Payment Ref Branch</value>
+  </data>
+  <data name="PaymentRefDate" xml:space="preserve">
+    <value>Payment Ref Date</value>
+  </data>
+  <data name="PaymentRefNo" xml:space="preserve">
+    <value>Payment Ref No</value>
   </data>
   <data name="ProductDescription" xml:space="preserve">
     <value>Product Description</value>

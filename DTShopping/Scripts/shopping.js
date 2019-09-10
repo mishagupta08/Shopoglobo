@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+    $("#offline").hide();
+    $("#dtcard").hide();
     $(".preloader").hide();
 
     $('a[name=deleteFunction]').unbind();
@@ -14,8 +16,36 @@
     $('input[name=paymentmethod]').unbind();
     $('input[name=paymentmethod]').click(function (e) {
         LoadPaymentPage(this);
-    }); 
+    });
+
+    $('input[name = paymentmethod]').bind('change', function () {
+        var value = $(this).val();
+        $("#offline").hide();
+        $("#dtcard").hide();
+        $("#" + value).show();
+    });
 });
+
+function SaveDetailForm() {
+    $("#loginError").html("");
+    var loginDetail = $('#addForm').serialize();
+    $(".preloader").show();
+    $.ajax({
+        url: '/Manage/UpdateOrderDetail',
+        type: 'Post',
+        datatype: 'Json',
+        data: loginDetail
+    }).done(function (result) {
+        $("#loginError").html(result);
+        $(".preloader").hide();
+
+    }).fail(function (error) {
+        $("#loginError").html(error.statusText);
+        $(".preloader").hide();
+    });
+
+    return false;
+}
 
 function UpdateQuantityDetail(thisVar) {
 

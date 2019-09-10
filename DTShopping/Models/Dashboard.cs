@@ -17,6 +17,7 @@ namespace DTShopping.Models
         public double UsersPoints { get; set; }
         public double TotalProductPoints { get; set; }
         public Product ProductDetail { get; set; }
+        public order OrderDetail { get; set; }
         public List<Containers> PaymentModeList { get; set; }
         public ShoppingPortalFrontPageProdList FontpageSections{get;set;}
 
