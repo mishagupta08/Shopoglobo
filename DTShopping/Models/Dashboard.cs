@@ -17,6 +17,17 @@ namespace DTShopping.Models
         public double UsersPoints { get; set; }
         public double TotalProductPoints { get; set; }
         public Product ProductDetail { get; set; }
+        public List<Containers> PaymentModeList { get; set; }
         public ShoppingPortalFrontPageProdList FontpageSections{get;set;}
+
+        public void AssignPaymentModes()
+        {
+            this.PaymentModeList = new List<Containers>();
+            this.PaymentModeList.Add(new Containers { value = "Cash Deposit"});
+            this.PaymentModeList.Add(new Containers { value = "Demand Draft" });
+            this.PaymentModeList.Add(new Containers { value = "Cheque" });
+            this.PaymentModeList.Add(new Containers { value = "NEFT" });
+            this.PaymentModeList.Add(new Containers { value = "RTGS" });
+        }
     }
 }

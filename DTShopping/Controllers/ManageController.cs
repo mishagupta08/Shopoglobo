@@ -132,7 +132,7 @@ namespace DTShopping.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetCartProductList()
+        public async Task<ActionResult> GetCartProductList(bool isWithPayment)
         {
             this.model = new Dashboard();
             this.objRepository = new APIRepository();
@@ -149,6 +149,7 @@ namespace DTShopping.Controllers
                     {
                         this.model.Products = JsonConvert.DeserializeObject<List<Product>>(response.ResponseValue);
                         this.model.UsersPoints = response.Points;
+                        this.model.AssignPaymentModes();
                         if (this.model.Products != null)
                         {
                             this.model.NetPayment = 0;
@@ -181,7 +182,14 @@ namespace DTShopping.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            return PartialView("cartDetailView", this.model);
+            if (isWithPayment)
+            {
+                return PartialView("cartPaymentDetailView", this.model);
+            }
+            else
+            {
+                return PartialView("cartDetailView", this.model);
+            }
         }
 
         private bool CheckLoginUserStatus()

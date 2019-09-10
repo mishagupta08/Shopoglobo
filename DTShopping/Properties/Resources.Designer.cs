@@ -142,6 +142,15 @@ namespace DTShopping.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment Mode.
+        /// </summary>
+        public static string PaymentMode {
+            get {
+                return ResourceManager.GetString("PaymentMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product Description.
         /// </summary>
         public static string ProductDescription {

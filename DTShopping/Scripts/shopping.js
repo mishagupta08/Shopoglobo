@@ -10,6 +10,11 @@
     $('a[name=updateQuantity]').click(function (e) {
         UpdateQuantityDetail(this);
     });
+
+    $('input[name=paymentmethod]').unbind();
+    $('input[name=paymentmethod]').click(function (e) {
+        LoadPaymentPage(this);
+    }); 
 });
 
 function UpdateQuantityDetail(thisVar) {

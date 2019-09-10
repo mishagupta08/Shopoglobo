@@ -210,6 +210,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartFilter.cs" />
+    <Compile Include="Models\Containers.cs" />
     <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\discount_coupons.cs" />
     <Compile Include="Models\Filters.cs" />

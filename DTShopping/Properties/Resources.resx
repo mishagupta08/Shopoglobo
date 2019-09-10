@@ -144,6 +144,9 @@
   <data name="OutOfStock" xml:space="preserve">
     <value>OUT OF STOCK</value>
   </data>
+  <data name="PaymentMode" xml:space="preserve">
+    <value>Payment Mode</value>
+  </data>
   <data name="ProductDescription" xml:space="preserve">
     <value>Product Description</value>
   </data>
