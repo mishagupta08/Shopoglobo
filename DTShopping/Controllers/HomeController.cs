@@ -428,6 +428,113 @@ namespace DTShopping.Controllers
 
             }
             return View(UserOrderList);
-        }       
+        }
+
+        public ActionResult Checkout()
+        {
+            order objUserOrder = new order();
+
+            try {
+                if (Session["UserDetail"] == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+                else
+                {
+                    var userDetail = Session["UserDetail"] as UserDetails;
+                    objUserOrder.billing_city = userDetail.CityName;
+                    objUserOrder.billing_state = userDetail.StateName;
+                    objUserOrder.billing_phone = userDetail.phone;
+                    objUserOrder.user_id = userDetail.id;
+                    objUserOrder.billing_first_name = userDetail.first_name;
+                    objUserOrder.billing_last_name = userDetail.last_name;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(objUserOrder);
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult> getCartCount()
+        {
+            UserDetails userDetail = new UserDetails();
+            int cartCount = 0;
+            try
+            {
+                if (Session["UserDetail"] == null)
+                {
+                    cartCount =  0;                   
+                }
+                else
+                {
+                    userDetail = Session["UserDetail"] as UserDetails;
+                    var result = await objRepository.getCartCount(userDetail);
+                   
+                    if (result.Status == true && result.ResponseValue != null)
+                    {
+                        cartCount = result.CartProductCount;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(cartCount,JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateOrder(order objorder)
+        {
+            var orderstatus = string.Empty;
+            try
+            {
+                objorder.created = DateTime.Now;
+                objorder.status = 2;
+                objorder.company_id = Convert.ToInt16(System.Configuration.ConfigurationManager.AppSettings["CompanyId"]);
+
+                var response = await objRepository.CreateOrder(objorder);
+                if (response.Status == true)
+                {
+                    orderstatus = "Success";
+                }
+                else
+                {
+                    orderstatus = "Fail";
+                }
+            }
+            catch (Exception ex) {
+                orderstatus = "Fail";
+            }
+            return Json(orderstatus,JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateAccount(UserDetails objorder)
+        {
+            var orderstatus = string.Empty;
+            try
+            {
+                objorder.modified = DateTime.Now;               
+                var response = await objRepository.UpdateAccount(objorder);
+                if (response.Status == true)
+                {
+                    orderstatus = response.ResponseValue;
+                }
+                else
+                {
+                    orderstatus = "Fail";
+                }
+            }
+            catch (Exception ex)
+            {
+                orderstatus = "Fail";
+            }
+            return Json(orderstatus, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
