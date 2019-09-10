@@ -149,7 +149,7 @@
             data: orderDetail
         }).done(function (result) {
             $(".preloader").hide();
-            alert(result);
+            alert(result.ResponseValue);
             //location.reload();
         }).fail(function (error) {
             $("#error").html(error.statusText);

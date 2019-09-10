@@ -512,5 +512,29 @@ namespace DTShopping.Controllers
             return Json(orderstatus,JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> UpdateAccount(UserDetails objorder)
+        {
+            var orderstatus = string.Empty;
+            try
+            {
+                objorder.modified = DateTime.Now;               
+                var response = await objRepository.UpdateAccount(objorder);
+                if (response.Status == true)
+                {
+                    orderstatus = response.ResponseValue;
+                }
+                else
+                {
+                    orderstatus = "Fail";
+                }
+            }
+            catch (Exception ex)
+            {
+                orderstatus = "Fail";
+            }
+            return Json(orderstatus, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

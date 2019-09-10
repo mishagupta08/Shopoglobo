@@ -67,6 +67,48 @@ function SaveDetailForm() {
     return false;
 }
 
+function UpdateAccount(){
+    $("#loginError").html("");
+    var oldPassword = $("#oldPassword").val();
+    var password_str = $("#password_str").val();
+    var validateOldPassword = true;
+    $("#ErrorMessage").html("");
+    if (oldPassword != password_str)
+    {
+        validateOldPassword = false;
+        $("#ErrorMessage").html("<br/><br/>Old password is not correct.");
+    }
+    if (validateOldPassword == true) {
+        var validateConfirm = true;
+        var newPassword = $("#new_password_str").val();
+        var ConfirmPassword = $("#ConfirmPassword").val();
+        if (newPassword != ConfirmPassword) {
+            validateConfirm = false;
+            $("#ErrorMessage").html("<br/><br/>New password and Confirm password do not match.");
+        }
+        else {
+            
+            $("#password_str").val(newPassword);
+            var loginDetail = $('#update_account').serialize();
+            $(".preloader").show();
+            $.ajax({
+                url: '/Home/UpdateAccount',
+                type: 'Post',
+                datatype: 'Json',
+                data: loginDetail
+            }).done(function (result) {
+                alert(result);
+                $(".preloader").hide();
+            }).fail(function (error) {
+                alert(error.statusText);
+                $(".preloader").hide();
+                $(".preloader").hide();
+            });
+        }
+    }
+
+    return false;
+}
 
 function Login_Account() {
     $("#loginError").html("");

@@ -36,7 +36,7 @@ namespace DTShopping.Repository
 
         private string ManageOrderproducts = "ManageVendorProductOrderListWithFilter/";
 
-        private string ManageOrder = "ManageVendorProductOrderListWithFilter/";
+        private string ManageOrder = "ManageOrder/";
 
 
 
@@ -349,7 +349,16 @@ namespace DTShopping.Repository
             return null;
         }
 
+        public async Task<Response> UpdateAccount(UserDetails user)
+        {
+            user.role_id = RoleId;
+            user.company_id = CompanyId;
+            var detail = JsonConvert.SerializeObject(user);
+            var result = await CallPostFunction(detail, "ManageVendor/Edit");            
+            return result;
+        }
 
-       
+
+
     }
 }
