@@ -503,7 +503,7 @@ namespace DTShopping.Controllers
                 {
                     Session["OrderId"] = response.ResponseValue;
                     orderstatus = "Success";
-                    return RedirectToAction("GetCartProductList", "Manage", new { isWithPayment = true });
+                    //return RedirectToAction("GetCartProductList", "Manage", new { isWithPayment = true });
                 }
                 else
                 {
