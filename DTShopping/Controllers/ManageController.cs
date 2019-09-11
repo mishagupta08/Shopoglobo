@@ -36,6 +36,7 @@ namespace DTShopping.Controllers
             objRepository = new APIRepository();
             var result = new Response();
 
+            detailModel.OrderDetail.id = Session["OrderId"] != null ? Convert.ToInt32(Session["OrderId"]) : 0;
             result = await objRepository.CreateOrder(detailModel.OrderDetail, "Edit");
 
             if (result == null)

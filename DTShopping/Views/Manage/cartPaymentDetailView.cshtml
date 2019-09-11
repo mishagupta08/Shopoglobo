@@ -123,35 +123,35 @@
                 <div id="offline">
                     <form data-parsley-validate class="validateForm form-horizontal form-style" id="addForm" onsubmit="return SaveDetailForm();">
                         <div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="username">@Resources.PaymentMode</label>
                                 @Html.DropDownListFor(m => m.OrderDetail.payment_mode, new SelectList(Model.PaymentModeList, "value", "value"), new { @required = "0", id = "brandDropDown", @class = "form-control" })
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="email">
                                     @Resources.PaymentRefNo
                                 </label>
                                 @Html.TextBoxFor(m => m.OrderDetail.payment_ref_no, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="email">
                                     @Resources.PaymentRefDate
                                 </label>
                                 @Html.TextBoxFor(m => m.OrderDetail.dt_payment_ref_date, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="email">
                                     @Resources.PaymentRefBank
                                 </label>
                                 @Html.TextBoxFor(m => m.OrderDetail.payment_ref_bank, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="email">
                                     @Resources.PaymentRefBranch
                                 </label>
                                 @Html.TextBoxFor(m => m.OrderDetail.payment_ref_branch, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="email">
                                     @Resources.PaymentRefAmount
                                 </label>
@@ -166,7 +166,39 @@
                     </form>
                 </div>
                 <div id="dtcard">
-                    <span>dt care</span>
+                    <table class="checkout" align="center" width="97%" cellpadding="7" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td colspan="2" style="background:#efefef;font-size:large;">Shopping Wallet Process</td>
+                            </tr>
+                            <tr class="feRow">
+                                <td class="feLabel" style="width: 30%;">One Time Password (OTP)<br><span id="err_otp_password" class="error"></span></td>
+                                <td class="feWidget">
+                                    <input type="text" name="otp_password" id="otp_password" value="" maxlength="50">
+                                    @Html.TextBoxFor(m => m.OrderDetail.dt_payment_ref_date, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
+                                    <a class="generateotp" id="lnkOtp">Click here to Generate OTP on XXXXXXXX03</a>
+                                </td>
+                            </tr>
+
+                            <tr class="feRow">
+                                <td class="feLabel" style="width: 30%;">User ID<br><span id="err_ewallet_account_number" class="error"></span></td>
+                                <td class="feWidget">demoagent</td>
+                            </tr>
+
+                            <tr class="feRow">
+                                <td class="feLabel">Password<br><span id="err_ewallet_password" class="error"></span></td>
+                                <td class="feWidget">
+                                    <input type="password" name="ewallet_password" id="ewallet_password" value="" maxlength="50">
+                                </td>
+                            </tr>
+
+                            <tr class="feRow">
+                                <td colspan="2" style="text-align: center;">
+                                    <input type="submit" name="sb" id="sb" value="Submit" onclick="javascript:AM_xForm_submitForm('validate',true,this);">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
