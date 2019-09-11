@@ -14,5 +14,6 @@ namespace DTShopping.Models
         public List<Product> SevenDaySaver { get; set; }
         public List<Product> FashionProdList { get; set; }
         public List<Product> ElectronicProdList { get; set; }
+        public List<brand> brandlist { get; set; }
     }
 }

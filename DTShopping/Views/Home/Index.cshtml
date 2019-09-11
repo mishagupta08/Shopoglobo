@@ -45,6 +45,30 @@
                 </ul>
                 <a class="rslides_nav rslides1_nav prev" href="#">Previous</a><a class="rslides_nav rslides1_nav next" href="#">Next</a>
             </div>
+            @if (Model.FontpageSections != null && Model.FontpageSections.brandlist != null && Model.FontpageSections.brandlist.Count > 0)
+            {
+                <div class="container">
+                    <div class="sixteen columns">
+                        <h1 id="brands_title"><span class="icon_brands">&nbsp;</span>Brands</h1>
+                        <div id="carousel_brands" class="es-carousel-wrapper">
+                            <div class="es-carousel container">
+                                <div class="es-carousel-inner">
+                                    <ul>
+                                        @foreach (var brand in Model.FontpageSections.brandlist)
+                                        {
+                                            if (!string.IsNullOrEmpty(brand.logo))
+                                            {
+                                              <li class="two columns brands-image"> <a href="#"> <img src="@imageUrl/@brand.logo" alt="@brand.name" title="@brand.name" width="140" height="66" class="scale-with-grid" /> </a> </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
             @if (Model.FontpageSections != null && Model.FontpageSections.SpeacialSegment != null && Model.FontpageSections.SpeacialSegment.Count > 0)
             {
                 <div class="container">
