@@ -31,4 +31,15 @@ namespace DTShopping.Models
             this.PaymentModeList.Add(new Containers { value = "RTGS" });
         }
     }
+
+    public partial class brand
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string logo { get; set; }
+        public byte status { get; set; }
+        public System.DateTime created { get; set; }
+        public System.DateTime modified { get; set; }
+    }
 }
