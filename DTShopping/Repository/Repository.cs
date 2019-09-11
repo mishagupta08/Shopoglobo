@@ -275,7 +275,7 @@ namespace DTShopping.Repository
             CartFilter filter = new CartFilter();
 
             filter.username = userDetail.username;
-            filter.password = userDetail.passwordDetail;
+            filter.password = userDetail.password_str;
 
             var productData = JsonConvert.SerializeObject(filter);
             var result = await CallPostFunction(productData, ManageCartAction + "CartCount");
