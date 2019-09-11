@@ -13,10 +13,14 @@
         UpdateQuantityDetail(this);
     });
 
-    $('input[name=paymentmethod]').unbind();
-    $('input[name=paymentmethod]').click(function (e) {
-        LoadPaymentPage(this);
+    $('#lnkOtp').click(function (e) {
+        GenerateOtp(this);
     });
+
+    //$('input[name=paymentmethod]').unbind();
+    //$('input[name=paymentmethod]').click(function (e) {
+    //    LoadPaymentPage(this);
+    //});
 
     $('input[name = paymentmethod]').bind('change', function () {
         var value = $(this).val();
@@ -25,6 +29,49 @@
         $("#" + value).show();
     });
 });
+
+function GenerateOtp(thisvar) {
+    $("#loginError").html("");
+    //var passwordDetail = $('#lnkOtp').val();
+    $(".preloader").show();
+    $.ajax({
+        url: '/Manage/GenerateOtpDetail',
+        type: 'Post',
+        datatype: 'Json',
+        data: {}
+    }).done(function (result) {
+        $("#otpMessage").html(result);
+        $(".preloader").hide();
+
+    }).fail(function (error) {
+        $("#loginError").html(error.statusText);
+        $(".preloader").hide();
+    });
+
+    return false;
+}
+
+
+function SaveDetailFormOtp() {
+    $("#loginError").html("");
+    var loginDetail = $('#addForm1').serialize();
+    $(".preloader").show();
+    $.ajax({
+        url: '/Manage/SaveDetailFormOtp',
+        type: 'Post',
+        datatype: 'Json',
+        data: loginDetail
+    }).done(function (result) {
+        $("#loginError1").html(result);
+        $(".preloader").hide();
+
+    }).fail(function (error) {
+        $("#loginError1").html(error.statusText);
+        $(".preloader").hide();
+    });
+
+    return false;
+}
 
 function SaveDetailForm() {
     $("#loginError").html("");

@@ -22,6 +22,8 @@ namespace DTShopping.Repository
 
         private string ManageProductsAction = "ManageProducts/";
 
+        private string MangeOtpFunctionsAction = "MangeOtpFunctions/";
+
         private string GetUserPointsByUserIdAction = "GetUserPointsByUserId/";
 
         private string ManageProductImagesAction = "ManageProductImages/";
@@ -201,6 +203,13 @@ namespace DTShopping.Repository
                 var prod = JsonConvert.DeserializeObject<Product>(result.ResponseValue);
                 return prod;
             }
+        }
+
+        public async Task<Response> MangeOtpFunctions(UserDetails user, string operation)
+        {
+            var data = JsonConvert.SerializeObject(user);
+            var result = await CallPostFunction(data, MangeOtpFunctionsAction + operation);
+            return result;
         }
 
         public async Task<Response> GetCategoryProducts(Filters FilterDetails)

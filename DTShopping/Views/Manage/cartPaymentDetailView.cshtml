@@ -44,7 +44,7 @@
                                 <td bgcolor="#C5C5C5">@product.offer_price</td>
 
                                 <td bgcolor="#C5C5C5">@product.RBV??0</td>
-                                
+
                                 <td bgcolor="#C5C5C5">@product.shippng_charge??0</td>
 
                                 <td bgcolor="#C5C5C5">@product.TotalPayment</td>
@@ -60,13 +60,13 @@
                 <table width="97%" border="0" cellspacing="0" cellpadding="0" class="shoptable">
 
                     <tr>
-                        <td width="15%" height="29"><strong>@Resources.CurrentAvailablePoints</strong></td>
+                        <td width="25%" height="29"><strong>@Resources.CurrentAvailablePoints</strong></td>
                         <td width="54%">
                             <span class="fieldValue">
                                 <input type="radio" value="usePoints" name="usePoints" id="Pay1">
                                 @Model.UsersPoints
                         </td>
-                        <td align="right"><h2><a href="~/#">Apply Voucher</a></h2></td>
+                        @*<td align="right"><h2><a href="~/#">Apply Voucher</a></h2></td>*@
                     </tr>
                     <tr>
                         <td colspan="2">&nbsp;</td>
@@ -122,83 +122,111 @@
                 </table>
                 <div id="offline">
                     <form data-parsley-validate class="validateForm form-horizontal form-style" id="addForm" onsubmit="return SaveDetailForm();">
-                        <div>
-                            <div class="col-md-6">
+                        <div style="padding-left: 26%;padding-top: 3%;">
+                            <div style="display:inline-block; width:30%;">
                                 <label for="username">@Resources.PaymentMode</label>
+                            </div>
+                            <div style="display:inline-block; width:30%;">
                                 @Html.DropDownListFor(m => m.OrderDetail.payment_mode, new SelectList(Model.PaymentModeList, "value", "value"), new { @required = "0", id = "brandDropDown", @class = "form-control" })
                             </div>
-                            <div class="col-md-6">
+                            <br />
+                            <div style="display:inline-block; width:30%;">
                                 <label for="email">
                                     @Resources.PaymentRefNo
                                 </label>
-                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_no, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
                             </div>
-                            <div class="col-md-6">
+                            <div style="display:inline-block; width:30%;">
+                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_no, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" })
+                            </div>
+                            <br />
+                            <div style="display:inline-block; width:30%;">
                                 <label for="email">
                                     @Resources.PaymentRefDate
                                 </label>
-                                @Html.TextBoxFor(m => m.OrderDetail.dt_payment_ref_date, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
                             </div>
-                            <div class="col-md-6">
+                            <div style="display:inline-block; width:30%;">
+                                @Html.TextBoxFor(m => m.OrderDetail.dt_payment_ref_date, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" })
+                            </div>
+                            <br />
+                            <div style="display:inline-block; width:30%;">
                                 <label for="email">
                                     @Resources.PaymentRefBank
                                 </label>
-                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_bank, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
                             </div>
-                            <div class="col-md-6">
+                            <div style="display:inline-block; width:30%;">
+                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_bank, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" })
+                            </div>
+                            <br />
+                            <div style="display:inline-block; width:30%;">
                                 <label for="email">
                                     @Resources.PaymentRefBranch
                                 </label>
-                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_branch, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
                             </div>
+                            <div style="display:inline-block; width:30%;">
+                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_branch, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" })
+                            </div>
+                            <br />
                             <div class="col-md-6">
-                                <label for="email">
-                                    @Resources.PaymentRefAmount
-                                </label>
-                                @Html.TextBoxFor(m => m.OrderDetail.payment_ref_amount, new { @type = "number", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
+                                <div style="display:inline-block; width:30%;">
+                                    <label for="email">
+                                        @Resources.PaymentRefAmount
+                                    </label>
+                                </div>
+                                <div style="display:inline-block; width:30%;">
+                                    @Html.TextBoxFor(m => m.OrderDetail.payment_ref_amount, new { @type = "number", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" })
+                                </div>
                             </div>
-                        </div>
 
-                        <label id="loginError" style="color:red;"></label>
-                        <button class="btn btn-primary btn-block saveBtn" type="submit">
-                            @Resources.Save
-                        </button>
+                            <label id="loginError" style="color:red;"></label>
+                            <br />
+                            <button class="btn btn-primary btn-block saveBtn" type="submit">
+                                @Resources.Save
+                            </button>
+
+                        </div>
                     </form>
                 </div>
                 <div id="dtcard">
-                    <table class="checkout" align="center" width="97%" cellpadding="7" cellspacing="0">
-                        <tbody>
-                            <tr>
-                                <td colspan="2" style="background:#efefef;font-size:large;">Shopping Wallet Process</td>
-                            </tr>
-                            <tr class="feRow">
-                                <td class="feLabel" style="width: 30%;">One Time Password (OTP)<br><span id="err_otp_password" class="error"></span></td>
-                                <td class="feWidget">
-                                    <input type="text" name="otp_password" id="otp_password" value="" maxlength="50">
-                                    @Html.TextBoxFor(m => m.OrderDetail.dt_payment_ref_date, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" });
-                                    <a class="generateotp" id="lnkOtp">Click here to Generate OTP on XXXXXXXX03</a>
-                                </td>
-                            </tr>
+                    <form data-parsley-validate class="validateForm form-horizontal form-style" id="addForm1" onsubmit="return SaveDetailFormOtp();">
+                        <table class="checkout" align="center" width="97%" cellpadding="7" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" style="background:#efefef;font-size:large;">Shopping Wallet Process</td>
+                                </tr>
+                                <tr class="feRow">
+                                    <td class="feLabel" style="width: 30%;">One Time Password (OTP)<br><span id="err_otp_password" class="error"></span></td>
+                                    <td class="feWidget">
+                                        @Html.TextBoxFor(m => m.User.OtpCode, new { @type = "text", @id = "paymentrefno", @required = "required", @class = "form-control", @placeholder = "" })
+                                        <a class="generateotp" id="lnkOtp">Click here to Generate OTP</a>
+                                        <br />
+                                        <label id="otpMessage" style="color:red;"></label>
+                                    </td>
+                                </tr>
 
-                            <tr class="feRow">
-                                <td class="feLabel" style="width: 30%;">User ID<br><span id="err_ewallet_account_number" class="error"></span></td>
-                                <td class="feWidget">demoagent</td>
-                            </tr>
+                                <tr class="feRow">
+                                    <td class="feLabel" style="width: 30%;">User ID<br><span id="err_ewallet_account_number" class="error"></span></td>
+                                    <td class="feWidget">@Model.User.username</td>
+                                </tr>
 
-                            <tr class="feRow">
-                                <td class="feLabel">Password<br><span id="err_ewallet_password" class="error"></span></td>
-                                <td class="feWidget">
-                                    <input type="password" name="ewallet_password" id="ewallet_password" value="" maxlength="50">
-                                </td>
-                            </tr>
+                                <tr class="feRow">
+                                    <td class="feLabel">Password<br><span id="err_ewallet_password" class="error"></span></td>
+                                    <td class="feWidget">
+                                        @Html.TextBoxFor(m => m.User.password_str, new { @type = "password", @id = "paymentPassword", @required = "required", @class = "form-control", @placeholder = "" })
+                                    </td>
+                                </tr>
 
-                            <tr class="feRow">
-                                <td colspan="2" style="text-align: center;">
-                                    <input type="submit" name="sb" id="sb" value="Submit" onclick="javascript:AM_xForm_submitForm('validate',true,this);">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <tr class="feRow">
+                                    <td colspan="2" style="text-align: center;">
+                                        <label id="loginError1" style="color:red;"></label>
+                                        <br />
+                                        <button class="btn btn-primary btn-block saveBtn" type="submit">
+                                            @Resources.Save
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>

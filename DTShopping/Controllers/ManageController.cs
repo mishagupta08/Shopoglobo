@@ -30,6 +30,45 @@ namespace DTShopping.Controllers
         {
         }
 
+        public async Task<ActionResult> SaveDetailFormOtp(Dashboard detailModel)
+        {
+            this.model = new Dashboard();
+            objRepository = new APIRepository();
+            var result = new Response();
+
+            var detail = (UserDetails)(Session["UserDetail"]);
+            detail.password_str = detailModel.User.password_str;
+            detail.OtpCode = detailModel.User.OtpCode;
+            result = await this.objRepository.MangeOtpFunctions(detail, "ValidateOtp");
+            if(result == null)
+            {
+                return Json(Resources.ErrorMessage);
+            }
+            else if (!result.Status)
+            {
+                return Json(result.ResponseValue);
+            }
+            else
+            {
+                detailModel.OrderDetail = new order();
+                detailModel.OrderDetail.id = Session["OrderId"] != null ? Convert.ToInt32(Session["OrderId"]) : 0;
+                result = await objRepository.CreateOrder(detailModel.OrderDetail, "EditWithOtp");
+            }
+
+            if (result == null)
+            {
+                return Json(Resources.ErrorMessage);
+            }
+            else if (!result.Status)
+            {
+                return Json(result.ResponseValue);
+            }
+            else
+            {
+                return Json(result.ResponseValue);
+            }
+        }
+
         public async Task<ActionResult> UpdateOrderDetail(Dashboard detailModel)
         {
             this.model = new Dashboard();
@@ -71,6 +110,40 @@ namespace DTShopping.Controllers
 
             return View("productDetailPage", this.model);
         }
+
+
+        [HttpPost]
+        public async Task<ActionResult> GenerateOtpDetail()
+        {
+            this.model = new Dashboard();
+            var result = new Response();
+            var message = string.Empty;
+            this.objRepository = new APIRepository();
+            try
+            {
+                if (CheckLoginUserStatus())
+                {
+                    var detail = (UserDetails)(Session["UserDetail"]);
+                    result = await this.objRepository.MangeOtpFunctions(detail, "GenerateOtp");
+                    if (result == null)
+                    {
+                        message= "Something went wrong.Please try again later.";
+                    }
+                    else
+                    {
+                        message= result.ResponseValue;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                message = e.Message;
+            }
+
+            return Json(message);
+        }
+
+
 
         [HttpPost]
         public async Task<ActionResult> UpdateProductQuantityDetail(int prodId, int quantity)
@@ -168,6 +241,8 @@ namespace DTShopping.Controllers
                     {
                         this.model.Products = JsonConvert.DeserializeObject<List<Product>>(response.ResponseValue);
                         this.model.UsersPoints = response.Points;
+                        this.model.User = new UserDetails();
+                        this.model.User.username = detail.username;
                         this.model.AssignPaymentModes();
                         if (this.model.Products != null)
                         {
@@ -203,6 +278,11 @@ namespace DTShopping.Controllers
 
             if (isWithPayment)
             {
+                if (this.model == null)
+                {
+                    this.model = new Dashboard();
+                }
+
                 return PartialView("cartPaymentDetailView", this.model);
             }
             else

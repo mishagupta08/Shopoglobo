@@ -37,6 +37,7 @@ namespace DTShopping.Models
         public string DistrictName { get; set; }
         public string AccountNumber { get; set; }
         public string BankName { get; set; }
+        public string OtpCode { get; set; }
         public string IfscCode { get; set; }
     }
 }
