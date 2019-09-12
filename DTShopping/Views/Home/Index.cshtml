@@ -58,7 +58,7 @@
                                         {
                                             if (!string.IsNullOrEmpty(brand.logo))
                                             {
-                                              <li class="two columns brands-image"> <a href="#"> <img src="@imageUrl/@brand.logo" alt="@brand.name" title="@brand.name" width="140" height="66" class="scale-with-grid" /> </a> </li>
+                                              <li class="two columns brands-image"> <a class="brandLink" data-branId="@brand.id" href="/Home/ProductList?BrandId=@brand.id"> <img src="@imageUrl/@brand.logo" alt="@brand.name" title="@brand.name" width="140" height="66" class="scale-with-grid" /> </a> </li>
                                             }
                                         }
                                     </ul>

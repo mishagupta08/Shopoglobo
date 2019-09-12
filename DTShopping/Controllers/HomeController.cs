@@ -95,12 +95,16 @@ namespace DTShopping.Controllers
             return View();
         }
 
-        public async Task<ActionResult> ProductList(string cat, string root, int? page, string SortBy, string Order, string FilterFromPoint, string FilterToPoint, string searchString)
+        public async Task<ActionResult> ProductList(string cat,string BrandId, string root, int? page, string SortBy, string Order, string FilterFromPoint, string FilterToPoint, string searchString)
         {
             Filters c = new Filters();
             if (!string.IsNullOrEmpty(cat))
             {
                 c.CategoryId = Convert.ToInt16(cat);
+            }
+            if (!string.IsNullOrEmpty(BrandId))
+            {
+                c.BrandId = Convert.ToInt16(BrandId);
             }
             c.pageNo = page ?? 1;
             c.NoOfRecord = 10;
@@ -149,8 +153,16 @@ namespace DTShopping.Controllers
             }
 
             string catName = string.Empty;
-            var catDetail = await objRepository.GetCategoryDetail(c);
-            catName = catDetail.title;
+            if (!string.IsNullOrEmpty(cat))
+            {
+                var catDetail = await objRepository.GetCategoryDetail(c);
+                catName = catDetail.title;
+            }
+            //if (!string.IsNullOrEmpty(BrandId))
+            //{
+            //    var brandDetail = await objRepository.GetBrandDetail(c);
+            //    brandDetail = catDetail.title;
+            //}
 
             PagewiseProducts finalprodlist = new PagewiseProducts();
             finalprodlist.ProductList = listProducts;
@@ -167,7 +179,7 @@ namespace DTShopping.Controllers
             ViewBag.CategoryName = catName;
             ViewBag.Page = page;
             ViewBag.ParentId = root;
-
+            ViewBag.brand = BrandId;
             return View(finalprodlist);
         }
 
@@ -199,7 +211,7 @@ namespace DTShopping.Controllers
             return PartialView("Category", list);
         }
 
-        public ActionResult getCatHeirarchy(string Cat, string subCat)
+        public ActionResult getCatHeirarchy(string Cat, string subCat,string brandId)
         {
             SideBar objsidebar = new SideBar();
             var CategoryList = new List<Category>();
@@ -215,6 +227,7 @@ namespace DTShopping.Controllers
             }
             ViewBag.ParentId = Cat;
             ViewBag.category = subCat;
+            ViewBag.brand = brandId;
             ViewBag.Page = 1;
             objsidebar.categoryList = CategoryList;
             if (Session["LatestProduct"] != null)

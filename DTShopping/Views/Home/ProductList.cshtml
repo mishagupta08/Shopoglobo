@@ -73,10 +73,10 @@
                                 <tr>
                                     <td class="padding0">
                                         Sort by :
-                                        <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=1&SortBy=points&Order=desc" class="SortProduct" data-SortBy="Points" data-SortOrder="DESC">High Points</a> |
-                                        <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=1&SortBy=points&Order=asc" class="SortProduct" data-SortBy="Points" data-SortOrder="ASC">Low Points</a> |
-                                        <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=1&SortBy=price&Order=desc" class="SortProduct" data-SortBy="price" data-SortOrder="DESC">High Price </a> |
-                                        <a href="/Home/ProductList?cat=@ViewBag.category&root=@ViewBag.ParentId&page=1&SortBy=price&Order=asc" class="SortProduct" data-SortBy="price" data-SortOrder="ASC">Low Price </a>
+                                        <a href="/Home/ProductList?cat=@ViewBag.category&BrandId=@ViewBag.brand&root=@ViewBag.ParentId&page=1&SortBy=points&Order=desc" class="SortProduct" data-SortBy="Points" data-SortOrder="DESC">High Points</a> |
+                                        <a href="/Home/ProductList?cat=@ViewBag.category&BrandId=@ViewBag.brand&root=@ViewBag.ParentId&page=1&SortBy=points&Order=asc" class="SortProduct" data-SortBy="Points" data-SortOrder="ASC">Low Points</a> |
+                                        <a href="/Home/ProductList?cat=@ViewBag.category&BrandId=@ViewBag.brand&root=@ViewBag.ParentId&page=1&SortBy=price&Order=desc" class="SortProduct" data-SortBy="price" data-SortOrder="DESC">High Price </a> |
+                                        <a href="/Home/ProductList?cat=@ViewBag.category&BrandId=@ViewBag.brand&root=@ViewBag.ParentId&page=1&SortBy=price&Order=asc" class="SortProduct" data-SortBy="price" data-SortOrder="ASC">Low Price </a>
                                         <div></div>
                                         @*<a id="anchorSearchForm" href="http://www.discounttadka.com/index.php?mod=product_search&srch_category_id=137#" onClick="javascript:$('#searchFormDiv').toggle('dropdown');return(false)"></a>*@
                                     </td>
@@ -578,13 +578,13 @@
             </div>
 
         </div>
-        @Html.Action("getCatHeirarchy", "Home", new { Cat = ViewBag.ParentId, subCat = ViewBag.category })
+        @Html.Action("getCatHeirarchy", "Home", new { Cat = ViewBag.ParentId, subCat = ViewBag.category, brandId = ViewBag.brand })
 
     </div>
     Page@(Model.pagerCount.PageCount < Model.pagerCount.PageNumber ? 0 : Model.pagerCount.PageNumber) of @Model.pagerCount.PageCount
 
 
-@Html.PagedListPager(Model.pagerCount, page => Url.Action("ProductList", "Home", new { page, SearchString = Model.SearchString, SortBy = Model.sortby, Order = Model.order }), new PagedListRenderOptions
+@Html.PagedListPager(Model.pagerCount, page => Url.Action("ProductList", "Home", new { page, SearchString = Model.SearchString, SortBy = Model.sortby, Order = Model.order, cat = ViewBag.category , BrandId = ViewBag.brand , root = ViewBag.ParentId  }), new PagedListRenderOptions
 {
     DisplayLinkToFirstPage = PagedListDisplayMode.Never,
     DisplayLinkToLastPage = PagedListDisplayMode.Never,
