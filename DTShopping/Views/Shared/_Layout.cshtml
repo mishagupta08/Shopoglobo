@@ -275,14 +275,20 @@
             return false;
         })
 
+        $('.brandLink').click(
+            function () {
+                var brandid = $(this).attr("data-branId");
+                window.location.href = "/Home/ProductList?BrandId="+brandid;
+            }
+        );
+
         getCartCount();
 
 
     });
 
 
-    function getCartCount()
-    {
+    function getCartCount() {
         $.ajax({
             type: "GET",
             async: false,
@@ -295,7 +301,7 @@
             }
         });
     }
-    
+
 
     function AddProductInCart(prodId, quantity) {
         $(".preloader").show();
@@ -312,7 +318,12 @@
                 alert("Something went wrong, Please try again later.");
             }
             else if (result.Status == false) {
-                alert(result.ResponseValue);
+                if (result.ResponseValue == "login") {
+                    window.location.href = "/Account/Login";
+                }
+                else {
+                    alert(result.ResponseValue);
+                }
             }
             else {
                 alert("Product added to cart.");

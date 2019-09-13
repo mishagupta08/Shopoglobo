@@ -17,6 +17,8 @@ namespace DTShopping.Models
 
         public Nullable<int> CategoryId { get; set; }
 
+        public Nullable<int> BrandId { get; set; }
+
         public byte Status { get; set; }
 
         public string pageName { get; set; }
