@@ -40,7 +40,7 @@ namespace DTShopping.Controllers
             detail.password_str = detailModel.User.password_str;
             detail.OtpCode = detailModel.User.OtpCode;
             result = await this.objRepository.MangeOtpFunctions(detail, "ValidateOtp");
-            if(result == null)
+            if (result == null)
             {
                 return Json(Resources.ErrorMessage);
             }
@@ -65,7 +65,38 @@ namespace DTShopping.Controllers
             }
             else
             {
+                //redirct to thank you page
+                //return Json(result.ResponseValue);
+
+                return RedirectToAction("thankYouPage", "Manage");
+            }
+        }
+
+        public async Task<ActionResult> SaveOrderDetailWithPoints(Dashboard detailModel)
+        {
+            this.model = new Dashboard();
+            objRepository = new APIRepository();
+            var result = new Response();
+            detailModel.OrderDetail.id = Convert.ToInt16(Session["OrderId"]);
+
+            detailModel.OrderDetail.id = Session["OrderId"] != null ? Convert.ToInt32(Session["OrderId"]) : 0;
+            detailModel.OrderDetail.payment_ref_amount = Convert.ToString(detailModel.NetPayment);
+            result = await objRepository.CreateOrder(detailModel.OrderDetail, "editwithpoints");
+
+            if (result == null)
+            {
+                return Json(Resources.ErrorMessage);
+            }
+            else if (!result.Status)
+            {
                 return Json(result.ResponseValue);
+            }
+            else
+            {
+                //redirct to thank you page
+                //return Json(result.ResponseValue);
+
+                return RedirectToAction("thankYouPage", "Manage");
             }
         }
 
@@ -77,15 +108,23 @@ namespace DTShopping.Controllers
             detailModel.OrderDetail.id = Convert.ToInt16(Session["OrderId"]);
 
             detailModel.OrderDetail.id = Session["OrderId"] != null ? Convert.ToInt32(Session["OrderId"]) : 0;
+
             result = await objRepository.CreateOrder(detailModel.OrderDetail, "Edit");
 
             if (result == null)
             {
                 return Json(Resources.ErrorMessage);
             }
-            else
+            else if (!result.Status)
             {
                 return Json(result.ResponseValue);
+            }
+            else
+            {
+                //redirct to thank you page
+                //return Json(result.ResponseValue);
+
+                return RedirectToAction("thankYouPage", "Manage");
             }
         }
 
@@ -112,6 +151,11 @@ namespace DTShopping.Controllers
             return View("productDetailPage", this.model);
         }
 
+        [HttpGet]
+        public async Task<ActionResult> thankYouPage()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<ActionResult> GenerateOtpDetail()
@@ -128,11 +172,11 @@ namespace DTShopping.Controllers
                     result = await this.objRepository.MangeOtpFunctions(detail, "GenerateOtp");
                     if (result == null)
                     {
-                        message= "Something went wrong.Please try again later.";
+                        message = "Something went wrong.Please try again later.";
                     }
                     else
                     {
-                        message= result.ResponseValue;
+                        message = result.ResponseValue;
                     }
                 }
             }

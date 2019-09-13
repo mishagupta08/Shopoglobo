@@ -17,6 +17,10 @@
         GenerateOtp(this);
     });
 
+    $('#pointSaveBtn').click(function (e) {
+        SaveOrderDetailWithPoint();
+    });
+
     //$('input[name=paymentmethod]').unbind();
     //$('input[name=paymentmethod]').click(function (e) {
     //    LoadPaymentPage(this);
@@ -27,6 +31,26 @@
         $("#offline").hide();
         $("#dtcard").hide();
         $("#" + value).show();
+    });
+
+    $('#Pay1').bind('click', function () {
+        var isChecked = document.getElementById("Pay1").checked;
+        if (isChecked) {
+            var totalCharge = parseInt($("#totalCharge").val());
+            var userPoints = parseInt($("#userPoints").val());
+            if (totalCharge <= userPoints) {
+                $("#paymentOptions").hide();
+            }
+            else {
+
+                $("#pointAdjusted1").val(userPoints);
+                $("#pointAdjusted2").val(userPoints);
+                $("#paymentOptions").show();
+            }
+        }
+        else {
+            $("#paymentOptions").show();
+        }
     });
 });
 
@@ -67,6 +91,28 @@ function SaveDetailFormOtp() {
 
     }).fail(function (error) {
         $("#loginError1").html(error.statusText);
+        $(".preloader").hide();
+    });
+
+    return false;
+}
+
+
+function SaveOrderDetailWithPoint() {
+    $("#loginError").html("");
+    var loginDetail = $('#addForm').serialize();
+    $(".preloader").show();
+    $.ajax({
+        url: '/Manage/SaveOrderDetailWithPoints',
+        type: 'Post',
+        datatype: 'Json',
+        data: loginDetail
+    }).done(function (result) {
+        $("#loginError").html(result);
+        $(".preloader").hide();
+
+    }).fail(function (error) {
+        $("#loginError").html(error.statusText);
         $(".preloader").hide();
     });
 
