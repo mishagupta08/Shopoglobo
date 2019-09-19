@@ -3,6 +3,11 @@
     UserDetails current_user = (Session["UserDetail"] != null) ? Session["UserDetail"] as UserDetails : null;
     string username = current_user != null ? current_user.username : "";
     double? points = current_user != null ? current_user.balance_point??0.0 : 0.0;
+    string imageUrl = System.Configuration.ConfigurationManager.AppSettings["ImageUrl"];
+    if (imageUrl.EndsWith("/"))
+    {
+        imageUrl = imageUrl.Substring(0, imageUrl.LastIndexOf("/"));
+    }
 
 }
 <!DOCTYPE html>
@@ -177,6 +182,32 @@
         <div class="footer_bg_color">
             <div id="back-top"><a href="#top"></a></div>
             <div id="footer">
+                @if (Session["Brands"]!= null )
+            {
+                    <div class="container" style="margin-bottom:50px;">
+                        <div class="sixteen columns">                            
+                            <marquee behavior="scroll" direction="left" onMouseMove="stop()" onMouseOut="start()">
+                                <table align="center" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            @foreach (var brand in Session["Brands"] as List<brand>)
+                                            {
+                                                if (!string.IsNullOrEmpty(brand.logo))
+                                                {
+                                                    <td style="padding:20px;">
+                                                        <a class="brandLink" data-branId="@brand.id" href="/Home/ProductList?BrandId=@brand.id"> <img src="@imageUrl/@brand.logo" alt="@brand.name" title="@brand.name" style="height:75%" /> </a>
+                                                    </td>
+                                                }
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </marquee>
+                         
+                            
+                        </div>
+                    </div>
+                }
                 <div class="container">
                     <div class="four columns footer-block footer-copyright">
 

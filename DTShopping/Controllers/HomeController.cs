@@ -28,6 +28,7 @@ namespace DTShopping.Controllers
                 objDashboardDetails.FontpageSections = await objRepository.GetShoppingPortalFrontPageProdList(companyId);
 
                 Session["LatestProduct"] = objDashboardDetails.FontpageSections.SpeacialSegment;
+                Session["Brands"] = objDashboardDetails.FontpageSections.brandlist;
             }
             catch (Exception ex)
             {
