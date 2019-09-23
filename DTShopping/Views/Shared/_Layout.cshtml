@@ -118,7 +118,7 @@
                                 </div>
                                 @if (Session["UserDetail"] != null)
                                 {
-                                    <div class="balancepoints" style="float:right; font-family:Oswald; font-size:12px; margin:15px 20px 0 20px;">Balance Points @points</div>
+                                    <div class="balancepoints" style="float:right; font-family:Oswald; font-size:12px; margin:15px 20px 0 20px;">Balance Points <span id="ShowBalancePoint"></span></div>
                                     <div class="welcome" style="float:right; font-family:Oswald; font-size:14px; margin:12px 0 0 0;">
                                         Welcome @username
                                         <div class="clear"></div>
@@ -314,7 +314,7 @@
         );
 
         getCartCount();
-
+        getBalancePoints();
 
     });
 
@@ -326,6 +326,21 @@
             url: "/Home/getCartCount",
             success: function (result) {
                 $("#cartCount").html(result);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus); alert("Error: " + errorThrown);
+            }
+        });
+    }
+
+    function getBalancePoints() {
+        $.ajax({
+            type: "GET",
+            async: false,
+            url: "/Home/getBalancePoints",
+            success: function (result) {
+                //alert(result);
+                $("#ShowBalancePoint").html(result);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Status: " + textStatus); alert("Error: " + errorThrown);

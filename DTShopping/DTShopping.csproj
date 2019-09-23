@@ -218,6 +218,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MenuItems.cs" />
     <Compile Include="Models\order.cs" />
+    <Compile Include="Models\Points.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\product_images.cs" />
     <Compile Include="Models\Response.cs" />

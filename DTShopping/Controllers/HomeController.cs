@@ -502,6 +502,37 @@ namespace DTShopping.Controllers
             return Json(cartCount, JsonRequestBehavior.AllowGet);
         }
 
+        
+        [HttpGet]
+        public async Task<ActionResult> getBalancePoints()
+        {
+            PointsLedger userPoints = new PointsLedger();
+            double BalancePoints = 0;
+            try
+            {
+                if (Session["UserDetail"] == null)
+                {
+                    BalancePoints = 0;
+                }
+                else
+                {
+                    var userDetail = Session["UserDetail"] as UserDetails;
+                    userPoints.UserId = userDetail.id;
+                    var result = await objRepository.ManagePointLedger(userPoints, "BalncePoint");
+
+                    if (result.Status == true)
+                    {
+                        BalancePoints = result.Points;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(BalancePoints, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateOrder(order objorder)
         {

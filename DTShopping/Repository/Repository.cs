@@ -40,6 +40,7 @@ namespace DTShopping.Repository
 
         private string ManageOrder = "ManageOrder/";
 
+        private string ManagePointLedgerAction = "ManagePointsLedger/";
 
 
         public async Task<List<Category>> GetMenuList()
@@ -173,6 +174,23 @@ namespace DTShopping.Repository
                 return result;
             }
         }
+
+
+        public async Task<Response> ManagePointLedger(PointsLedger filter, string action)
+        {
+            var filterData = JsonConvert.SerializeObject(filter);
+            var result = await CallPostFunction(filterData, ManagePointLedgerAction + action);
+            if (result == null)
+            {
+                return null;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        
 
         public async Task<Response> GetProductImage(int prodId)
         {

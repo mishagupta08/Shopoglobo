@@ -195,6 +195,7 @@ namespace DTShopping.Controllers
             this.model = new Dashboard();
             var message = string.Empty;
             this.objRepository = new APIRepository();
+            string companyId = System.Configuration.ConfigurationManager.AppSettings["CompanyId"];
             try
             {
                 if (CheckLoginUserStatus())
@@ -204,6 +205,7 @@ namespace DTShopping.Controllers
                     filter.productId = prodId;
                     filter.username = detail.username;
                     filter.password = detail.password_str;
+                    filter.companyId = Convert.ToInt16(companyId);
                     filter.quantity = quantity;
                     var res = await objRepository.ManageCart(filter, "UpdateQuantity");
                     if (res == null)
@@ -233,6 +235,7 @@ namespace DTShopping.Controllers
         {
             this.model = new Dashboard();
             var message = string.Empty;
+            string companyId = System.Configuration.ConfigurationManager.AppSettings["CompanyId"];
             this.objRepository = new APIRepository();
             try
             {
@@ -243,7 +246,7 @@ namespace DTShopping.Controllers
                     filter.productId = prodId;
                     filter.username = detail.username;
                     filter.password = detail.password_str;
-
+                    filter.companyId = Convert.ToInt16(companyId);
                     var res = await objRepository.ManageCart(filter, "Remove");
                     if (res == null)
                     {
@@ -351,6 +354,7 @@ namespace DTShopping.Controllers
         {
             this.model = new Dashboard();
             this.objRepository = new APIRepository();
+            string companyId = System.Configuration.ConfigurationManager.AppSettings["CompanyId"];
             try
             {
                 if (CheckLoginUserStatus())
@@ -358,6 +362,7 @@ namespace DTShopping.Controllers
                     var cart = new CartFilter();
                     cart.productId = ProductId;
                     cart.quantity = Quantity;
+                    cart.companyId = Convert.ToInt16(companyId);
                     var detail = (UserDetails)(Session["UserDetail"]);
                     cart.username = detail.username;
                     cart.password = detail.password_str;
