@@ -13,7 +13,7 @@ namespace DTShopping.Models
         public List<R_CityMaster> Cities { get; set; }
         public List<Product> Products { get; set; }
         public UserDetails User { get; set; }
-        public double NetPayment { get; set; }
+        public decimal NetPayment { get; set; }
         public double UsersPoints { get; set; }
         public double TotalProductPoints { get; set; }
         public Product ProductDetail { get; set; }

@@ -17,5 +17,6 @@ namespace DTShopping.Models
         public Nullable<decimal> AvailableBalance { get; set; }
         public string ReferenceNo { get; set; }
         public string Remark { get; set; }
+
     }
 }

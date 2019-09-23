@@ -306,9 +306,11 @@ namespace DTShopping.Controllers
                                     prodPrice = Convert.ToDouble(prod.offer_price);
                                 }
 
-                                prod.TotalPayment = prodPrice * (prod.vendor_qty ?? 1) + (prod.shippng_charge ?? 0);
-                                this.model.TotalProductPoints += (prod.RBV ?? 0) * (prod.vendor_qty ?? 1);
-                                this.model.NetPayment += prod.TotalPayment;
+                                //prod.TotalPayment = prodPrice * (prod.vendor_qty ?? 1) + (prod.shippng_charge ?? 0);
+                                //this.model.TotalProductPoints += (prod.RBV ?? 0) * (prod.vendor_qty ?? 1);
+                                //this.model.NetPayment += prod.TotalPayment;
+
+                                this.model.NetPayment += prod.amount;
                             }
                         }
                     }

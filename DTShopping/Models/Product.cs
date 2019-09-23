@@ -47,6 +47,7 @@ namespace DTShopping.Models
         public string VendorName { get; set; }
         public Nullable<int> RBV { get; set; }
         public double TotalPayment { get; set; }
+        public decimal amount { get; set; }
     }
 
     public class PagewiseProducts {
