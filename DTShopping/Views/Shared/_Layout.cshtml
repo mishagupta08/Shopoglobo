@@ -269,7 +269,8 @@
 </body>
 </html>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function () {        
+
         $.ajax({
             type: "GET",
             async: false,
@@ -374,6 +375,7 @@
             else {
                 alert("Product added to cart.");
                 $("#cartCount").html(result.CartProductCount);
+                $("#ShowBalancePoint").html(result.Points);
             }
 
             $(".preloader").hide();

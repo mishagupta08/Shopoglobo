@@ -154,7 +154,7 @@ function UpdateQuantityDetail(thisVar) {
     }).done(function (result) {
         $(".preloader").hide();
         alert(result);
-        //location.reload();
+        location.reload();
     }).fail(function (error) {
         $("#error").html(error.statusText);
         $(".preloader").hide();
