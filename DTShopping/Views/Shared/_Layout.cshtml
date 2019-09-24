@@ -202,9 +202,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </marquee>
-                         
-                            
+                            </marquee>                                                     
                         </div>
                     </div>
                 }
@@ -315,8 +313,7 @@
         );
 
         getCartCount();
-        getBalancePoints();
-
+       
     });
 
 
@@ -326,7 +323,8 @@
             async: false,
             url: "/Home/getCartCount",
             success: function (result) {
-                $("#cartCount").html(result);
+                $("#cartCount").html(result.CartProductCount);
+                $("#ShowBalancePoint").html(result.Points);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Status: " + textStatus); alert("Error: " + errorThrown);
@@ -334,20 +332,20 @@
         });
     }
 
-    function getBalancePoints() {
-        $.ajax({
-            type: "GET",
-            async: false,
-            url: "/Home/getBalancePoints",
-            success: function (result) {
-                //alert(result);
-                $("#ShowBalancePoint").html(result);
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Status: " + textStatus); alert("Error: " + errorThrown);
-            }
-        });
-    }
+    //function getBalancePoints() {
+    //    $.ajax({
+    //        type: "GET",
+    //        async: false,
+    //        url: "/Home/getBalancePoints",
+    //        success: function (result) {
+    //            //alert(result);
+    //            $("#ShowBalancePoint").html(result);
+    //        },
+    //        error: function (XMLHttpRequest, textStatus, errorThrown) {
+    //            alert("Status: " + textStatus); alert("Error: " + errorThrown);
+    //        }
+    //    });
+    //}
 
 
     function AddProductInCart(prodId, quantity) {

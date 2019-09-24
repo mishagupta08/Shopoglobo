@@ -303,7 +303,7 @@ namespace DTShopping.Repository
 
             filter.username = userDetail.username;
             filter.password = userDetail.password_str;
-
+            filter.userId = userDetail.id;
             var productData = JsonConvert.SerializeObject(filter);
             var result = await CallPostFunction(productData, ManageCartAction + "CartCount");
             if (result == null)

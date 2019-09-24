@@ -477,52 +477,24 @@ namespace DTShopping.Controllers
         public async Task<ActionResult> getCartCount()
         {
             UserDetails userDetail = new UserDetails();
-            int cartCount = 0;
+            Response userResponse = new Response();           
             try
             {
                 if (Session["UserDetail"] == null)
                 {
-                    cartCount = 0;
+                    userResponse.Points = 0;
+                    userResponse.CartProductCount = 0;
                 }
                 else
                 {
                     userDetail = Session["UserDetail"] as UserDetails;
                     var result = await objRepository.getCartCount(userDetail);
 
-                    if (result.Status == true && result.ResponseValue != null)
-                    {
-                        cartCount = result.CartProductCount;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return Json(cartCount, JsonRequestBehavior.AllowGet);
-        }
-
-        
-        [HttpGet]
-        public async Task<ActionResult> getBalancePoints()
-        {
-            PointsLedger userPoints = new PointsLedger();
-            double BalancePoints = 0;
-            try
-            {
-                if (Session["UserDetail"] == null)
-                {
-                    BalancePoints = 0;
-                }
-                else
-                {
-                    var userDetail = Session["UserDetail"] as UserDetails;
-                    userPoints.UserId = userDetail.id;
-                    var result = await objRepository.ManagePointLedger(userPoints, "BalncePoint");
-
                     if (result.Status == true)
                     {
-                        BalancePoints = result.Points;
+                        userResponse = result;
+                        Session["Points"] = result.Points;
+                        Session["CartNumber"] = result.CartProductCount;
                     }
                 }
             }
@@ -530,9 +502,9 @@ namespace DTShopping.Controllers
             {
 
             }
-            return Json(BalancePoints, JsonRequestBehavior.AllowGet);
+            return Json(userResponse, JsonRequestBehavior.AllowGet);
         }
-
+               
         [HttpPost]
         public async Task<ActionResult> CreateOrder(order objorder)
         {

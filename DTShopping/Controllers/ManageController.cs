@@ -205,6 +205,7 @@ namespace DTShopping.Controllers
                     filter.productId = prodId;
                     filter.username = detail.username;
                     filter.password = detail.password_str;
+                    filter.userId = detail.id;
                     filter.companyId = Convert.ToInt16(companyId);
                     filter.quantity = quantity;
                     var res = await objRepository.ManageCart(filter, "UpdateQuantity");
@@ -244,6 +245,7 @@ namespace DTShopping.Controllers
                     var detail = (UserDetails)(Session["UserDetail"]);
                     var filter = new CartFilter();
                     filter.productId = prodId;
+                    filter.userId = detail.id;
                     filter.username = detail.username;
                     filter.password = detail.password_str;
                     filter.companyId = Convert.ToInt16(companyId);
@@ -279,10 +281,12 @@ namespace DTShopping.Controllers
             {
                 try
                 {
+
                     var cart = new CartFilter();
                     var detail = (UserDetails)(Session["UserDetail"]);
                     cart.username = detail.username;
                     cart.password = detail.password_str;
+                    cart.userId = detail.id;
                     var response = await objRepository.ManageCart(cart, CartProductListAction);
                     if (response != null && response.Status)
                     {
@@ -365,9 +369,11 @@ namespace DTShopping.Controllers
                     cart.productId = ProductId;
                     cart.quantity = Quantity;
                     cart.companyId = Convert.ToInt16(companyId);
+                    
                     var detail = (UserDetails)(Session["UserDetail"]);
                     cart.username = detail.username;
                     cart.password = detail.password_str;
+                    cart.userId = Convert.ToInt16(detail.id);
                     var response = await objRepository.ManageCart(cart, AddAction);
                     return Json(response);
                 }
