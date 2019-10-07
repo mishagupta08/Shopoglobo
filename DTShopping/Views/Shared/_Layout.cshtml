@@ -202,9 +202,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </marquee>
-                         
-                            
+                            </marquee>                                                     
                         </div>
                     </div>
                 }
@@ -269,7 +267,8 @@
 </body>
 </html>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function () {        
+
         $.ajax({
             type: "GET",
             async: false,
@@ -314,8 +313,7 @@
         );
 
         getCartCount();
-        getBalancePoints();
-
+       
     });
 
 
@@ -325,7 +323,8 @@
             async: false,
             url: "/Home/getCartCount",
             success: function (result) {
-                $("#cartCount").html(result);
+                $("#cartCount").html(result.CartProductCount);
+                $("#ShowBalancePoint").html(result.Points);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("Status: " + textStatus); alert("Error: " + errorThrown);
@@ -333,20 +332,20 @@
         });
     }
 
-    function getBalancePoints() {
-        $.ajax({
-            type: "GET",
-            async: false,
-            url: "/Home/getBalancePoints",
-            success: function (result) {
-                //alert(result);
-                $("#ShowBalancePoint").html(result);
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Status: " + textStatus); alert("Error: " + errorThrown);
-            }
-        });
-    }
+    //function getBalancePoints() {
+    //    $.ajax({
+    //        type: "GET",
+    //        async: false,
+    //        url: "/Home/getBalancePoints",
+    //        success: function (result) {
+    //            //alert(result);
+    //            $("#ShowBalancePoint").html(result);
+    //        },
+    //        error: function (XMLHttpRequest, textStatus, errorThrown) {
+    //            alert("Status: " + textStatus); alert("Error: " + errorThrown);
+    //        }
+    //    });
+    //}
 
 
     function AddProductInCart(prodId, quantity) {
@@ -374,6 +373,7 @@
             else {
                 alert("Product added to cart.");
                 $("#cartCount").html(result.CartProductCount);
+                $("#ShowBalancePoint").html(result.Points);
             }
 
             $(".preloader").hide();
