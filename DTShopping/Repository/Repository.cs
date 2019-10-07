@@ -190,7 +190,7 @@ namespace DTShopping.Repository
             }
         }
 
-        
+
 
         public async Task<Response> GetProductImage(int prodId)
         {
@@ -232,6 +232,7 @@ namespace DTShopping.Repository
 
         public async Task<Response> GetCategoryProducts(Filters FilterDetails)
         {
+            FilterDetails.CompanyId = CompanyId;
             var productData = JsonConvert.SerializeObject(FilterDetails);
             var result = await CallPostFunction(productData, ManageShoppingProductsListWithFilter);
             if (result == null)
